@@ -2,7 +2,7 @@ from Database.DBConection import Database
 from Objetos.Produto import Produto
 
 
-class ProdutoDB:
+class DBProduto:
     def __init__(self, db):
         self.db = db
 
