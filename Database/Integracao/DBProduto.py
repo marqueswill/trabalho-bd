@@ -8,16 +8,14 @@ class ProdutoDB:
 
     def create_table(self):
         sql_create = """
-        CREATE TABLE IF NOT EXISTS tbl_produto (
-            idProduto INT NOT NULL,
-            unidade VARCHAR(45),
-            quantidade FLOAT,
-            descricao VARCHAR(45),
-            idCategoria INT,
-            nome VARCHAR(45),
-            PRIMARY KEY (idProduto),
-            FOREIGN KEY (idCategoria) REFERENCES tbl_categoria(idCategoria)
-        )
+        CREATE TABLE "tbl_produto" (
+            "codProduto" serial PRIMARY KEY,
+            "unidade" varchar NOT NULL,
+            "quantidade" real NOT NULL,
+            "nome" varchar NOT NULL,
+            "descricao" varchar,
+            "codCategoria" integer NOT NULL
+        );
         """
         self.db.execute_query(sql_create)
 

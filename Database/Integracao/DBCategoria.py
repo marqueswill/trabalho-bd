@@ -8,12 +8,11 @@ class DBCategoria:
 
     def create_table(self):
         sql_create = """
-            CREATE TABLE IF NOT EXISTS tbl_categoria (
-                idCategoria INT, 
-                nome VARCHAR(45), 
-                PRIMARY KEY (idCategoria)
-            )
-            """
+        CREATE TABLE "tbl_categoria" (
+            "codCategoria" serial PRIMARY KEY,
+            "nome" varchar NOT NULL
+        );
+        """
 
         self.db.execute_query(sql_create)
 
@@ -42,7 +41,7 @@ class DBCategoria:
 
     def delete_all(self):
         pass
-    
+
     def get_by_id(self, idCategoria):
         sql_select = """
         SELECT * FROM tbl_categoria
