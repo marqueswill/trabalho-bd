@@ -2,20 +2,21 @@ import psycopg2
 from psycopg2 import OperationalError
 import json
 
+
 class Database:
-    def __init__(self, config_file='dbConfig.json'):
+    def __init__(self, config_file="dbConfig.json"):
         self.config_file = config_file
         self.connection = None
         self.load_config()
 
     def load_config(self):
-        with open(self.config_file, 'r') as f:
+        with open(self.config_file, "r") as f:
             config = json.load(f)
-            self.database = config['database']
-            self.host = config['host']
-            self.user = config['user']
-            self.password = config['password']
-            self.port = config['port']
+            self.database = config["database"]
+            self.host = config["host"]
+            self.user = config["user"]
+            self.password = config["password"]
+            self.port = config["port"]
 
     def create_connection(self):
         try:
@@ -24,7 +25,7 @@ class Database:
                 host=self.host,
                 user=self.user,
                 password=self.password,
-                port=self.port
+                port=self.port,
             )
             return self.connection
         except OperationalError as e:

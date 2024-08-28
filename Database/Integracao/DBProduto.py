@@ -1,5 +1,6 @@
-from DBConection import Database
-from Produto import Produto
+from Database.DBConection import Database
+from Objetos.Produto import Produto
+
 
 class ProdutoDB:
     def __init__(self, db):
@@ -20,43 +21,53 @@ class ProdutoDB:
         """
         self.db.execute_query(sql_create)
 
-    def insert_produto(self, produto):
+    def insert(self, produto):
         sql_insert_produto = """
         INSERT INTO tbl_produto (idProduto, unidade, quantidade, descricao, idCategoria, nome)
         VALUES (%s, %s, %s, %s, %s, %s)
         """
         self.db.execute_query(sql_insert_produto, produto.to_tuple())
 
-    def update_produto(self, produto):
+    def update(self, produto):
         sql_update_produto = """
         UPDATE tbl_produto
         SET unidade = %s, quantidade = %s, descricao = %s, idCategoria = %s, nome = %s
         WHERE idProduto = %s
         """
-        params = (produto.unidade, produto.quantidade, produto.descricao, produto.idCategoria, produto.nome, produto.idProduto)
+
+        params = (
+            produto.unidade,
+            produto.quantidade,
+            produto.descricao,
+            produto.idCategoria,
+            produto.nome,
+            produto.idProduto,
+        )
         self.db.execute_query(sql_update_produto, params)
 
-    def delete_produto(self, idProduto):
+    def delete(self, idProduto):
         sql_delete_produto = """
         DELETE FROM tbl_produto
         WHERE idProduto = %s
         """
-        self.db.execute_query(sql_delete_produto, (idProduto,))
+        self.db.execute_query(sql_delete_produto, (idProduto))
 
-    def get_produto_by_id(self, idProduto):
+    def delete_all(self):
+        pass
+
+    def get_by_id(self, idProduto):
         sql_select_produto = """
-        SELECT idProduto, unidade, quantidade, descricao, idCategoria, nome
-        FROM tbl_produto
+        SELECT * FROM tbl_produto
         WHERE idProduto = %s
         """
-        cursor = self.db.execute_query(sql_select_produto, (idProduto,), fetch=True)
+        cursor = self.db.execute_query(sql_select_produto, (idProduto), fetch=True)
         if cursor:
             row = cursor
             if row:
                 return Produto(*row)
         return None
 
-    def get_all_produtos(self):
+    def get_all(self):
         sql_select_produtos = """
         SELECT idProduto, unidade, quantidade, descricao, idCategoria, nome
         FROM tbl_produto
