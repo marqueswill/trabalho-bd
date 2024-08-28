@@ -1,4 +1,4 @@
-from Database.DBConection import Database
+# from Database.DBConection import Database
 from Objetos.Categoria import Categoria
 
 
@@ -18,7 +18,7 @@ class DBCategoria:
 
     def insert(self, categoria):
         sql_insert = """
-        INSERT INTO tbl_categoria (idCategoria, nome)
+        INSERT INTO tbl_categoria ("codCategoria", "nome")
         VALUES (%s, %s)
         """
         self.db.execute_query(sql_insert, categoria.to_tuple())
@@ -27,27 +27,27 @@ class DBCategoria:
         sql_update = """
         UPDATE tbl_categoria 
         SET nome = %s 
-        WHERE idCategoria = %s
+        WHERE codCategoria = %s
         """
-        params = (categoria.nome, categoria.idCategoria)
+        params = (categoria.nome, categoria.codCategoria)
         self.db.execute_query(sql_update, params)
 
-    def delete(self, idCategoria):
+    def delete(self, codCategoria):
         sql_delete = """
         DELETE FROM tbl_categoria
-        WHERE idCategoria = %s
+        WHERE codCategoria = %s
         """
-        self.db.execute_query(sql_delete, (idCategoria,))
+        self.db.execute_query(sql_delete, (codCategoria,))
 
     def delete_all(self):
         pass
 
-    def get_by_id(self, idCategoria):
+    def get_by_id(self, codCategoria):
         sql_select = """
         SELECT * FROM tbl_categoria
-        WHERE idCategoria = %s
+        WHERE "codCategoria" = %s
         """
-        result = self.db.execute_query(sql_select, (idCategoria,), fetch=True)
+        result = self.db.execute_query(sql_select, (codCategoria,), fetch=True)
         if result:
             return Categoria(*result)
         return None

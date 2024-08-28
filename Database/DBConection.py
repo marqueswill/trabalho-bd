@@ -65,3 +65,4 @@ class Database:
                 cursor.close()
             if not fetch:
                 self.close_connection()
+    

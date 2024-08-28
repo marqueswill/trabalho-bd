@@ -1,4 +1,4 @@
-from Database.DBConection import Database
+# from Database.DBConection import Database
 from Objetos.Produto import Produto
 
 
