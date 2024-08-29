@@ -16,41 +16,41 @@ class TesteCategoria(TesteBase):
             ]
             for c in categorias:
                 self.categoria_db.insert(c)
-            print("test_insert: Success")
+            return("test_insert: Success")
         except Exception as e:
-            print(f"test_insert: Failed - {str(e)}")
+            return(f"test_insert: Failed - {str(e)}")
 
     def test_get_by_id(self):
         try:
             categoria = self.categoria_db.get_by_id(1)
             if categoria:
-                print("test_get_by_id: Success")
+                return("test_get_by_id: Success")
             else:
-                print("test_get_by_id: Failed - No category found")
+                return("test_get_by_id: Failed - No category found")
         except Exception as e:
-            print(f"test_get_by_id: Failed - {str(e)}")
+            return(f"test_get_by_id: Failed - {str(e)}")
 
     def test_get_all(self):
         try:
             select_all = self.categoria_db.get_all()
             # for categoria in select_all:
-            #     print(f"ID: {categoria.codCategoria}, Nome: {categoria.nome}")
-            print("test_get_all: Success")
+            #     return(f"ID: {categoria.codCategoria}, Nome: {categoria.nome}")
+            return("test_get_all: Success")
         except Exception as e:
-            print(f"test_get_all: Failed - {str(e)}")
+            return(f"test_get_all: Failed - {str(e)}")
 
     def test_delete(self):
         try:
             self.categoria_db.delete(1)
-            print("test_delete: Success")
+            return("test_delete: Success")
         except Exception as e:
-            print(f"test_delete: Failed - {str(e)}")
+            return(f"test_delete: Failed - {str(e)}")
 
     def delete_all(self):
         try:
             all_categorias = self.categoria_db.get_all()
             for categoria in all_categorias:
                 self.categoria_db.delete(categoria.codCategoria)
-            print("delete_all: Success")
+            return("delete_all: Success")
         except Exception as e:
-            print(f"delete_all: Failed - {str(e)}")
+            return(f"delete_all: Failed - {str(e)}")

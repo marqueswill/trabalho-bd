@@ -10,10 +10,12 @@ class TesteBase:
 
     def run(self):
         # self.delete_all()
-        self.test_insert()
-        self.test_get_by_id()
-        self.test_get_all()
-        self.test_delete()
+        return [
+            self.test_insert(),
+            self.test_get_by_id(),
+            self.test_get_all(),
+            self.test_delete(),
+        ]
 
     def test_insert(self):
         pass
