@@ -1,32 +1,26 @@
-# from Database.DBConection import Database
-from DBConection import Database
 from Objetos.Categoria import Categoria
+from Integracao.DBOperation import DBOperation
 
-
-class DBCategoria:
-    def __init__(self, db:Database):
-        self.db = db
-
+class DBCategoria(DBOperation):
     def create_table(self):
         sql_create = """
-        CREATE TABLE "tbl_categoria" (
+        CREATE TABLE "Categoria" (
             "codCategoria" serial PRIMARY KEY,
             "nome" varchar NOT NULL
         );
         """
-
         self.db.execute_query(sql_create)
 
     def insert(self, categoria):
         sql_insert = """
-        INSERT INTO tbl_categoria ("codCategoria", "nome")
+        INSERT INTO "Categoria" ("codCategoria", "nome")
         VALUES (%s, %s)
         """
         self.db.execute_query(sql_insert, categoria.to_tuple())
 
     def update(self, categoria):
         sql_update = """
-        UPDATE tbl_categoria 
+        UPDATE "Categoria" 
         SET nome = %s 
         WHERE codCategoria = %s
         """
@@ -35,17 +29,18 @@ class DBCategoria:
 
     def delete(self, codCategoria):
         sql_delete = """
-        DELETE FROM tbl_categoria
+        DELETE FROM "Categoria"
         WHERE "codCategoria" = %s
         """
         self.db.execute_query(sql_delete, [codCategoria])
 
     def delete_all(self):
+        # Implementation for deleting all categories
         pass
 
     def get_by_id(self, codCategoria):
         sql_select = """
-        SELECT * FROM tbl_categoria
+        SELECT * FROM "Categoria"
         WHERE "codCategoria" = %s
         """
         result = self.db.execute_query(sql_select, [codCategoria], fetch=True)
@@ -55,8 +50,7 @@ class DBCategoria:
 
     def get_all(self):
         sql_select = """
-        SELECT "codCategoria", "nome" FROM tbl_categoria
+        SELECT "codCategoria", "nome" FROM "Categoria"
         """
-
         results = self.db.execute_query(sql_select, fetch=True)
         return [Categoria(*row) for row in results] if results else []
