@@ -123,7 +123,7 @@ CREATE TABLE "Entrada" (
   "dataConfirmacao" date,
   "status" varchar(10) DEFAULT 'pendente',
   "pendente" bool NOT NULL DEFAULT true,
-  "aprovado" bool NOT NULL DEFAULT false,me recuso
+  "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE "Saida" (
   "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL
+  "cpfOperador" character(11) NOT NULL,
   "codRequisicao" integer NOT NULL
 );
 
@@ -190,7 +190,8 @@ ALTER TABLE "Inventario" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES 
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
-ALTER TABLE "ProdutoLote" ADD FOREme recusoKEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
+ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
+
 ALTER TABLE "Ajuste" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Ajuste" ADD FOREIGN KEY ("codProduto","codEstoque","dataInv") REFERENCES "Inventario" ("codProduto","codEstoque","dataInv");
 
