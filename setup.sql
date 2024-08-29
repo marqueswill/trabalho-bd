@@ -123,7 +123,7 @@ CREATE TABLE "Entrada" (
   "dataConfirmacao" date,
   "status" varchar(10) DEFAULT 'pendente',
   "pendente" bool NOT NULL DEFAULT true,
-  "aprovado" bool NOT NULL DEFAULT false,
+  "aprovado" bool NOT NULL DEFAULT false,me recuso
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL,
@@ -170,62 +170,36 @@ CREATE TABLE "Saida" (
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL
+  "codRequisicao" integer NOT NULL
 );
 
 ALTER TABLE "Produto" ADD FOREIGN KEY ("codCategoria") REFERENCES "Categoria" ("codCategoria");
 
 ALTER TABLE "Restaurante" ADD FOREIGN KEY ("cnpjMatriz") REFERENCES "Restaurante" ("cnpjRestaurante");
-
 ALTER TABLE "Restaurante" ADD FOREIGN KEY ("cpfGerente") REFERENCES "Funcionario" ("cpfFuncionario");
 
 ALTER TABLE "Cotacao" ADD FOREIGN KEY ("codProduto") REFERENCES "Produto" ("codProduto");
-
 ALTER TABLE "Cotacao" ADD FOREIGN KEY ("cnpjFornecedor") REFERENCES "Fornecedor" ("cnpjFornecedor");
 
 ALTER TABLE "Estoque" ADD FOREIGN KEY ("cnpjRestaurante") REFERENCES "Restaurante" ("cnpjRestaurante");
 
 ALTER TABLE "ProdutoEstoque" ADD FOREIGN KEY ("codProduto") REFERENCES "Produto" ("codProduto");
-
 ALTER TABLE "ProdutoEstoque" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
 
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
-
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
-
-ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
-ALTER TABLE "Compra" ADD FOREIGN KEY ("cnpjFornecedor") REFERENCES "Fornecedor" ("cnpjFornecedor");
-
-ALTER TABLE "Compra" ADD FOREIGN KEY ("cnpjRestaurante") REFERENCES "Restaurante" ("cnpjRestaurante");
-
-ALTER TABLE "Compra" ADD FOREIGN KEY ("codOperacao") REFERENCES "Entrada" ("codOperacao");
-
-ALTER TABLE "Entrada" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
-ALTER TABLE "Entrada" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
-
-ALTER TABLE "Entrada" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
-
-ALTER TABLE "Ajuste" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
-ALTER TABLE "Ajuste" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
-
+ALTER TABLE "ProdutoLote" ADD FOREme recusoKEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Ajuste" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
-
 ALTER TABLE "Ajuste" ADD FOREIGN KEY ("codProduto","codEstoque","dataInv") REFERENCES "Inventario" ("codProduto","codEstoque","dataInv");
 
 ALTER TABLE "Requisicao" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
 ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
-
 ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
 
 ALTER TABLE "Saida" ADD FOREIGN KEY ("codOperacao") REFERENCES "Requisicao" ("codOperacao");
-
 ALTER TABLE "Saida" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
-
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
+ALTER TABLE "Saida" ADD FOREIGN KEY ("codRequisicao") REFERENCES "Requisicao" ("codOperacao");

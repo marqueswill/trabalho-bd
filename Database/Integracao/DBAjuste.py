@@ -29,12 +29,12 @@ class DBAjuste(DBOperation):
         INSERT INTO "Ajuste" ({",".join(ajuste.columns())})
         VALUES ({",".join(["%s"]*len(ajuste.columns()))})
         """
-        print(sql_insert)
+        # print(sql_insert)
         self.db.execute_query(sql_insert, ajuste.to_tuple())
 
     def update(self, ajuste: Ajuste):
         sql_update = f"""
-        UPDATE "Categoria" 
+        UPDATE "Ajuste" 
         SET {", ".join([f"{c} = %s" for c in ajuste.columns() if c != "codOperacao"])}
         WHERE "codOperacao" = %s
         """

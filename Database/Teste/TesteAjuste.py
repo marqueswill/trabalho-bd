@@ -1,3 +1,4 @@
+from Teste.TesteLote import TesteLote
 from Teste.TesteBase import TesteBase
 from Integracao.DBAjuste import DBAjuste
 from Objetos.Ajuste import Ajuste
@@ -6,10 +7,21 @@ from Objetos.Ajuste import Ajuste
 class TesteAjuste(TesteBase):
     def __init__(self):
         super().__init__()
+
         self.ajuste_db = DBAjuste()
+        self.setup_relations()
+
+    def setup_relations(self):
+        teste_ajuste = TesteLote()
+        teste_ajuste.test_insert()
+        # teste_funcionario = TesteFuncionario()
+        # teste_funcionario.test_insert()
+        # teste_inventario = TesteInventario()
+        # teste_inventario.test_insert()
 
     def test_insert(self):
         try:
+
             ajustes = [
                 Ajuste(
                     codOperacao=1,
