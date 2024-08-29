@@ -4,4 +4,10 @@ class Lote:
         self.tipo = tipo
 
     def to_tuple(self):
-        return (self.numLote, self.tipo)
+        return (self.tipo, self.numLote)
+
+    def columns(self):
+        return [
+            '"tipo"',
+            '"numLote"',
+        ]

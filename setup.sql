@@ -92,14 +92,15 @@ CREATE TABLE "Inventario" (
 );
 
 CREATE TABLE "Lote" (
-  "numLote" integer PRIMARY KEY,
-  "cpnjFornecedor" char(11)
+  "numLote" serial PRIMARY KEY,
+  "tipo" varchar
 );
 
 CREATE TABLE "ProdutoLote" (
   "codProduto" integer,
   "codEstoque" integer,
   "numLote" integer,
+  "quantidade" integer NOT NULL,
   PRIMARY KEY ("codProduto", "codEstoque", "numLote")
 );
 
@@ -109,6 +110,7 @@ CREATE TABLE "Compra" (
   "cnpjRestaurante" char(14),
   "notaFiscal" bytea NOT NULL,
   "data" date NOT NULL,
+  "quantidade" integer NOT NULL,
   PRIMARY KEY ("codOperacao", "cnpjFornecedor", "cnpjRestaurante")
 );
 
