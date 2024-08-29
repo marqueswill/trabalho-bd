@@ -8,4 +8,11 @@ class Produto:
         self.nome = nome
 
     def to_tuple(self):
-        return (self.idProduto, self.unidade, self.quantidade, self.descricao, self.idCategoria, self.nome)
+        return (
+            self.idProduto,
+            self.unidade,
+            self.quantidade,
+            self.descricao,
+            self.idCategoria,
+            self.nome,
+        )
