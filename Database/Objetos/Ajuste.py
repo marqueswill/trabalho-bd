@@ -31,7 +31,6 @@ class Ajuste:
 
     def to_tuple(self):
         return (
-            self.codOperacao,
             self.descricao,
             self.dataLancamento,
             self.dataConfirmacao,
@@ -44,4 +43,22 @@ class Ajuste:
             self.codProduto,
             self.codEstoque,
             self.dataInv,
+            self.codOperacao,
         )
+
+    def columns(self):
+        return [
+            '"descricao"',
+            '"dataLancamento"',
+            '"dataConfirmacao"',
+            '"status"',
+            '"pendente"',
+            '"aprovado"',
+            '"numLote"',
+            '"cpfEstoquista"',
+            '"cpfOperador"',
+            '"codProduto"',
+            '"codEstoque"',
+            '"dataInv"',
+            '"codOperacao"',
+        ]

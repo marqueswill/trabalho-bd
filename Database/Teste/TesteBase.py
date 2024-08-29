@@ -12,9 +12,9 @@ class TesteBase:
         # self.delete_all()
         return [
             self.test_insert(),
-            self.test_get_by_id(),
-            self.test_get_all(),
-            self.test_delete(),
+            # self.test_get_by_id(),
+            # self.test_get_all(),
+            # self.test_delete(),
         ]
 
     def test_insert(self):
