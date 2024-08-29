@@ -12,7 +12,6 @@ class Requisicao:
         cpfEstoquista,
         cpfOperador,
     ):
-        self.codOperacao = codOperacao
         self.descricao = descricao
         self.dataLancamento = dataLancamento
         self.dataConfirmacao = dataConfirmacao
@@ -22,10 +21,10 @@ class Requisicao:
         self.numLote = numLote
         self.cpfEstoquista = cpfEstoquista
         self.cpfOperador = cpfOperador
+        self.codOperacao = codOperacao
 
     def to_tuple(self):
         return (
-            self.codOperacao,
             self.descricao,
             self.dataLancamento,
             self.dataConfirmacao,
@@ -35,4 +34,19 @@ class Requisicao:
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
+            self.codOperacao,
+        )
+
+    def columns(self):
+        return (
+            '"descricao"',
+            '"dataLancamento"',
+            '"dataConfirmacao"',
+            '"status"',
+            '"pendente"',
+            '"aprovado"',
+            '"numLote"',
+            '"cpfEstoquista"',
+            '"cpfOperador"',
+            '"codOperacao"',
         )
