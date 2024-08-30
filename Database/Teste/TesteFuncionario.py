@@ -41,27 +41,27 @@ class TesteFuncionario(TesteBase):
 
             for f in funcionarios:
                 self.funcionario_db.insert(f)
-            return "test_insert: Success"
+            return "Success"
         except Exception as e:
-            return f"test_insert: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
             funcionario = self.funcionario_db.get_by_id("12345678900")
 
             if funcionario:
-                return "test_get_by_id: Success"
+                return "Success"
             else:
-                return "test_get_by_id: Failed - No funcionario found"
+                return "Failed - No funcionario found"
         except Exception as e:
-            return f"test_get_by_id: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_all(self):
         try:
             self.funcionario_db.get_all()
-            return "test_get_all: Success"
+            return "Success"
         except Exception as e:
-            return f"test_get_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
@@ -71,21 +71,21 @@ class TesteFuncionario(TesteBase):
 
             self.funcionario_db.update(funcionario)
 
-            return "test_update: Success"
+            return "Success"
 
         except Exception as e:
-            return f"test_update: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete(self):
         try:
             self.funcionario_db.delete("02345678900")
-            return "test_delete: Success"
+            return "Success"
         except Exception as e:
-            return f"test_delete: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete_all(self):
         try:
             self.funcionario_db.delete_all()
-            return "delete_all: Success"
+            return "Success"
         except Exception as e:
-            return f"delete_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"

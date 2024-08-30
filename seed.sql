@@ -106,7 +106,6 @@ INSERT INTO "ProdutoLote" ("codProduto", "codEstoque", "numLote", "quantidade") 
 (5, 1, 5, 330);
 
 
-
 -- Entrada
 INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
 ('Entrada de carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012'),

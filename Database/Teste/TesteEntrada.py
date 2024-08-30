@@ -38,26 +38,26 @@ class TesteEntrada(TesteBase):
             ]
             for i in items:
                 self.entrada_db.insert(i)
-            return "test_insert: Success"
+            return "Success"
         except Exception as e:
-            return f"test_insert: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
             entrada = self.entrada_db.get_by_id(21)
             if entrada:
-                return "test_get_by_id: Success"
+                return "Success"
             else:
-                return "test_get_by_id: Failed - No entrada found"
+                return "Failed - No entrada found"
         except Exception as e:
-            return f"test_get_by_id: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_all(self):
         try:
             self.entrada_db.get_all()
-            return "test_get_all: Success"
+            return "Success"
         except Exception as e:
-            return f"test_get_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
@@ -67,21 +67,21 @@ class TesteEntrada(TesteBase):
             entrada.pendente = (False,)
             entrada.aprovado = (False,)
             self.entrada_db.update(entrada=self.entrada_db.get_by_id(22))
-            return "test_update: Success"
+            return "Success"
 
         except Exception as e:
-            return f"test_update: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete(self):
         try:
             self.entrada_db.delete(21)
-            return "test_delete: Success"
+            return "Success"
         except Exception as e:
-            return f"test_delete: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def delete_all(self):
         try:
             self.entrada_db.delete_all()
-            return "delete_all: Success"
+            return "Success"
         except Exception as e:
-            return f"delete_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"

@@ -23,15 +23,15 @@ class DBRequisicao(DBOperation):
 
     def insert(self, requisicao: Requisicao):
         sql_insert = f"""
-        INSERT INTO "Requisicao" ({",".join(requisicao.columns())})
-        VALUES ({",".join(["%s"]*len(requisicao.columns()))})
+        INSERT INTO "Requisicao" ({",".join(requisicao.columns()[:-1])})
+        VALUES ({",".join(["%s"]*(len(requisicao.columns())-1))})
         """
-        self.db.execute_query(sql_insert, requisicao.to_tuple())
+        self.db.execute_query(sql_insert, requisicao.to_tuple()[:-1])
 
     def update(self, requisicao: Requisicao):
         sql_update = f"""
         UPDATE "Requisicao" 
-        SET {", ".join([f"{c} = %s" for c in requisicao.columns() if c != '"codOperacao"'])}
+        SET {", ".join([f"{c} = %s" for c in requisicao.columns()[:-1]])}
         WHERE "codOperacao" = %s
         """
         
