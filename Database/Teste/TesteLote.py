@@ -17,47 +17,47 @@ class TesteLote(TesteBase):
             ]
             for l in lotes:
                 self.lote_db.insert(l)
-            return "test_insert: Success"
+            return "Success"
         except Exception as e:
-            return f"test_insert: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
             lote = self.lote_db.get_by_id(21)
             if lote:
-                return "test_get_by_id: Success"
+                return "Success"
             else:
-                return "test_get_by_id: Failed - No lote found"
+                return "Failed - No lote found"
         except Exception as e:
-            return f"test_get_by_id: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_all(self):
         try:
             self.lote_db.get_all()
-            return "test_get_all: Success"
+            return "Success"
         except Exception as e:
-            return f"test_get_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
             lote = self.lote_db.get_by_id(22)
             lote.tipo = "entrada"
             self.lote_db.update(lote)
-            return "test_update: Success"
+            return "Success"
 
         except Exception as e:
-            return f"test_update: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete(self):
         try:
             self.lote_db.delete(21)
-            return "test_delete: Success"
+            return "Success"
         except Exception as e:
-            return f"test_delete: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete_all(self):
         try:
             self.lote_db.delete_all()
-            return "delete_all: Success"
+            return "Success"
         except Exception as e:
-            return f"delete_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"

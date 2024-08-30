@@ -16,41 +16,41 @@ class TesteCategoria(TesteBase):
             ]
             for c in categorias:
                 self.categoria_db.insert(c)
-            return("test_insert: Success")
+            return "Success"
         except Exception as e:
-            return(f"test_insert: Failed - {str(e)}")
+            return f"Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
             categoria = self.categoria_db.get_by_id(1)
             if categoria:
-                return("test_get_by_id: Success")
+                return "Success"
             else:
-                return("test_get_by_id: Failed - No category found")
+                return "Failed - No category found"
         except Exception as e:
-            return(f"test_get_by_id: Failed - {str(e)}")
+            return f"Failed - {str(e)}"
 
     def test_get_all(self):
         try:
             select_all = self.categoria_db.get_all()
             # for categoria in select_all:
             #     return(f"ID: {categoria.codCategoria}, Nome: {categoria.nome}")
-            return("test_get_all: Success")
+            return "Success"
         except Exception as e:
-            return(f"test_get_all: Failed - {str(e)}")
+            return f"Failed - {str(e)}"
 
     def test_delete(self):
         try:
             self.categoria_db.delete(1)
-            return("test_delete: Success")
+            return "Success"
         except Exception as e:
-            return(f"test_delete: Failed - {str(e)}")
+            return f"Failed - {str(e)}"
 
     def delete_all(self):
         try:
             all_categorias = self.categoria_db.get_all()
             for categoria in all_categorias:
                 self.categoria_db.delete(categoria.codCategoria)
-            return("delete_all: Success")
+            return "Success"
         except Exception as e:
-            return(f"delete_all: Failed - {str(e)}")
+            return f"Failed - {str(e)}"

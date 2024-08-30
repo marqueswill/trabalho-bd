@@ -38,26 +38,26 @@ class TesteRequisicao(TesteBase):
             ]
             for i in items:
                 self.requisicao_db.insert(i)
-            return "test_insert: Success"
+            return "Success"
         except Exception as e:
-            return f"test_insert: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
             requisicao = self.requisicao_db.get_by_id(22)
             if requisicao:
-                return "test_get_by_id: Success"
+                return "Success"
             else:
-                return "test_get_by_id: Failed - No requisicao found"
+                return "Failed - No requisicao found"
         except Exception as e:
-            return f"test_get_by_id: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_get_all(self):
         try:
             self.requisicao_db.get_all()
-            return "test_get_all: Success"
+            return "Success"
         except Exception as e:
-            return f"test_get_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
@@ -67,20 +67,20 @@ class TesteRequisicao(TesteBase):
             requisicao.aprovado = False
 
             self.requisicao_db.update(requisicao)
-            return "test_update: Success"
+            return "Success"
         except Exception as e:
-            return f"test_update: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def test_delete(self):
         try:
             self.requisicao_db.delete(21)
-            return "test_delete: Success"
+            return "Success"
         except Exception as e:
-            return f"test_delete: Failed - {str(e)}"
+            return f"Failed - {str(e)}"
 
     def delete_all(self):
         try:
             self.requisicao_db.delete_all()
-            return "delete_all: Success"
+            return "Success"
         except Exception as e:
-            return f"delete_all: Failed - {str(e)}"
+            return f"Failed - {str(e)}"

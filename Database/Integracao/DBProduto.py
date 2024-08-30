@@ -19,8 +19,8 @@ class DBProduto(DBOperation):
 
     def insert(self, produto):
         sql_insert_produto = """
-        INSERT INTO "Produto" (idProduto, unidade, quantidade, descricao, idCategoria, nome)
-        VALUES (%s, %s, %s, %s, %s, %s)
+        INSERT INTO "Produto" (unidade, quantidade, descricao, idCategoria, nome)
+        VALUES (%s, %s, %s, %s, %s)
         """
         self.db.execute_query(sql_insert_produto, produto.to_tuple())
 
