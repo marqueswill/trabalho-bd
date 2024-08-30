@@ -67,6 +67,20 @@ class TesteAjuste(TesteBase):
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
 
+    def test_update(self):
+        try:
+            ajuste = self.ajuste_db.get_by_id(22)
+            ajuste.descricao = "Ajuste de varias coisas e tal"
+            ajuste.status = "recusado"
+            ajuste.pendente = False
+            ajuste.aprovado = False
+
+            self.ajuste_db.update(ajuste)
+            return "test_update: Success"
+
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
+
     def test_delete(self):
         try:
             self.ajuste_db.delete(21)

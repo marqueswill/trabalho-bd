@@ -35,7 +35,7 @@ class DBAjuste(DBOperation):
     def update(self, ajuste: Ajuste):
         sql_update = f"""
         UPDATE "Ajuste" 
-        SET {", ".join([f"{c} = %s" for c in ajuste.columns() if c != "codOperacao"])}
+        SET {", ".join([f"{c} = %s" for c in ajuste.columns()[:-1]])}
         WHERE "codOperacao" = %s
         """
         self.db.execute_query(sql_update, ajuste.to_tuple())

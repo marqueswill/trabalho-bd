@@ -5,7 +5,7 @@ from Integracao.DBOperation import DBOperation
 class DBSaida(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
-        
+
     def create_table(self):
         sql_create = """
         CREATE TABLE "Saida" (
@@ -26,15 +26,15 @@ class DBSaida(DBOperation):
 
     def insert(self, saida: Saida):
         sql_insert = f"""
-        INSERT INTO "Saida" ({",".join(saida.columns())})
-        VALUES ({",".join(["%s"]*len(saida.columns()))})
+        INSERT INTO "Saida" ({",".join(saida.columns()[:-1])})
+        VALUES ({",".join(["%s"]*(len(saida.columns())-1))})
         """
-        self.db.execute_query(sql_insert, saida.to_tuple())
+        self.db.execute_query(sql_insert, saida.to_tuple()[:-1])
 
     def update(self, saida: Saida):
         sql_update = f"""
         UPDATE "Saida" 
-        SET {", ".join([f"{c} = %s" for c in saida.columns() if c != "codOperacao"])}
+        SET {", ".join([f"{c} = %s" for c in saida.columns()[:-1]])}
         WHERE "codOperacao" = %s
         """
         self.db.execute_query(sql_update, saida.to_tuple())

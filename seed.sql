@@ -76,26 +76,26 @@ INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cp
 
 -- Lote
 INSERT INTO "Lote" ("tipo") VALUES
-('Entrada'),
-('Entrada'),
-('Entrada'),
-('Entrada'),
-('Entrada'),
-('Requisicao'),
-('Requisicao'),
-('Requisicao'),
-('Requisicao'),
-('Requisicao'),
-('Saida'),
-('Saida'),
-('Saida'),
-('Saida'),
-('Saida'),
-('Ajuste'),
-('Ajuste'),
-('Ajuste'),
-('Ajuste'),
-('Ajuste');
+('entrada'),
+('entrada'),
+('entrada'),
+('entrada'),
+('entrada'),
+('requisicao'),
+('requisicao'),
+('requisicao'),
+('requisicao'),
+('requisicao'),
+('saida'),
+('saida'),
+('saida'),
+('saida'),
+('saida'),
+('ajuste'),
+('ajuste'),
+('ajuste'),
+('ajuste'),
+('ajuste');
 
 -- ProdutoLote
 INSERT INTO "ProdutoLote" ("codProduto", "codEstoque", "numLote", "quantidade") VALUES

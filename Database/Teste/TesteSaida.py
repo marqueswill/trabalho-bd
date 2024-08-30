@@ -70,7 +70,18 @@ class TesteSaida(TesteBase):
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"
 
-    def delete_all(self):
+    def test_update(self):
+        try:
+            saida = self.saida_db.get_by_id(22)
+            saida.descricao = "Saida de varias coisas e tal"
+            
+            self.saida_db.update(saida)
+            return "test_update: Success"
+
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
+
+    def test_delete_all(self):
         try:
             self.saida_db.delete_all()
             return "delete_all: Success"

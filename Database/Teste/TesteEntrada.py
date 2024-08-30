@@ -21,7 +21,7 @@ class TesteEntrada(TesteBase):
                     aprovado=True,
                     numLote=1,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012"
+                    cpfOperador="23456789012",
                 ),
                 Entrada(
                     codOperacao=22,
@@ -33,7 +33,7 @@ class TesteEntrada(TesteBase):
                     aprovado=False,
                     numLote=2,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012"
+                    cpfOperador="23456789012",
                 ),
             ]
             for i in items:
@@ -58,6 +58,19 @@ class TesteEntrada(TesteBase):
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
+
+    def test_update(self):
+        try:
+            entrada = self.entrada_db.get_by_id(22)
+            entrada.descricao = "Entrada de varias coisas e tal"
+            entrada.status = ("recusado",)
+            entrada.pendente = (False,)
+            entrada.aprovado = (False,)
+            self.entrada_db.update(entrada=self.entrada_db.get_by_id(22))
+            return "test_update: Success"
+
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
 
     def test_delete(self):
         try:
