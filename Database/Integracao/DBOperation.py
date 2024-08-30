@@ -4,11 +4,13 @@ from DBConection import Database
 class DBOperation:
     def __init__(self, teste=False):
         self.db = Database(teste=teste)
+        if teste:
+            self.setup()
 
     def reset(self):
         with open("setup.sql", "r") as file:
-            setup_query = file.read()
-        self.db.execute_query(setup_query)
+            reset_query = file.read()
+        self.db.execute_query(reset_query)
 
     def seed(self):
         with open("seed.sql", "r") as file:

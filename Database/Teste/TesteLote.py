@@ -10,10 +10,10 @@ class TesteLote(TesteBase):
     def test_insert(self):
         try:
             lotes = [
-                Lote(numLote=1, tipo="entrada"),
-                Lote(numLote=2, tipo="ajuste"),
-                Lote(numLote=3, tipo="requisicao"),
-                Lote(numLote=4, tipo="saida"),
+                Lote(numLote=6, tipo="entrada"),
+                Lote(numLote=7, tipo="ajuste"),
+                Lote(numLote=8, tipo="requisicao"),
+                Lote(numLote=9, tipo="saida"),
             ]
             for l in lotes:
                 self.lote_db.insert(l)
@@ -23,7 +23,7 @@ class TesteLote(TesteBase):
 
     def test_get_by_id(self):
         try:
-            lote = self.lote_db.get_by_id(1)
+            lote = self.lote_db.get_by_id(6)
             if lote:
                 return "test_get_by_id: Success"
             else:
@@ -40,7 +40,7 @@ class TesteLote(TesteBase):
 
     def test_delete(self):
         try:
-            self.lote_db.delete(1)
+            self.lote_db.delete(6)
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"

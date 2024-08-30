@@ -1,7 +1,7 @@
 from DBConection import Database
 
 
-class TesteBase:
+class TesteBase:        
     def run(self):
         return [
             self.test_insert(),

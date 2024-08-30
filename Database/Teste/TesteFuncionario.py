@@ -8,8 +8,6 @@ from Objetos.Funcionario import Funcionario
 
 class TesteFuncionario(TesteBase):
     def __init__(self):
-        super().__init__()
-
         self.funcionario_db = DBFuncionario(teste=True)
 
     def test_insert(self):
