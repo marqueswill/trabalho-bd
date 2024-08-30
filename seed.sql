@@ -51,5 +51,17 @@ INSERT INTO "Saida" ("descricao", "dataLancamento", "dataConfirmacao", "status",
 ('Saída de carnes para preparo', '2024-08-28', '2024-08-29', 'aprovado', false, true, 1, '56789012345', '12345678901', 5);
 
 -- Entrada
+-- INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "notaFiscal") VALUES
+-- ('Entrada de carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012', '\\xDEADBEEF'),
+-- ('Entrada de bebidas', '2024-08-22', '2024-08-23', 'aprovado', false, true, 2, '23456789012', '34567890123', '\\xDEADBEEF'),
+-- ('Entrada de produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 4, '34567890123', '45678901234', '\\xDEADBEEF'),
+-- ('Entrada de itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 5, '45678901234', '56789012345', '\\xDEADBEEF'),
+-- ('Entrada de ingredientes perecíveis', '2024-08-28', '2024-08-29', 'aprovado', false, true, 1, '56789012345', '12345678901', '\\xDEADBEEF');
 
 -- Ajuste
+-- INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
+-- ('Ajuste de inventário para carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012', 101, 10, '2024-08-19'),
+-- ('Ajuste de inventário para bebidas', '2024-08-22', '2024-08-23', 'aprovado', false, true, 2, '23456789012', '34567890123', 102, 20, '2024-08-21'),
+-- ('Ajuste de inventário para produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 4, '34567890123', '45678901234', 103, 30, '2024-08-23'),
+-- ('Ajuste de inventário para itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 5, '45678901234', '56789012345', 104, 40, '2024-08-25'),
+-- ('Ajuste de inventário para ingredientes perecíveis', '2024-08-28', '2024-08-29', 'aprovado', false, true, 1, '56789012345', '12345678901', 105, 50, '2024-08-27');

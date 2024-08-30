@@ -126,24 +126,7 @@ CREATE TABLE "Entrada" (
   "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL,
-  "notaFiscal" bytea
-);
-
-CREATE TABLE "Ajuste" (
-  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
-  "descricao" varchar,
-  "dataLancamento" date NOT NULL,
-  "dataConfirmacao" date,
-  "status" varchar(10) DEFAULT 'pendente',
-  "pendente" bool NOT NULL DEFAULT true,
-  "aprovado" bool NOT NULL DEFAULT false,
-  "numLote" integer NOT NULL,
-  "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL,
-  "codProduto" integer NOT NULL,
-  "codEstoque" integer NOT NULL,
-  "dataInv" date NOT NULL
+  "cpfOperador" character(11) NOT NULL
 );
 
 CREATE TABLE "Requisicao" (
@@ -171,6 +154,22 @@ CREATE TABLE "Saida" (
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL,
   "codRequisicao" integer NOT NULL
+);
+
+CREATE TABLE "Ajuste" (
+  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
+  "descricao" varchar,
+  "dataLancamento" date NOT NULL,
+  "dataConfirmacao" date,
+  "status" varchar(10) DEFAULT 'pendente',
+  "pendente" bool NOT NULL DEFAULT true,
+  "aprovado" bool NOT NULL DEFAULT false,
+  "numLote" integer NOT NULL,
+  "cpfEstoquista" character(11),
+  "cpfOperador" character(11) NOT NULL,
+  "codProduto" integer NOT NULL,
+  "codEstoque" integer NOT NULL,
+  "dataInv" date NOT NULL
 );
 
 ALTER TABLE "Produto" ADD FOREIGN KEY ("codCategoria") REFERENCES "Categoria" ("codCategoria");

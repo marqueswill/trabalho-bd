@@ -6,13 +6,13 @@ from Objetos.Entrada import Entrada
 
 class TesteEntrada(TesteBase):
     def __init__(self):
-        self.requisicao_db = DBEntrada(teste=True)
+        self.entrada_db = DBEntrada(teste=True)
 
     def test_insert(self):
         try:
             items = [
                 Entrada(
-                    codOperacao=6,
+                    codOperacao=21,
                     descricao="Entrada sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
@@ -21,10 +21,10 @@ class TesteEntrada(TesteBase):
                     aprovado=True,
                     numLote=1,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012",
+                    cpfOperador="23456789012"
                 ),
                 Entrada(
-                    codOperacao=7,
+                    codOperacao=22,
                     descricao="Entrada carnes",
                     dataLancamento="2024-08-05",
                     dataConfirmacao="2024-08-06",
@@ -33,42 +33,42 @@ class TesteEntrada(TesteBase):
                     aprovado=False,
                     numLote=2,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012",
+                    cpfOperador="23456789012"
                 ),
             ]
             for i in items:
-                self.requisicao_db.insert(i)
+                self.entrada_db.insert(i)
             return "test_insert: Success"
         except Exception as e:
             return f"test_insert: Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
-            requisicao = self.requisicao_db.get_by_id(1)
-            if requisicao:
+            entrada = self.entrada_db.get_by_id(21)
+            if entrada:
                 return "test_get_by_id: Success"
             else:
-                return "test_get_by_id: Failed - No requisicao found"
+                return "test_get_by_id: Failed - No entrada found"
         except Exception as e:
             return f"test_get_by_id: Failed - {str(e)}"
 
     def test_get_all(self):
         try:
-            self.requisicao_db.get_all()
+            self.entrada_db.get_all()
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
 
     def test_delete(self):
         try:
-            self.requisicao_db.delete(1)
+            self.entrada_db.delete(21)
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"
 
     def delete_all(self):
         try:
-            self.requisicao_db.delete_all()
+            self.entrada_db.delete_all()
             return "delete_all: Success"
         except Exception as e:
             return f"delete_all: Failed - {str(e)}"
