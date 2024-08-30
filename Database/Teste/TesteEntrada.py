@@ -1,19 +1,19 @@
 from Teste.TesteBase import TesteBase
 
-from Integracao.DBRequisicao import DBRequisicao
-from Objetos.Requisicao import Requisicao
+from Integracao.DBEntrada import DBEntrada
+from Objetos.Entrada import Entrada
 
 
-class TesteRequisicao(TesteBase):
+class TesteEntrada(TesteBase):
     def __init__(self):
-        self.requisicao_db = DBRequisicao(teste=True)
+        self.requisicao_db = DBEntrada(teste=True)
 
     def test_insert(self):
         try:
             items = [
-                Requisicao(
-                    codOperacao=21,
-                    descricao="Requisicao sucos",
+                Entrada(
+                    codOperacao=6,
+                    descricao="Entrada sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
                     status="Confirmado",
@@ -23,9 +23,9 @@ class TesteRequisicao(TesteBase):
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
                 ),
-                Requisicao(
-                    codOperacao=22,
-                    descricao="Requisicao carnes",
+                Entrada(
+                    codOperacao=7,
+                    descricao="Entrada carnes",
                     dataLancamento="2024-08-05",
                     dataConfirmacao="2024-08-06",
                     status="Pendente",
@@ -44,7 +44,7 @@ class TesteRequisicao(TesteBase):
 
     def test_get_by_id(self):
         try:
-            requisicao = self.requisicao_db.get_by_id(21)
+            requisicao = self.requisicao_db.get_by_id(1)
             if requisicao:
                 return "test_get_by_id: Success"
             else:
@@ -61,7 +61,7 @@ class TesteRequisicao(TesteBase):
 
     def test_delete(self):
         try:
-            self.requisicao_db.delete(21)
+            self.requisicao_db.delete(1)
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"

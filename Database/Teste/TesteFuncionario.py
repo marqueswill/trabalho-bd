@@ -65,7 +65,7 @@ class TesteFuncionario(TesteBase):
 
     def test_delete(self):
         try:
-            self.funcionario_db.delete("12345678900")
+            self.funcionario_db.delete("02345678900")
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"

@@ -27,7 +27,7 @@ class TesteLote(TesteBase):
             if lote:
                 return "test_get_by_id: Success"
             else:
-                return "test_get_by_id: Failed - No lot found"
+                return "test_get_by_id: Failed - No lote found"
         except Exception as e:
             return f"test_get_by_id: Failed - {str(e)}"
 
