@@ -9,14 +9,12 @@ class TesteAjuste(TesteBase):
         super().__init__()
         self.ajuste_db = DBAjuste(teste=True)
 
-
-
     def test_insert(self):
         try:
 
             ajustes = [
                 Ajuste(
-                    codOperacao=1,
+                    codOperacao=21,
                     descricao="Ajuste positivo",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
@@ -24,14 +22,14 @@ class TesteAjuste(TesteBase):
                     pendente=False,
                     aprovado=True,
                     numLote=1,
-                    cpfEstoquista="12345678901",
-                    cpfOperador="10987654321",
+                    cpfEstoquista="45678901234",
+                    cpfOperador="23456789012",
                     codProduto=1,
                     codEstoque=1,
                     dataInv="2024-08-01",
                 ),
                 Ajuste(
-                    codOperacao=2,
+                    codOperacao=22,
                     descricao="Ajuste adicional",
                     dataLancamento="2024-08-05",
                     dataConfirmacao="2024-08-06",
@@ -39,11 +37,11 @@ class TesteAjuste(TesteBase):
                     pendente=True,
                     aprovado=False,
                     numLote=2,
-                    cpfEstoquista="12345678901",
-                    cpfOperador="10987654321",
-                    codProduto=1,
+                    cpfEstoquista="45678901234",
+                    cpfOperador="23456789012",
+                    codProduto=2,
                     codEstoque=1,
-                    dataInv="2024-08-05",
+                    dataInv="2024-08-02",
                 ),
             ]
             for a in ajustes:
@@ -54,7 +52,7 @@ class TesteAjuste(TesteBase):
 
     def test_get_by_id(self):
         try:
-            ajuste = self.ajuste_db.get_by_id(1)
+            ajuste = self.ajuste_db.get_by_id(21)
             if ajuste:
                 return "test_get_by_id: Success"
             else:
@@ -71,7 +69,7 @@ class TesteAjuste(TesteBase):
 
     def test_delete(self):
         try:
-            self.ajuste_db.delete(1)
+            self.ajuste_db.delete(21)
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"

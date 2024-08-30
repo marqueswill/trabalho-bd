@@ -17,6 +17,15 @@ DROP TABLE IF EXISTS "Funcionario" CASCADE;
 DROP TABLE IF EXISTS "Compra" CASCADE;
 DROP SEQUENCE IF EXISTS codOperacao_seq CASCADE;
 
+CREATE TABLE "Funcionario" (
+  "cpfFuncionario" char(11) PRIMARY KEY,
+  "sexo" char(1),
+  "telefone" bigint,
+  "nome" varchar NOT NULL,
+  "dataContratacao" date NOT NULL,
+  "cargo" char(1) NOT NULL
+);
+
 CREATE TABLE "Categoria" (
   "codCategoria" serial PRIMARY KEY,
   "nome" varchar NOT NULL
@@ -24,8 +33,8 @@ CREATE TABLE "Categoria" (
 
 CREATE TABLE "Produto" (
   "codProduto" serial PRIMARY KEY,
-  "uncodade" varchar NOT NULL,
-  "quantcodade" real NOT NULL,
+  "unidade" varchar NOT NULL,
+  "quantidade" real NOT NULL,
   "nome" varchar NOT NULL,
   "descricao" varchar,
   "codCategoria" integer NOT NULL
@@ -73,14 +82,6 @@ CREATE TABLE "ProdutoEstoque" (
   PRIMARY KEY ("codProduto", "codEstoque")
 );
 
-CREATE TABLE "Funcionario" (
-  "cpfFuncionario" char(11) PRIMARY KEY,
-  "sexo" char(1),
-  "telefone" bigint,
-  "nome" varchar NOT NULL,
-  "dataContratacao" date NOT NULL,
-  "cargo" char(1) NOT NULL
-);
 
 CREATE TABLE "Inventario" (
   "codProduto" integer,
