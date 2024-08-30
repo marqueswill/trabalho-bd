@@ -24,7 +24,7 @@ class TesteSaida(TesteBase):
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
-                    codRequisicao=1,
+                    codRequisicao=6,
                 ),
                 Saida(
                     codOperacao=22,
@@ -37,7 +37,7 @@ class TesteSaida(TesteBase):
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
-                    codRequisicao=2,
+                    codRequisicao=7,
                 ),
             ]
             for s in saidas:
