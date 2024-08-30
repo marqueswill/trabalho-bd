@@ -45,11 +45,9 @@ class TesteLote(TesteBase):
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"
 
-    def delete_all(self):
+    def test_delete_all(self):
         try:
-            all_lotes = self.lote_db.get_all()
-            for lote in all_lotes:
-                self.lote_db.delete(lote.numLote)
+            all_lotes = self.lote_db.delete_all()
             return "delete_all: Success"
         except Exception as e:
             return f"delete_all: Failed - {str(e)}"

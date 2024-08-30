@@ -70,7 +70,7 @@ class TesteFuncionario(TesteBase):
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"
 
-    def delete_all(self):
+    def test_delete_all(self):
         try:
             self.funcionario_db.delete_all()
             return "delete_all: Success"

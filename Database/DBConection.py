@@ -63,7 +63,8 @@ class Database:
                 return cursor
         except Exception as e:
             print(f"Erro ao executar a consulta: {e}")
-            return None
+            # return None
+            return e
         finally:
             if cursor and not fetch:
                 cursor.close()

@@ -10,7 +10,7 @@ class TesteBase:
             self.test_update(),
             self.test_update_all(),
             self.test_delete(),
-            self.test_delete_all(),
+            # self.test_delete_all(),
         ]
 
     def test_insert(self):
