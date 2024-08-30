@@ -6,7 +6,7 @@ from Objetos.Categoria import Categoria
 class TesteCategoria(TesteBase):
     def __init__(self):
         super().__init__()
-        self.categoria_db = DBCategoria()
+        self.categoria_db = DBCategoria(teste=True)
 
     def test_insert(self):
         try:

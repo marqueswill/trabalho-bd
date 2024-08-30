@@ -2,8 +2,10 @@ from Objetos.Saida import Saida
 from Integracao.DBOperation import DBOperation
 
 
-class DBRequisicao(DBOperation):
-
+class DBSaida(DBOperation):
+    def __init__(self, teste=False):
+        super().__init__(teste)
+        
     def create_table(self):
         sql_create = """
         CREATE TABLE "Saida" (

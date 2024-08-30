@@ -40,7 +40,7 @@ class Database:
         if self.connection is not None:
             self.connection.close()
             self.connection = None
-            print("Conexão ao PostgreSQL finalizada")
+            # print("Conexão ao PostgreSQL finalizada")
 
     def execute_query(self, query, params=None, fetch=False):
         if self.connection is None:

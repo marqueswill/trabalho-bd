@@ -5,14 +5,15 @@ from Objetos.Lote import Lote
 
 class TesteLote(TesteBase):
     def __init__(self):
-        super().__init__()
-        self.lote_db = DBLote()
+        self.lote_db = DBLote(teste=True)
 
     def test_insert(self):
         try:
             lotes = [
                 Lote(numLote=1, tipo="entrada"),
                 Lote(numLote=2, tipo="ajuste"),
+                Lote(numLote=3, tipo="requisicao"),
+                Lote(numLote=4, tipo="saida"),
             ]
             for l in lotes:
                 self.lote_db.insert(l)
@@ -32,7 +33,7 @@ class TesteLote(TesteBase):
 
     def test_get_all(self):
         try:
-            select_all = self.lote_db.get_all()
+            self.lote_db.get_all()
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
