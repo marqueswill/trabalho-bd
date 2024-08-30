@@ -25,7 +25,6 @@ class Entrada:
 
     def to_tuple(self):
         return (
-            self.codOperacao,
             self.descricao,
             self.dataLancamento,
             self.dataConfirmacao,
@@ -35,4 +34,19 @@ class Entrada:
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
+            self.codOperacao,
+        )
+
+    def columns(self):
+        return (
+            '"descricao"',
+            '"dataLancamento"',
+            '"dataConfirmacao"',
+            '"status"',
+            '"pendente"',
+            '"aprovado"',
+            '"numLote"',
+            '"cpfEstoquista"',
+            '"cpfOperador"',
+            '"codOperacao"',
         )

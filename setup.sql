@@ -17,6 +17,15 @@ DROP TABLE IF EXISTS "Funcionario" CASCADE;
 DROP TABLE IF EXISTS "Compra" CASCADE;
 DROP SEQUENCE IF EXISTS codOperacao_seq CASCADE;
 
+CREATE TABLE "Funcionario" (
+  "cpfFuncionario" char(11) PRIMARY KEY,
+  "sexo" char(1),
+  "telefone" bigint,
+  "nome" varchar NOT NULL,
+  "dataContratacao" date NOT NULL,
+  "cargo" char(1) NOT NULL
+);
+
 CREATE TABLE "Categoria" (
   "codCategoria" serial PRIMARY KEY,
   "nome" varchar NOT NULL
@@ -24,8 +33,8 @@ CREATE TABLE "Categoria" (
 
 CREATE TABLE "Produto" (
   "codProduto" serial PRIMARY KEY,
-  "uncodade" varchar NOT NULL,
-  "quantcodade" real NOT NULL,
+  "unidade" varchar NOT NULL,
+  "quantidade" real NOT NULL,
   "nome" varchar NOT NULL,
   "descricao" varchar,
   "codCategoria" integer NOT NULL
@@ -73,14 +82,6 @@ CREATE TABLE "ProdutoEstoque" (
   PRIMARY KEY ("codProduto", "codEstoque")
 );
 
-CREATE TABLE "Funcionario" (
-  "cpfFuncionario" char(11) PRIMARY KEY,
-  "sexo" char(1),
-  "telefone" bigint,
-  "nome" varchar NOT NULL,
-  "dataContratacao" date NOT NULL,
-  "cargo" char(1) NOT NULL
-);
 
 CREATE TABLE "Inventario" (
   "codProduto" integer,
@@ -126,24 +127,7 @@ CREATE TABLE "Entrada" (
   "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL,
-  "notaFiscal" bytea
-);
-
-CREATE TABLE "Ajuste" (
-  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
-  "descricao" varchar,
-  "dataLancamento" date NOT NULL,
-  "dataConfirmacao" date,
-  "status" varchar(10) DEFAULT 'pendente',
-  "pendente" bool NOT NULL DEFAULT true,
-  "aprovado" bool NOT NULL DEFAULT false,
-  "numLote" integer NOT NULL,
-  "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL,
-  "codProduto" integer NOT NULL,
-  "codEstoque" integer NOT NULL,
-  "dataInv" date NOT NULL
+  "cpfOperador" character(11) NOT NULL
 );
 
 CREATE TABLE "Requisicao" (
@@ -165,12 +149,28 @@ CREATE TABLE "Saida" (
   "dataLancamento" date NOT NULL,
   "dataConfirmacao" date,
   "status" varchar(10) DEFAULT 'pendente',
+  "pendente" bool NOT NULL DEFAULT false,
+  "aprovado" bool NOT NULL DEFAULT true,
+  "numLote" integer NOT NULL,
+  "cpfEstoquista" character(11),
+  "cpfOperador" character(11) NOT NULL,
+  "codRequisicao" integer NOT NULL
+);
+
+CREATE TABLE "Ajuste" (
+  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
+  "descricao" varchar,
+  "dataLancamento" date NOT NULL,
+  "dataConfirmacao" date,
+  "status" varchar(10) DEFAULT 'pendente',
   "pendente" bool NOT NULL DEFAULT true,
   "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL,
-  "codRequisicao" integer NOT NULL
+  "codProduto" integer NOT NULL,
+  "codEstoque" integer NOT NULL,
+  "dataInv" date NOT NULL
 );
 
 ALTER TABLE "Produto" ADD FOREIGN KEY ("codCategoria") REFERENCES "Categoria" ("codCategoria");
@@ -199,7 +199,6 @@ ALTER TABLE "Requisicao" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote
 ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
 
-ALTER TABLE "Saida" ADD FOREIGN KEY ("codOperacao") REFERENCES "Requisicao" ("codOperacao");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");

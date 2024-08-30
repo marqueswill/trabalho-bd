@@ -1,21 +1,19 @@
-from Teste.TesteLote import TesteLote
 from Teste.TesteBase import TesteBase
-from Integracao.DBAjuste import DBAjuste
-from Objetos.Ajuste import Ajuste
+
+from Integracao.DBEntrada import DBEntrada
+from Objetos.Entrada import Entrada
 
 
-class TesteAjuste(TesteBase):
+class TesteEntrada(TesteBase):
     def __init__(self):
-        super().__init__()
-        self.ajuste_db = DBAjuste(teste=True)
+        self.entrada_db = DBEntrada(teste=True)
 
     def test_insert(self):
         try:
-
-            ajustes = [
-                Ajuste(
+            items = [
+                Entrada(
                     codOperacao=21,
-                    descricao="Ajuste positivo",
+                    descricao="Entrada sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
                     status="Confirmado",
@@ -23,14 +21,11 @@ class TesteAjuste(TesteBase):
                     aprovado=True,
                     numLote=1,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012",
-                    codProduto=1,
-                    codEstoque=1,
-                    dataInv="2024-08-01",
+                    cpfOperador="23456789012"
                 ),
-                Ajuste(
+                Entrada(
                     codOperacao=22,
-                    descricao="Ajuste adicional",
+                    descricao="Entrada carnes",
                     dataLancamento="2024-08-05",
                     dataConfirmacao="2024-08-06",
                     status="Pendente",
@@ -38,45 +33,42 @@ class TesteAjuste(TesteBase):
                     aprovado=False,
                     numLote=2,
                     cpfEstoquista="45678901234",
-                    cpfOperador="23456789012",
-                    codProduto=2,
-                    codEstoque=1,
-                    dataInv="2024-08-02",
+                    cpfOperador="23456789012"
                 ),
             ]
-            for a in ajustes:
-                self.ajuste_db.insert(a)
+            for i in items:
+                self.entrada_db.insert(i)
             return "test_insert: Success"
         except Exception as e:
             return f"test_insert: Failed - {str(e)}"
 
     def test_get_by_id(self):
         try:
-            ajuste = self.ajuste_db.get_by_id(21)
-            if ajuste:
+            entrada = self.entrada_db.get_by_id(21)
+            if entrada:
                 return "test_get_by_id: Success"
             else:
-                return "test_get_by_id: Failed - No ajuste found"
+                return "test_get_by_id: Failed - No entrada found"
         except Exception as e:
             return f"test_get_by_id: Failed - {str(e)}"
 
     def test_get_all(self):
         try:
-            self.ajuste_db.get_all()
+            self.entrada_db.get_all()
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
 
     def test_delete(self):
         try:
-            self.ajuste_db.delete(21)
+            self.entrada_db.delete(21)
             return "test_delete: Success"
         except Exception as e:
             return f"test_delete: Failed - {str(e)}"
 
     def delete_all(self):
         try:
-            self.ajuste_db.delete_all()
+            self.entrada_db.delete_all()
             return "delete_all: Success"
         except Exception as e:
             return f"delete_all: Failed - {str(e)}"

@@ -40,7 +40,7 @@ class Database:
         if self.connection is not None:
             self.connection.close()
             self.connection = None
-            print("Conexão ao PostgreSQL finalizada")
+            # print("Conexão ao PostgreSQL finalizada")
 
     def execute_query(self, query, params=None, fetch=False):
         if self.connection is None:
@@ -62,8 +62,10 @@ class Database:
                 self.connection.commit()
                 return cursor
         except Exception as e:
-            print(f"Erro ao executar a consulta: {e}")
-            return None
+            # print(f"Erro ao executar a consulta: {e}")
+            # return None
+            raise Exception(e)
+            # return e
         finally:
             if cursor and not fetch:
                 cursor.close()

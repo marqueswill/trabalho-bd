@@ -2,7 +2,7 @@ from Objetos.Entrada import Entrada
 from Integracao.DBOperation import DBOperation
 
 
-class DBRequisicao(DBOperation):
+class DBEntrada(DBOperation):
 
     def create_table(self):
         sql_create = """

@@ -2,8 +2,10 @@ from Objetos.Saida import Saida
 from Integracao.DBOperation import DBOperation
 
 
-class DBRequisicao(DBOperation):
-
+class DBSaida(DBOperation):
+    def __init__(self, teste=False):
+        super().__init__(teste)
+        
     def create_table(self):
         sql_create = """
         CREATE TABLE "Saida" (
@@ -27,7 +29,6 @@ class DBRequisicao(DBOperation):
         INSERT INTO "Saida" ({",".join(saida.columns())})
         VALUES ({",".join(["%s"]*len(saida.columns()))})
         """
-        # print(sql_insert)
         self.db.execute_query(sql_insert, saida.to_tuple())
 
     def update(self, saida: Saida):
