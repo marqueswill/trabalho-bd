@@ -1,5 +1,6 @@
 from Objetos.Lote import Lote
 from Integracao.DBOperation import DBOperation
+from typing import List
 
 
 class DBLote(DBOperation):
@@ -14,17 +15,18 @@ class DBLote(DBOperation):
 
     def insert(self, lote: Lote):
         sql_insert = f"""
-        INSERT INTO "Lote" ({",".join(lote.columns())})
-        VALUES ({",".join(["%s"]*len(lote.columns()))})
+        INSERT INTO "Lote" ({",".join(lote.columns()[:-1])})
+        VALUES ({", ".join(["%s"]*(len(lote.columns())-1))})
         """
-        self.db.execute_query(sql_insert, lote.to_tuple())
+        self.db.execute_query(sql_insert, lote.to_tuple()[:-1])
 
     def update(self, lote: Lote):
         sql_update = """
         UPDATE "Lote"
-        SET tipo = %s
-        WHERE numLote = %s
+        SET "tipo" = %s
+        WHERE "numLote" = %s
         """
+
         self.db.execute_query(sql_update, lote.to_tuple())
 
     def delete(self, numLote):
@@ -42,7 +44,7 @@ class DBLote(DBOperation):
 
     def get_by_id(self, numLote):
         sql_select = """
-        SELECT * FROM "Lote"
+        SELECT * FROM "Lote" 
         WHERE "numLote" = %s
         """
         result = self.db.execute_query(sql_select, [numLote], fetch=True)

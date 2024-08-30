@@ -30,7 +30,7 @@ class DBFuncionario(DBOperation):
     def update(self, funcionario: Funcionario):
         sql_update = f"""
         UPDATE "Funcionario" 
-        SET {", ".join([f"{c} = %s" for c in funcionario.columns() if c != "cpfFuncionario"])}
+        SET {", ".join([f"{c} = %s" for c in funcionario.columns()[:-1]])}
         WHERE "cpfFuncionario" = %s
         """
         self.db.execute_query(sql_update, funcionario.to_tuple())

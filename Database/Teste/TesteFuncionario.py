@@ -12,7 +12,6 @@ class TesteFuncionario(TesteBase):
 
     def test_insert(self):
         try:
-
             funcionarios = [
                 Funcionario(
                     cpfFuncionario="12345678900",
@@ -49,6 +48,7 @@ class TesteFuncionario(TesteBase):
     def test_get_by_id(self):
         try:
             funcionario = self.funcionario_db.get_by_id("12345678900")
+
             if funcionario:
                 return "test_get_by_id: Success"
             else:
@@ -62,6 +62,19 @@ class TesteFuncionario(TesteBase):
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
+
+    def test_update(self):
+        try:
+            funcionario = self.funcionario_db.get_by_id("12345678999")
+            funcionario.nome = "Lohane Vekanandre Smith Bueno"
+            funcionario.sexo = "F"
+
+            self.funcionario_db.update(funcionario)
+
+            return "test_update: Success"
+
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
 
     def test_delete(self):
         try:

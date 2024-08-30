@@ -26,15 +26,15 @@ class DBRequisicao(DBOperation):
         INSERT INTO "Requisicao" ({",".join(requisicao.columns())})
         VALUES ({",".join(["%s"]*len(requisicao.columns()))})
         """
-        # print(sql_insert)
         self.db.execute_query(sql_insert, requisicao.to_tuple())
 
     def update(self, requisicao: Requisicao):
         sql_update = f"""
         UPDATE "Requisicao" 
-        SET {", ".join([f"{c} = %s" for c in requisicao.columns() if c != "codOperacao"])}
+        SET {", ".join([f"{c} = %s" for c in requisicao.columns() if c != '"codOperacao"'])}
         WHERE "codOperacao" = %s
         """
+        
         self.db.execute_query(sql_update, requisicao.to_tuple())
 
     def delete(self, codOperacao):

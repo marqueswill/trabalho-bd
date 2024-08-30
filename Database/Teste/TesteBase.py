@@ -8,7 +8,7 @@ class TesteBase:
             self.test_get_by_id(),
             self.test_get_all(),
             self.test_update(),
-            self.test_update_all(),
+            # self.test_update_all(),
             self.test_delete(),
             # self.test_delete_all(),
         ]

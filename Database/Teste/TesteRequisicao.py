@@ -16,7 +16,7 @@ class TesteRequisicao(TesteBase):
                     descricao="Requisicao sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
-                    status="Confirmado",
+                    status="aprovado",
                     pendente=False,
                     aprovado=True,
                     numLote=1,
@@ -27,8 +27,8 @@ class TesteRequisicao(TesteBase):
                     codOperacao=22,
                     descricao="Requisicao carnes",
                     dataLancamento="2024-08-05",
-                    dataConfirmacao="2024-08-06",
-                    status="Pendente",
+                    dataConfirmacao=None,
+                    status="pendente",
                     pendente=True,
                     aprovado=False,
                     numLote=2,
@@ -44,7 +44,7 @@ class TesteRequisicao(TesteBase):
 
     def test_get_by_id(self):
         try:
-            requisicao = self.requisicao_db.get_by_id(21)
+            requisicao = self.requisicao_db.get_by_id(22)
             if requisicao:
                 return "test_get_by_id: Success"
             else:
@@ -58,6 +58,18 @@ class TesteRequisicao(TesteBase):
             return "test_get_all: Success"
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
+
+    def test_update(self):
+        try:
+            requisicao = self.requisicao_db.get_by_id(22)
+            requisicao.status = "recusado"
+            requisicao.pendente = False
+            requisicao.aprovado = False
+
+            self.requisicao_db.update(requisicao)
+            return "test_update: Success"
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
 
     def test_delete(self):
         try:

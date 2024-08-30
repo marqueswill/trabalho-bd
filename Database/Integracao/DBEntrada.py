@@ -32,7 +32,7 @@ class DBEntrada(DBOperation):
     def update(self, entrada: Entrada):
         sql_update = f"""
         UPDATE "Entrada" 
-        SET {", ".join([f"{c} = %s" for c in entrada.columns() if c != "codOperacao"])}
+        SET {", ".join([f"{c} = %s" for c in entrada.columns()[:-1]])}
         WHERE "codOperacao" = %s
         """
         self.db.execute_query(sql_update, entrada.to_tuple())

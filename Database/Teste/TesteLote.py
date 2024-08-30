@@ -38,6 +38,16 @@ class TesteLote(TesteBase):
         except Exception as e:
             return f"test_get_all: Failed - {str(e)}"
 
+    def test_update(self):
+        try:
+            lote = self.lote_db.get_by_id(22)
+            lote.tipo = "entrada"
+            self.lote_db.update(lote)
+            return "test_update: Success"
+
+        except Exception as e:
+            return f"test_update: Failed - {str(e)}"
+
     def test_delete(self):
         try:
             self.lote_db.delete(21)
@@ -47,7 +57,7 @@ class TesteLote(TesteBase):
 
     def test_delete_all(self):
         try:
-            all_lotes = self.lote_db.delete_all()
+            self.lote_db.delete_all()
             return "delete_all: Success"
         except Exception as e:
             return f"delete_all: Failed - {str(e)}"
