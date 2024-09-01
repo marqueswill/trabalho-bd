@@ -83,6 +83,33 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION ajustar_estoque()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Atualiza os valores em ProdutoEstoque
+    UPDATE "ProdutoEstoque" pe
+    SET 
+        pe."estoqueAtual" = NEW."valorNovo",
+        pe."estoqueDisp" = NEW."valorNovo"
+    WHERE 
+        pe."codProduto" = NEW."codProduto" 
+        AND pe."codEstoque" = NEW."codEstoque";
+
+    -- Atualiza os valores em Requisicao
+    UPDATE "Requisicao" req
+    SET 
+        "aprovado" = false,
+        "pendente" = false
+    WHERE 
+        req."pendente" = true
+        AND req."codProduto" = NEW."codProduto"
+        AND req."codEstoque" = NEW."codEstoque";
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
 -- TRIGGERS
 CREATE TRIGGER trigger_entrada
 AFTER INSERT OR UPDATE ON "Entrada"
@@ -113,6 +140,11 @@ AFTER INSERT OR UPDATE ON "Requisicao"
 FOR EACH ROW
 WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
 EXECUTE FUNCTION aprovar_requisicao();
+
+CREATE TRIGGER trigger_ajuste
+AFTER INSERT OR UPDATE ON "Ajuste"
+FOR EACH ROW
+EXECUTE FUNCTION ajustar_estoque();
 
 -- DROP TRIGGER IF EXISTS trigger_entrada
 -- ON "Entrada";

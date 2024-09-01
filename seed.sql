@@ -67,7 +67,7 @@ INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoque
 (5, 1, 400, 150, 0, 0, '2024-08-05');
 
 -- Inventario
-INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cpfEstoquista") VALUES
+INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cpfOperador") VALUES
 (1, 1, '2024-08-01', 45, '56789012345'),
 (2, 1, '2024-08-02', 115, '45678901234'),
 (3, 1, '2024-08-03', 240, '56789012345'),
@@ -157,9 +157,9 @@ INSERT INTO "Requisicao" ("descricao", "dataLancamento", "dataConfirmacao", "sta
 -- ('Saída de carnes para preparo', '2024-08-28', '2024-08-29', 'aprovado', false, true, 15, '56789012345', '12345678901', 10);
 
 -- Ajuste
-INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
-('Correção de contagem', '2024-08-10', '2024-08-12', 'confirmado', false, true, 16, '56789012345', '23456789012', 1, 1, '2024-08-01'),
-('Ajuste de estoque inicial', '2024-08-11', NULL, 'pendente', true, false, 17, '45678901234', '34567890123', 2, 1, '2024-08-02'),
-('Ajuste pós-inventário', '2024-08-15', '2024-08-16', 'confirmado', false, true, 18, '56789012345', '23456789012', 3, 1, '2024-08-03'),
-('Correção de lote', '2024-08-20', NULL, 'pendente', true, false, 19, '45678901234', '34567890123', 4, 1, '2024-08-04'),
-('Ajuste final de estoque', '2024-08-25', '2024-08-26', 'confirmado', false, true, 20, '56789012345', '23456789012', 5, 1, '2024-08-05');
+-- INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
+-- ('Correção de contagem', '2024-08-10', '2024-08-12', 'confirmado', false, true, 16, '56789012345', '23456789012', 1, 1, '2024-08-01'),
+-- ('Ajuste de estoque inicial', '2024-08-11', NULL, 'pendente', true, false, 17, '45678901234', '34567890123', 2, 1, '2024-08-02'),
+-- ('Ajuste pós-inventário', '2024-08-15', '2024-08-16', 'confirmado', false, true, 18, '56789012345', '23456789012', 3, 1, '2024-08-03'),
+-- ('Correção de lote', '2024-08-20', NULL, 'pendente', true, false, 19, '45678901234', '34567890123', 4, 1, '2024-08-04'),
+-- ('Ajuste final de estoque', '2024-08-25', '2024-08-26', 'confirmado', false, true, 20, '56789012345', '23456789012', 5, 1, '2024-08-05');
