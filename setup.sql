@@ -126,10 +126,10 @@ CREATE TABLE "Compra" (
   PRIMARY KEY ("codOperacao", "cnpjFornecedor", "cnpjRestaurante")
 );
 
-CREATE SEQUENCE codOperacao_seq START 1;
+-- CREATE SEQUENCE codOperacao_seq START 1;
 
 CREATE TABLE "Entrada" (
-  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
+  "codOperacao" serial PRIMARY KEY,
   "descricao" varchar,
   "dataLancamento" date NOT NULL,
   "dataConfirmacao" date,
@@ -142,7 +142,7 @@ CREATE TABLE "Entrada" (
 );
 
 CREATE TABLE "Requisicao" (
-  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
+  "codOperacao" serial PRIMARY KEY,
   "descricao" varchar,
   "dataLancamento" date NOT NULL,
   "dataConfirmacao" date,
@@ -155,7 +155,7 @@ CREATE TABLE "Requisicao" (
 );
 
 CREATE TABLE "Saida" (
-  "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
+  "codOperacao" serial PRIMARY KEY,
   "descricao" varchar,
   "dataLancamento" date NOT NULL,
   "dataConfirmacao" date,

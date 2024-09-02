@@ -1,64 +1,102 @@
 class Ajuste:
     def __init__(
         self,
-        codOperacao,
-        descricao,
-        dataLancamento,
-        dataConfirmacao,
-        status,
-        pendente,
-        aprovado,
-        numLote,
-        cpfEstoquista,
-        cpfOperador,
+        valorAntigo,
+        valorNovo,
+        diferenca,
         codProduto,
         codEstoque,
         dataInv,
     ):
-        self.codOperacao = codOperacao
-        self.descricao = descricao
-        self.dataLancamento = dataLancamento
-        self.dataConfirmacao = dataConfirmacao
-        self.status = status
-        self.pendente = pendente
-        self.aprovado = aprovado
-        self.numLote = numLote
-        self.cpfEstoquista = cpfEstoquista
-        self.cpfOperador = cpfOperador
+        self.valorAntigo = valorAntigo
+        self.valorNovo = valorNovo
+        self.diferenca = diferenca
         self.codProduto = codProduto
         self.codEstoque = codEstoque
         self.dataInv = dataInv
 
     def to_tuple(self):
         return (
-            self.descricao,
-            self.dataLancamento,
-            self.dataConfirmacao,
-            self.status,
-            self.pendente,
-            self.aprovado,
-            self.numLote,
-            self.cpfEstoquista,
-            self.cpfOperador,
+            self.valorAntigo,
+            self.valorNovo,
+            self.diferenca,
             self.codProduto,
             self.codEstoque,
             self.dataInv,
-            self.codOperacao,
         )
 
     def columns(self):
         return [
-            '"descricao"',
-            '"dataLancamento"',
-            '"dataConfirmacao"',
-            '"status"',
-            '"pendente"',
-            '"aprovado"',
-            '"numLote"',
-            '"cpfEstoquista"',
-            '"cpfOperador"',
-            '"codProduto"',
-            '"codEstoque"',
-            '"dataInv"',
-            '"codOperacao"',
+            "valorAntigo",
+            "valorNovo",
+            "diferenca",
+            "codProduto",
+            "codEstoque",
+            "dataInv",
         ]
+
+
+# class Ajuste:
+#     def __init__(
+#         self,
+#         codOperacao,
+#         descricao,
+#         dataLancamento,
+#         dataConfirmacao,
+#         status,
+#         pendente,
+#         aprovado,
+#         numLote,
+#         cpfEstoquista,
+#         cpfOperador,
+#         codProduto,
+#         codEstoque,
+#         dataInv,
+#     ):
+#         self.codOperacao = codOperacao
+#         self.descricao = descricao
+#         self.dataLancamento = dataLancamento
+#         self.dataConfirmacao = dataConfirmacao
+#         self.status = status
+#         self.pendente = pendente
+#         self.aprovado = aprovado
+#         self.numLote = numLote
+#         self.cpfEstoquista = cpfEstoquista
+#         self.cpfOperador = cpfOperador
+#         self.codProduto = codProduto
+#         self.codEstoque = codEstoque
+#         self.dataInv = dataInv
+
+#     def to_tuple(self):
+#         return (
+#             self.descricao,
+#             self.dataLancamento,
+#             self.dataConfirmacao,
+#             self.status,
+#             self.pendente,
+#             self.aprovado,
+#             self.numLote,
+#             self.cpfEstoquista,
+#             self.cpfOperador,
+#             self.codProduto,
+#             self.codEstoque,
+#             self.dataInv,
+#             self.codOperacao,
+#         )
+
+#     def columns(self):
+#         return [
+#             '"descricao"',
+#             '"dataLancamento"',
+#             '"dataConfirmacao"',
+#             '"status"',
+#             '"pendente"',
+#             '"aprovado"',
+#             '"numLote"',
+#             '"cpfEstoquista"',
+#             '"cpfOperador"',
+#             '"codProduto"',
+#             '"codEstoque"',
+#             '"dataInv"',
+#             '"codOperacao"',
+#         ]

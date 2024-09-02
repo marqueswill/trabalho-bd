@@ -142,11 +142,11 @@ INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status
 
 -- Requisicao
 INSERT INTO "Requisicao" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
-('Requisição de carnes', '2024-08-25', '2024-08-26', 'aprovado', true, false, 6, '56789012345', '12345678901'),
+('Requisição de carnes', '2024-08-25', '2024-08-26', 'pendente', true, false, 6, '56789012345', '12345678901'),
 ('Requisição de bebidas', '2024-08-26', NULL, 'pendente', true, false, 7, '45678901234', '23456789012'),
-('Requisição de produtos de limpeza', '2024-08-27', '2024-08-28', 'aprovado', true, false, 8, '34567890123', '34567890123'),
+('Requisição de produtos de limpeza', '2024-08-27', '2024-08-28', 'pendente', true, false, 8, '34567890123', '34567890123'),
 ('Requisição de itens de higiene', '2024-08-28', NULL, 'pendente', true, false, 9, '23456789012', '45678901234'),
-('Requisição de ingredientes', '2024-08-29', '2024-08-30', 'aprovado', true, false, 10, '12345678901', '56789012345');
+('Requisição de ingredientes', '2024-08-29', '2024-08-30', 'pendente', true, false, 10, '12345678901', '56789012345');
 
 -- Saida
 -- INSERT INTO "Saida" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codRequisicao") VALUES
