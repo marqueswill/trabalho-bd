@@ -21,6 +21,7 @@ class TesteRequisicao(TesteBase):
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
                 Requisicao(
                     descricao="Requisicao carnes",
@@ -32,6 +33,7 @@ class TesteRequisicao(TesteBase):
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
             ]
             for i in items:

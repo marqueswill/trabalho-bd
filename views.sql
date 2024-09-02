@@ -23,16 +23,16 @@ CREATE OR REPLACE VIEW Cotacao_Produtos AS
 
 CREATE VIEW View_Produtos_Fornecedores AS
     SELECT 
-        f.nome AS fornecedor,
-        f.razao,
-        p.nome AS produto,
-        c.valor AS valorCotacao
+        f."nome" AS fornecedor,
+        f."razao",
+        p."nome" AS produto,
+        c."valor" AS valorCotacao
     FROM 
-        Cotacao c
+        "Cotacao" c
     JOIN 
-        Fornecedor f ON c.cnpjFornecedor = f.cnpjFornecedor
+        "Fornecedor" f ON c."cnpjFornecedor" = f."cnpjFornecedor"
     JOIN 
-        Produto p ON c.codProduto = p.codProduto;
+        "Produto" p ON c."codProduto" = p."codProduto";
 
 -- CREATE VIEW Operacoes_Estoque AS
 --     SELECT 

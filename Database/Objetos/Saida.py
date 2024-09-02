@@ -12,6 +12,7 @@ class Saida:
         numLote,
         cpfEstoquista,
         cpfOperador,
+        codEstoque,
         codRequisicao,
     ):
         self.descricao = descricao
@@ -24,6 +25,7 @@ class Saida:
         self.cpfEstoquista = cpfEstoquista
         self.cpfOperador = cpfOperador
         self.codRequisicao = codRequisicao
+        self.codEstoque = codEstoque
         self.codOperacao = codOperacao
 
     def to_tuple(self):
@@ -38,6 +40,7 @@ class Saida:
             self.cpfEstoquista,
             self.cpfOperador,
             self.codRequisicao,
+            self.codEstoque,
             self.codOperacao,
         )
 
@@ -53,5 +56,6 @@ class Saida:
             '"cpfEstoquista"',
             '"cpfOperador"',
             '"codRequisicao"',
+            '"codEstoque"',
             '"codOperacao"',
         )

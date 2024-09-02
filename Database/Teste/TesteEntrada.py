@@ -22,6 +22,7 @@ class TesteEntrada(TesteBase):
                     numLote=6,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
                 Entrada(
                     codOperacao=22,
@@ -34,6 +35,7 @@ class TesteEntrada(TesteBase):
                     numLote=7,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
             ]
             for i in items:

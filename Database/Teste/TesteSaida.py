@@ -27,6 +27,7 @@ class TesteSaida(TesteBase):
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                     # codRequisicao=6,
                 ),
                 Requisicao(
@@ -40,6 +41,7 @@ class TesteSaida(TesteBase):
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                     # codRequisicao=7,
                 ),
             ]

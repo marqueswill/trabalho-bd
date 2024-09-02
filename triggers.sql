@@ -65,7 +65,8 @@ BEGIN
         "numLote", 
         "cpfEstoquista", 
         "cpfOperador",
-        "codRequisicao"
+        "codRequisicao",
+        "codEstoque"
     ) 
     VALUES (
         NEW."descricao", 
@@ -77,7 +78,8 @@ BEGIN
         NEW."numLote", 
         NEW."cpfEstoquista", 
         NEW."cpfOperador", 
-        NEW."codOperacao"
+        NEW."codOperacao",
+        NEW."codEstoque"
     );
     RETURN NEW;
 END;

@@ -11,6 +11,7 @@ class Requisicao:
         numLote=0,
         cpfEstoquista="",
         cpfOperador="",
+        codEstoque=0,
     ):
         self.descricao = descricao
         self.dataLancamento = dataLancamento
@@ -21,6 +22,7 @@ class Requisicao:
         self.numLote = numLote
         self.cpfEstoquista = cpfEstoquista
         self.cpfOperador = cpfOperador
+        self.codEstoque = (codEstoque,)
         self.codOperacao = codOperacao
 
     def to_tuple(self):
@@ -34,6 +36,7 @@ class Requisicao:
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
+            self.codEstoque,
             self.codOperacao,
         )
 
@@ -48,5 +51,6 @@ class Requisicao:
             '"numLote"',
             '"cpfEstoquista"',
             '"cpfOperador"',
+            '"codEstoque"',
             '"codOperacao"',
         )

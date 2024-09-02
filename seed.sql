@@ -266,12 +266,12 @@ INSERT INTO "ProdutoLote" ("codProduto", "codEstoque", "numLote", "quantidade") 
 
 
 -- Entrada
-INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
-('Entrada de carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012'),
-('Entrada de bebidas', '2024-08-22', '2024-08-22', 'rejeitado', false, false, 2, '23456789012', '34567890123'),
-('Entrada de produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 3, '34567890123', '45678901234'),
-('Entrada de itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 4, '45678901234', '56789012345'),
-('Entrada de ingredientes perecíveis', '2024-08-28', NULL, 'pendente', true, false, 5, '56789012345', '12345678901');
+INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador","codEstoque") VALUES
+('Entrada de carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012',1),
+('Entrada de bebidas', '2024-08-22', '2024-08-22', 'rejeitado', false, false, 2, '23456789012', '34567890123',1),
+('Entrada de produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 3, '34567890123', '45678901234',1),
+('Entrada de itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 4, '45678901234', '56789012345',1),
+('Entrada de ingredientes perecíveis', '2024-08-28', NULL, 'pendente', true, false, 5, '56789012345', '12345678901',1);
 
 -- Compra 
 -- INSERT INTO "Compra" ("codOperacao", "cnpjFornecedor", "cnpjRestaurante", "notaFiscal", "data", "quantidade") VALUES
@@ -282,12 +282,12 @@ INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status
 -- (5, '56789012000155', '98765432000199', decode('BADF00D', 'hex'), '2024-08-28', 250);
 
 -- Requisicao
-INSERT INTO "Requisicao" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
-('Requisição de carnes', '2024-08-25', '2024-08-25', 'aprovado', false, true, 6, '56789012345', '12345678901'),
-('Requisição de bebidas', '2024-08-26', '2024-08-27', 'rejeitado', false, false, 7, '45678901234', '23456789012'),
-('Requisição de produtos de limpeza', '2024-08-27', NULL, 'pendente', true, false, 8, '34567890123', '34567890123'),
-('Requisição de itens de higiene', '2024-08-28', NULL, 'pendente', true, false, 9, '23456789012', '45678901234'),
-('Requisição de ingredientes', '2024-08-29', NULL, 'pendente', true, false, 10, '12345678901', '56789012345');
+INSERT INTO "Requisicao" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador","codEstoque") VALUES
+('Requisição de carnes', '2024-08-25', '2024-08-25', 'aprovado', false, true, 6, '56789012345', '12345678901',1),
+('Requisição de bebidas', '2024-08-26', '2024-08-27', 'rejeitado', false, false, 7, '45678901234', '23456789012',1),
+('Requisição de produtos de limpeza', '2024-08-27', NULL, 'pendente', true, false, 8, '34567890123', '34567890123',1),
+('Requisição de itens de higiene', '2024-08-28', NULL, 'pendente', true, false, 9, '23456789012', '45678901234',1),
+('Requisição de ingredientes', '2024-08-29', NULL, 'pendente', true, false, 10, '12345678901', '56789012345',1);
 
 -- Saida
 -- INSERT INTO "Saida" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codRequisicao") VALUES
