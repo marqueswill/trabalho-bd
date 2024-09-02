@@ -97,7 +97,7 @@ BEGIN
         AND req."codEstoque" = NEW."codEstoque";
 
     RETURN NEW;
-    
+
     -- Atualiza os valores em ProdutoEstoque
     UPDATE "ProdutoEstoque" pe
     SET 
@@ -144,7 +144,7 @@ WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
 EXECUTE FUNCTION aprovar_requisicao();
 
 CREATE TRIGGER trigger_ajuste
-AFTER INSERT OR UPDATE ON "Ajuste"
+AFTER INSERT ON "Ajuste"
 FOR EACH ROW
 EXECUTE FUNCTION ajustar_estoque();
 
