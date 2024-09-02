@@ -1,16 +1,16 @@
 class Requisicao:
     def __init__(
         self,
-        codOperacao,
-        descricao,
-        dataLancamento,
-        dataConfirmacao,
-        status,
-        pendente,
-        aprovado,
-        numLote,
-        cpfEstoquista,
-        cpfOperador,
+        codOperacao=0,
+        descricao="",
+        dataLancamento="",
+        dataConfirmacao="",
+        status="",
+        pendente=True,
+        aprovado=False,
+        numLote=0,
+        cpfEstoquista="",
+        cpfOperador="",
     ):
         self.descricao = descricao
         self.dataLancamento = dataLancamento

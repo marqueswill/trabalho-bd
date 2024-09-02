@@ -12,25 +12,23 @@ class TesteRequisicao(TesteBase):
         try:
             items = [
                 Requisicao(
-                    codOperacao=21,
                     descricao="Requisicao sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
                     status="aprovado",
-                    pendente=False,
-                    aprovado=True,
+                    pendente=True,
+                    aprovado=False,
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
                 ),
                 Requisicao(
-                    codOperacao=22,
                     descricao="Requisicao carnes",
                     dataLancamento="2024-08-05",
                     dataConfirmacao=None,
                     status="pendente",
-                    pendente=True,
-                    aprovado=False,
+                    pendente=False,
+                    aprovado=True,
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
@@ -44,7 +42,7 @@ class TesteRequisicao(TesteBase):
 
     def test_get_by_id(self):
         try:
-            requisicao = self.requisicao_db.get_by_id(22)
+            requisicao = self.requisicao_db.get_by_id(7)
             if requisicao:
                 return "Success"
             else:
@@ -61,7 +59,7 @@ class TesteRequisicao(TesteBase):
 
     def test_update(self):
         try:
-            requisicao = self.requisicao_db.get_by_id(22)
+            requisicao = self.requisicao_db.get_by_id(7)
             requisicao.status = "recusado"
             requisicao.pendente = False
             requisicao.aprovado = False
@@ -73,7 +71,7 @@ class TesteRequisicao(TesteBase):
 
     def test_delete(self):
         try:
-            self.requisicao_db.delete(21)
+            self.requisicao_db.delete(6)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

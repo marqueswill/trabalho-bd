@@ -34,7 +34,7 @@ class DBRequisicao(DBOperation):
         SET {", ".join([f"{c} = %s" for c in requisicao.columns()[:-1]])}
         WHERE "codOperacao" = %s
         """
-        
+
         self.db.execute_query(sql_update, requisicao.to_tuple())
 
     def delete(self, codOperacao):
