@@ -86,16 +86,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION ajustar_estoque()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Atualiza os valores em ProdutoEstoque
-    UPDATE "ProdutoEstoque" pe
-    SET 
-        pe."estoqueAtual" = NEW."valorNovo",
-        pe."estoqueDisp" = NEW."valorNovo"
-    WHERE 
-        pe."codProduto" = NEW."codProduto" 
-        AND pe."codEstoque" = NEW."codEstoque";
-
-    -- Atualiza os valores em Requisicao
+    -- Rejeita as requisições pendentes
     UPDATE "Requisicao" req
     SET 
         "aprovado" = false,
@@ -106,6 +97,17 @@ BEGIN
         AND req."codEstoque" = NEW."codEstoque";
 
     RETURN NEW;
+    
+    -- Atualiza os valores em ProdutoEstoque
+    UPDATE "ProdutoEstoque" pe
+    SET 
+        pe."estoqueAtual" = NEW."valorNovo",
+        pe."estoqueDisp" = NEW."valorNovo"
+    WHERE 
+        pe."codProduto" = NEW."codProduto" 
+        AND pe."codEstoque" = NEW."codEstoque";
+
+
 END;
 $$ LANGUAGE plpgsql;
 

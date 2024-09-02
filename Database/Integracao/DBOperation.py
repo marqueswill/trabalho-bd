@@ -9,16 +9,16 @@ class DBOperation:
 
     def reset(self):
         with open("setup.sql", "r") as file:
-            reset_query = file.read()
+            setup_query = file.read()
         with open("triggers.sql", "r") as file:
             triggers_query = file.read()
         with open("procedures.sql", "r") as file:
             procedures_query = file.read()
         with open("views.sql", "r") as file:
             views_query = file.read()
-            
+
         self.db.execute_query(
-            reset_query + triggers_query + procedures_query + views_query
+            setup_query + triggers_query + procedures_query + views_query
         )
 
     def seed(self):

@@ -12,19 +12,88 @@ INSERT INTO "Funcionario" ("cpfFuncionario", "sexo", "telefone", "nome", "dataCo
 
 -- Categoria
 INSERT INTO "Categoria" ("nome") VALUES
+('Carnes'),
 ('Bebidas'),
 ('Laticínios'),
-('Carnes'),
 ('Hortifrúti'),
-('Grãos');
+('Grãos'),
+('Pães e Bolos'),
+('Doces e Sobremesas'),
+('Enlatados'),
+('Temperos'),
+('Frios e Embutidos');
 
 -- Produto
 INSERT INTO "Produto" ("unidade", "quantidade", "nome", "descricao", "codCategoria") VALUES
-('kg', 5.0, 'Arroz', 'Arroz branco tipo 1', 5),
-('lt', 2.0, 'Leite', 'Leite integral', 2),
-('un', 12.0, 'Cerveja', 'Cerveja Pilsen 350ml', 1),
-('kg', 1.5, 'Tomate', 'Tomate italiano', 4),
-('kg', 3.0, 'Carne bovina', 'Contrafilé', 3);
+-- Carnes (Categoria 1)
+('kg', 1, 'Filé Mignon', 'Carne de alta qualidade', 1),
+('kg', 1, 'Picanha', 'Corte nobre de carne bovina', 1),
+('kg', 1, 'Frango Inteiro', 'Frango inteiro resfriado', 1),
+('kg', 1, 'Costela Suína', 'Carne suína com osso', 1),
+('kg', 1, 'Alcatra', 'Carne bovina de primeira', 1),
+
+-- Bebidas (Categoria 2)
+('ml', 500, 'Água Mineral', 'Garrafa de 500ml', 2),
+('ml', 350, 'Refrigerante', 'Lata de 350ml', 2),
+('ml', 350, 'Cerveja', 'Lata de 350ml', 2),
+('ml', 750 , 'Vinho Tinto', 'Garrafa de 750ml', 2),
+('L', 1 , 'Suco de Laranja', 'Caixa de 1L', 2),
+
+-- Laticínios (Categoria 3)
+('L', 1, 'Leite Integral', 'Leite integral pasteurizado', 3),
+('g', 200, 'Queijo Mussarela', 'Queijo mussarela fatiado', 3),
+('g', 200, 'Iogurte Natural', 'Iogurte natural sem açúcar', 3),
+('g', 200, 'Manteiga', 'Manteiga com sal', 3),
+('g', 400, 'Requeijão', 'Requeijão cremoso', 3),
+
+-- Hortifrúti (Categoria 4)
+('kg', 1, 'Maçã', 'Maçã vermelha', 4),
+('kg', 1, 'Banana', 'Banana prata', 4),
+('kg', 1, 'Tomate', 'Tomate italiano', 4),
+('kg', 1, 'Alface', 'Alface crespa', 4),
+('kg', 1, 'Batata', 'Batata inglesa', 4),
+
+-- Grãos (Categoria 5)
+('kg', 1, 'Arroz Branco', 'Arroz branco tipo 1', 5),
+('kg', 1, 'Feijão Preto', 'Feijão preto', 5),
+('g', 500, 'Lentilha', 'Lentilha seca', 5),
+('g', 500, 'Grão de Bico', 'Grão de bico', 5),
+('g', 500, 'Quinoa', 'Quinoa em grãos', 5),
+
+-- Pães e Bolos (Categoria 6)
+('g', 500, 'Pão de Forma', 'Pão de forma integral', 6),
+('g', 300, 'Baguete', 'Pão baguete', 6),
+('g', 400, 'Bolo de Chocolate', 'Bolo de chocolate caseiro', 6),
+('g', 400, 'Croissant', 'Croissant de manteiga', 6),
+('g', 400, 'Pão de Queijo', 'Pão de queijo tradicional', 6),
+
+-- Doces e Sobremesas (Categoria 7)
+('g', 200, 'Chocolate ao Leite', 'Chocolate ao leite', 7),
+('g', 250, 'Doce de Leite', 'Doce de leite cremoso', 7),
+('g', 200, 'Brigadeiro', 'Brigadeiro tradicional', 7),
+('g', 100, 'Goiabada', 'Goiabada em pedaços', 7),
+('g', 250, 'Pudim', 'Pudim de leite condensado', 7),
+
+-- Enlatados (Categoria 8)
+('g', 400, 'Milho em Conserva', 'Milho verde em conserva', 8),
+('g', 400, 'Ervilha em Conserva', 'Ervilha verde em conserva', 8),
+('g', 400, 'Sardinha em Óleo', 'Sardinha em óleo vegetal', 8),
+('g', 400, 'Atum em Água', 'Atum em conserva', 8),
+('g', 300, 'Tomate Pelado', 'Tomate pelado em lata', 8),
+
+-- Temperos (Categoria 9)
+('g', 100, 'Sal', 'Sal refinado', 9),
+('g', 50, 'Pimenta do Reino', 'Pimenta do reino moída', 9),
+('g', 50, 'Orégano', 'Orégano seco', 9),
+('g', 50, 'Açafrão', 'Açafrão da terra', 9),
+('g', 50, 'Manjericão', 'Manjericão desidratado', 9),
+
+-- Frios e Embutidos (Categoria 10)
+('g', 200, 'Presunto', 'Presunto fatiado', 10),
+('g', 200, 'Mortadela', 'Mortadela fatiada', 10),
+('g', 150, 'Salame', 'Salame italiano', 10),
+('g', 200, 'Peito de Peru', 'Peito de peru fatiado', 10),
+('g', 300, 'Salsicha', 'Salsicha tipo viena', 10);
 
 -- Fornecedor
 INSERT INTO "Fornecedor" ("cnpjFornecedor", "endereco", "razao", "nome", "telefone") VALUES
@@ -44,11 +113,35 @@ INSERT INTO "Restaurante" ("cnpjRestaurante", "endereco", "razao", "nome", "tele
 
 -- Cotacao
 INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
-('15.00', 1, '12345678000199'),
-('4.50', 2, '23456789000188'),
-('2.00', 3, '34567890000177'),
-('3.20', 4, '45678901000166'),
-('30.00', 5, '56789012000155');
+(0, 1, '12345678000199'),   
+(0, 2, '12345678000199'),  
+(0, 3, '12345678000199'),   
+(0, 4, '12345678000199'),   
+(0, 5, '12345678000199'),  
+
+(0, 6, '23456789000188'),   
+(0, 7, '23456789000188'),  
+(0, 8, '23456789000188'),   
+(0, 9, '23456789000188'),   
+(0, 10, '23456789000188'),  
+
+(0, 11, '34567890000177'),   
+(0, 12, '34567890000177'),  
+(0, 13, '34567890000177'),   
+(0, 14, '34567890000177'),   
+(0, 15, '34567890000177'),  
+
+(0, 16, '45678901000166'),   
+(0, 17, '45678901000166'),  
+(0, 18, '45678901000166'),   
+(0, 19, '45678901000166'),   
+(0, 20, '45678901000166'),  
+
+(0, 21, '56789012000155'),   
+(0, 22, '56789012000155'),  
+(0, 23, '56789012000155'),   
+(0, 24, '56789012000155'),   
+(0, 25, '56789012000155');
 
 -- Estoque
 INSERT INTO "Estoque" ("nome", "cnpjRestaurante") VALUES
