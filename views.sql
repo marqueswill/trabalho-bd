@@ -47,21 +47,21 @@ CREATE VIEW Operacoes_Estoque AS
 
     UNION ALL
 
-    SELECT 
-        'Requisicao' AS "tipo_operacao",
-        "codOperacao",
-        "descricao",
-        "dataLancamento",
-        "dataConfirmacao",
-        "status",
-        "pendente",
-        "aprovado",
-        "numLote",
-        "cpfEstoquista",
-        "cpfOperador"
-    FROM "Requisicao"
+    -- SELECT 
+    --     'Requisicao' AS "tipo_operacao",
+    --     "codOperacao",
+    --     "descricao",
+    --     "dataLancamento",
+    --     "dataConfirmacao",
+    --     "status",
+    --     "pendente",
+    --     "aprovado",
+    --     "numLote",
+    --     "cpfEstoquista",
+    --     "cpfOperador"
+    -- FROM "Requisicao"
 
-    UNION ALL
+    -- UNION ALL
 
     SELECT 
         'Saida' AS "tipo_operacao",

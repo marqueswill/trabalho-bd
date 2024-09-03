@@ -5,39 +5,39 @@ from Teste.TesteFuncionario import TesteFuncionario
 from Integracao.DBSaida import DBSaida
 from Integracao.DBRequisicao import DBRequisicao
 
-from Objetos.Requisicao import Requisicao
+from Objetos.Saida import Saida
 
 
 class TesteSaida(TesteBase):
     def __init__(self):
         self.saida_db = DBSaida(teste=True)
-        self.requisicao_db = DBRequisicao(teste=True)
+        # self.requisicao_db = DBRequisicao(teste=True)
 
     def test_insert(self):
         try:
             items = [
-                Requisicao(
+                Saida(
                     # codOperacao=21,
                     descricao="Saida sucos",
                     dataLancamento="2024-08-01",
-                    dataConfirmacao="2024-08-02",
-                    status="Confirmado",
-                    pendente=False,
-                    aprovado=True,
+                    # dataConfirmacao=None,
+                    # status="Confirmado",
+                    pendente=True,
+                    aprovado=False,
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
                     codEstoque=1,
                     # codRequisicao=6,
                 ),
-                Requisicao(
+                Saida(
                     # codOperacao=22,
                     descricao="Saida carnes",
                     dataLancamento="2024-08-05",
-                    dataConfirmacao="2024-08-06",
-                    status="Pendente",
-                    pendente=False,
-                    aprovado=True,
+                    dataConfirmacao=None,
+                    # status="Pendente",
+                    pendente=True,
+                    aprovado=False,
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
@@ -46,7 +46,7 @@ class TesteSaida(TesteBase):
                 ),
             ]
             for i in items:
-                self.requisicao_db.insert(i)
+                self.saida_db.insert(i)
 
             self.saida_db.get_by_id(1)
             self.saida_db.get_by_id(2)

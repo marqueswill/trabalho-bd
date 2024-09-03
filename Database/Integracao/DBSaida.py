@@ -29,6 +29,7 @@ class DBSaida(DBOperation):
         INSERT INTO "Saida" ({",".join(saida.columns()[:-1])})
         VALUES ({",".join(["%s"]*(len(saida.columns())-1))})
         """
+        # print(sql_insert, saida.to_tuple()[:-1])
         self.db.execute_query(sql_insert, saida.to_tuple()[:-1])
 
     def update(self, saida: Saida):
