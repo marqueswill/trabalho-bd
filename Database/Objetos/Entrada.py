@@ -1,4 +1,5 @@
 class Entrada:
+
     def __init__(
         self,
         codOperacao,
@@ -11,6 +12,7 @@ class Entrada:
         numLote,
         cpfEstoquista,
         cpfOperador,
+        codEstoque,
     ):
         self.codOperacao = codOperacao
         self.descricao = descricao
@@ -21,6 +23,7 @@ class Entrada:
         self.aprovado = aprovado
         self.numLote = numLote
         self.cpfEstoquista = cpfEstoquista
+        self.codEstoque = codEstoque
         self.cpfOperador = cpfOperador
 
     def to_tuple(self):
@@ -34,6 +37,7 @@ class Entrada:
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
+            self.codEstoque,
             self.codOperacao,
         )
 
@@ -48,5 +52,6 @@ class Entrada:
             '"numLote"',
             '"cpfEstoquista"',
             '"cpfOperador"',
+            '"codEstoque"',
             '"codOperacao"',
         )
