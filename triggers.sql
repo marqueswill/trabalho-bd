@@ -20,7 +20,7 @@ BEGIN
             AND pl."numLote" = NEW."numLote";
 
         UPDATE "Entrada"
-        SET "status" = 'aprovado'
+        SET "status" = 'aprovado', "dataConfirmacao" = NOW()
         WHERE "codOperacao" = NEW."codOperacao";
 
         RETURN NEW;
@@ -32,7 +32,7 @@ BEGIN
         END IF;
 
         UPDATE "Entrada"
-        SET "status" = 'rejeitado'
+        SET "status" = 'rejeitado', "dataConfirmacao" = NOW()
         WHERE "codOperacao" = NEW."codOperacao";
         RETURN NEW;
     END IF;
@@ -43,9 +43,9 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION atualizar_estoque_saida()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- IF NEW."pendente" = true AND NEW."aprovado" = false THEN --pendente
-    --     RETURN NEW;
-    -- END IF;
+    IF NEW."pendente" = true AND NEW."aprovado" = false THEN --pendente
+        RETURN NEW;
+    END IF;
 
     IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
         IF NEW."status" = 'aprovado' THEN
@@ -60,14 +60,14 @@ BEGIN
             AND pl."numLote" = NEW."numLote";
 
         UPDATE "Saida"
-        SET "status" = 'aprovado'
+        SET "status" = 'aprovado', "dataConfirmacao" = NOW()
         WHERE "codOperacao" = NEW."codOperacao";
         RETURN NEW;
     END IF;
 
-    -- IF NEW."pendente" = false AND NEW."aprovado" = false THEN --rejeitado
-    --     RETURN NEW;
-    -- END IF;
+    IF NEW."pendente" = false AND NEW."aprovado" = false THEN --rejeitado
+        RETURN NEW;
+    END IF;
 
 
 END;
@@ -119,7 +119,7 @@ BEGIN
         );
 
         UPDATE "Requisicao"
-        SET "status" = 'aprovado'
+        SET "status" = 'aprovado', "dataConfirmacao" = NOW()
         WHERE "codOperacao" = NEW."codOperacao";
 
         RETURN NEW;
@@ -138,7 +138,7 @@ BEGIN
             AND pl."numLote" = NEW."numLote";
 
         UPDATE "Requisicao"
-        SET "status" = 'rejeitado'
+        SET "status" = 'rejeitado', "dataConfirmacao" = NOW()
         WHERE "codOperacao" = NEW."codOperacao";
 
         RETURN NEW;
