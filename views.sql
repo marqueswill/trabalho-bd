@@ -77,4 +77,4 @@ CREATE VIEW Operacoes_Estoque AS
         "cpfOperador"
     FROM "Saida"
     WHERE "codEstoque" = 1
-    ORDER BY "dataLancamento";
+    ORDER BY "dataLancamento" DESC;

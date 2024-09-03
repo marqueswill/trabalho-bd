@@ -155,6 +155,17 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- FUNCOES
+CREATE OR REPLACE FUNCTION atualizar_ultimo_inventario()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE "ProdutoEstoque" pe
+    SET "ultimoInv" = NEW."dataInv"
+    WHERE pe."codProduto" = NEW."codProduto"
+        AND pe."codEstoque" = NEW."codEstoque";
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 -- TRIGGERS
 CREATE TRIGGER trigger_entrada
@@ -178,6 +189,11 @@ CREATE TRIGGER trigger_ajuste
 AFTER INSERT ON "Ajuste"
 FOR EACH ROW
 EXECUTE FUNCTION ajustar_estoque();
+
+CREATE TRIGGER trigger_inventario
+AFTER INSERT ON "Inventario"
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_ultimo_inventario();
 
 -- DROP TRIGGER IF EXISTS trigger_entrada
 -- ON "Entrada";
