@@ -280,9 +280,6 @@ INSERT INTO "Saida" ("descricao","dataLancamento",  "numLote", "cpfEstoquista", 
 ('Saída de itens de higiene', '2024-08-28',  9, '23456789012', '45678901234',1,true,false),
 ('Saída de ingredientes', '2024-08-29',  10, '12345678901', '56789012345',1,true,false);
 
-INSERT INTO "Saida" ("descricao","numLote", "cpfEstoquista", "cpfOperador", "codEstoque","pendente","aprovado") VALUES
-('Saída de ingredientes', 1, '12345678901', '56789012345',1,true,false);
-
 
 -- Ajuste
 -- INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
