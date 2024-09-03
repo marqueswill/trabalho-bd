@@ -81,75 +81,17 @@ AS $$
     END;
 $$;
 
-
--- CREATE OR REPLACE PROCEDURE trocar_estoque(
---     estoque_origem INTEGER,
---     produtos INTEGER[],
---     qunatidades INTEGER[],
---     estoque_destino INTEGER
--- )
--- LANGUAGE plpgsql
--- AS $$
--- DECLARE
---     produto INTEGER;
---     quantidade INTEGER;
--- BEGIN
---     -- Loop através da lista de produtos
---     FOREACH produto IN ARRAY produtos
---     LOOP
---         -- Verifica se o produto existe no estoque de origem
---         SELECT "estoqueAtual" INTO quantidade
---         FROM "ProdutoEstoque"
---         WHERE "codProduto" = produto
---           AND "codEstoque" = estoque_origem;
-
---         IF FOUND THEN
---             -- Verifica se há estoque suficiente
---             IF quantidade > 0 THEN
---                 -- Atualiza o estoque no estoque de origem
---                 UPDATE "ProdutoEstoque"
---                 SET "estoqueAtual" = "estoqueAtual" - 1
---                 WHERE "codProduto" = produto
---                   AND "codEstoque" = estoque_origem;
-
---                 -- Atualiza o estoque no estoque de destino
---                 -- Verifica se o produto já existe no estoque de destino
---                 IF EXISTS (
---                     SELECT 1
---                     FROM "ProdutoEstoque"
---                     WHERE "codProduto" = produto
---                       AND "codEstoque" = estoque_destino
---                 ) THEN
---                     UPDATE "ProdutoEstoque"
---                     SET "estoqueAtual" = "estoqueAtual" + 1
---                     WHERE "codProduto" = produto
---                       AND "codEstoque" = estoque_destino;
---                 ELSE
---                     INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueAtual", "estoqueMax", "estoqueMin", "estoqueDisp", "ultimoInv")
---                     VALUES (produto, estoque_destino, 1, 0, 0, 0, NULL);
---                 END IF;
---             ELSE
---                 RAISE NOTICE 'Produto % não tem estoque suficiente no estoque de origem.', produto;
---             END IF;
---         ELSE
---             RAISE NOTICE 'Produto % não encontrado no estoque de origem.', produto;
---         END IF;
---     END LOOP;
--- END;
--- $$;
-
--- Primeiro, defina o tipo composto para a lista de tuplas
 DROP TYPE IF EXISTS produto_quantidade CASCADE;
+
 CREATE TYPE produto_quantidade AS (
     codProduto INTEGER,
     quantidade INTEGER
 );
 
--- Atualize a procedure para usar o tipo composto
 CREATE OR REPLACE PROCEDURE trocar_estoque(
     estoque_origem INTEGER,
-    produtos_quantidades produto_quantidade[],
-    estoque_destino INTEGER
+    estoque_destino INTEGER,
+    produtos_quantidades produto_quantidade[]
 )
 LANGUAGE plpgsql
 AS $$
@@ -157,26 +99,37 @@ DECLARE
     item produto_quantidade;
     estoque_atual INTEGER;
 BEGIN
-    -- Loop através da lista de produtos e quantidades
+    -- Loop through the list of products and quantities
     FOREACH item IN ARRAY produtos_quantidades
     LOOP
-        -- Verifica se o produto existe no estoque de origem
+        -- Check if the product exists in the source stock
         SELECT "estoqueAtual" INTO estoque_atual
         FROM "ProdutoEstoque"
         WHERE "codProduto" = item.codProduto
           AND "codEstoque" = estoque_origem;
 
         IF FOUND THEN
-            -- Verifica se há estoque suficiente
+            -- Check if there is enough stock
             IF estoque_atual >= item.quantidade THEN
-                -- Atualiza o estoque no estoque de origem
+                -- Cancela requisições pendentes
+                UPDATE "Saida" s
+                SET "pendente" = false, "aprovado" = false
+                FROM "Lote" l
+                JOIN "ProdutoLote" pl ON pl."numLote" = l."numLote"
+                WHERE s."pendente" = true
+                AND s."numLote" = l."numLote"
+                AND s."codEstoque" = estoque_origem
+                AND pl."codProduto" = item.codProduto;
+
+                -- Update the stock in the source stock
                 UPDATE "ProdutoEstoque"
-                SET "estoqueAtual" = "estoqueAtual" - item.quantidade
+                SET "estoqueAtual" = "estoqueAtual" - item.quantidade,
+                    "estoqueDisp" = "estoqueDisp" - item.quantidade
                 WHERE "codProduto" = item.codProduto
                   AND "codEstoque" = estoque_origem;
 
-                -- Atualiza o estoque no estoque de destino
-                -- Verifica se o produto já existe no estoque de destino
+                -- Update the stock in the destination stock
+                -- Check if the product already exists in the destination stock
                 IF EXISTS (
                     SELECT 1
                     FROM "ProdutoEstoque"
@@ -201,3 +154,15 @@ BEGIN
     END LOOP;
 END;
 $$;
+
+---- EXEMPLO:
+-- CALL trocar_estoque(
+--     1,
+-- 	5,
+--     ARRAY[
+--         (1, 10)::produto_quantidade, 
+--         (2, 10)::produto_quantidade   
+--     ]
+-- );
+
+-- SELECT * FROM "ProdutoEstoque" ORDER BY "codEstoque", "codProduto";
