@@ -2,27 +2,41 @@
 CREATE OR REPLACE FUNCTION atualizar_estoque_entrada()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- IF NEW."pendente" = true AND NEW."aprovado" = false THEN --pendente
-    --     RETURN NEW;
-    -- END IF;
+    IF NEW."pendente" = true AND NEW."aprovado" = false THEN --pendente
+        RETURN NEW;
+    END IF;
 
-    -- IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
-    --     RETURN NEW;
-    -- END IF;
+    IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
+        IF NEW."status" = 'aprovado' THEN
+            RETURN NEW;
+        END IF;
 
-    -- IF NEW."pendente" = false AND NEW."aprovado" = false THEN --rejeitado
-    --     RETURN NEW;
-    -- END IF;
+        UPDATE "ProdutoEstoque" pe
+        SET "estoqueAtual" = "estoqueAtual" + pl."quantidade",
+            "estoqueDisp" = "estoqueDisp" + pl."quantidade"
+        FROM "ProdutoLote" pl
+        WHERE pe."codProduto" = pl."codProduto"
+            AND pe."codEstoque" = pl."codEstoque"
+            AND pl."numLote" = NEW."numLote";
 
-    NEW."status" := 'aprovado';
-    UPDATE "ProdutoEstoque" pe
-    SET "estoqueAtual" = "estoqueAtual" + pl."quantidade",
-        "estoqueDisp" = "estoqueDisp" + pl."quantidade"
-    FROM "ProdutoLote" pl
-    WHERE pe."codProduto" = pl."codProduto"
-        AND pe."codEstoque" = pl."codEstoque"
-        AND pl."numLote" = NEW."numLote";
-    RETURN NEW;
+        UPDATE "Entrada"
+        SET "status" = 'aprovado'
+        WHERE "codOperacao" = NEW."codOperacao";
+
+        RETURN NEW;
+    END IF;
+
+    IF NEW."pendente" = false AND NEW."aprovado" = false THEN --rejeitado
+        IF NEW."status" = 'rejeitado' THEN
+            RETURN NEW;
+        END IF;
+
+        UPDATE "Entrada"
+        SET "status" = 'rejeitado'
+        WHERE "codOperacao" = NEW."codOperacao";
+        RETURN NEW;
+    END IF;
+
 END;
 $$ LANGUAGE plpgsql;
 
@@ -33,22 +47,29 @@ BEGIN
     --     RETURN NEW;
     -- END IF;
 
-    -- IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
-    --     RETURN NEW;
-    -- END IF;
+    IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
+        IF NEW."status" = 'aprovado' THEN
+            RETURN NEW;
+        END IF;
+
+        UPDATE "ProdutoEstoque" pe
+        SET "estoqueAtual" = "estoqueAtual" - pl."quantidade"
+        FROM "ProdutoLote" pl
+        WHERE pe."codProduto" = pl."codProduto"
+            AND pe."codEstoque" = pl."codEstoque"
+            AND pl."numLote" = NEW."numLote";
+
+        UPDATE "Saida"
+        SET "status" = 'aprovado'
+        WHERE "codOperacao" = NEW."codOperacao";
+        RETURN NEW;
+    END IF;
 
     -- IF NEW."pendente" = false AND NEW."aprovado" = false THEN --rejeitado
     --     RETURN NEW;
     -- END IF;
 
-    NEW."status" := 'aprovado';
-    UPDATE "ProdutoEstoque" pe
-    SET "estoqueAtual" = "estoqueAtual" - pl."quantidade"
-    FROM "ProdutoLote" pl
-    WHERE pe."codProduto" = pl."codProduto"
-        AND pe."codEstoque" = pl."codEstoque"
-        AND pl."numLote" = NEW."numLote";
-    RETURN NEW;
+
 END;
 $$ LANGUAGE plpgsql;
 
@@ -56,7 +77,6 @@ CREATE OR REPLACE FUNCTION atualizar_estoque_requisicao()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW."pendente" = true AND NEW."aprovado" = false THEN --pendente
-
         UPDATE "ProdutoEstoque" pe
         SET "estoqueDisp" = "estoqueDisp" - pl."quantidade"
         FROM "ProdutoLote" pl
@@ -64,8 +84,6 @@ BEGIN
             AND pe."codEstoque" = pl."codEstoque"
             AND pl."numLote" = NEW."numLote";
         RETURN NEW;
-
-        
     END IF;
 
     IF NEW."pendente" = false AND NEW."aprovado" = true THEN --aprovado
@@ -141,8 +159,6 @@ BEGIN
         AND req."codProduto" = NEW."codProduto"
         AND req."codEstoque" = NEW."codEstoque";
 
-    RETURN NEW;
-
     -- Atualiza os valores em ProdutoEstoque
     UPDATE "ProdutoEstoque" pe
     SET 
@@ -152,6 +168,7 @@ BEGIN
         pe."codProduto" = NEW."codProduto" 
         AND pe."codEstoque" = NEW."codEstoque";
 
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -171,13 +188,13 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER trigger_entrada
 AFTER INSERT OR UPDATE ON "Entrada"
 FOR EACH ROW
-WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
+-- WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
 EXECUTE FUNCTION atualizar_estoque_entrada();
 
 CREATE TRIGGER trigger_saida
 AFTER INSERT OR UPDATE ON "Saida"
 FOR EACH ROW
-WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
+-- WHEN (NEW."aprovado" = true AND NEW."pendente" = false)
 EXECUTE FUNCTION atualizar_estoque_saida();
 
 CREATE TRIGGER trigger_requisicao
