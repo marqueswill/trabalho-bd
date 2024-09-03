@@ -3,53 +3,50 @@ from Teste.TesteBase import TesteBase
 from Teste.TesteFuncionario import TesteFuncionario
 
 from Integracao.DBSaida import DBSaida
-from Integracao.DBRequisicao import DBRequisicao
+from Integracao.DBLote import DBLote
+from Integracao.DBProdutoLote import DBProdutoLote
 
-from Objetos.Requisicao import Requisicao
+from Objetos.Saida import Saida
+from Objetos.Lote import Lote
+from Objetos.ProdutoLote import ProdutoLote
 
 
 class TesteSaida(TesteBase):
     def __init__(self):
         self.saida_db = DBSaida(teste=True)
-        self.requisicao_db = DBRequisicao(teste=True)
+        self.lote_db = DBLote(teste=True)
+        self.produtolote_db = DBProdutoLote(teste=True)
 
     def test_insert(self):
         try:
+            self.lote_db.insert(Lote(tipo="saida"))
+            self.produtolote_db.insert(ProdutoLote(1,1,11,10))
+            
             items = [
-                Requisicao(
-                    # codOperacao=21,
+                Saida(
                     descricao="Saida sucos",
                     dataLancamento="2024-08-01",
-                    dataConfirmacao="2024-08-02",
-                    status="Confirmado",
-                    pendente=False,
-                    aprovado=True,
+                    pendente=True,
+                    aprovado=False,
                     numLote=1,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
                     codEstoque=1,
-                    # codRequisicao=6,
                 ),
-                Requisicao(
-                    # codOperacao=22,
+                Saida(
                     descricao="Saida carnes",
                     dataLancamento="2024-08-05",
-                    dataConfirmacao="2024-08-06",
-                    status="Pendente",
-                    pendente=False,
-                    aprovado=True,
+                    dataConfirmacao=None,
+                    pendente=True,
+                    aprovado=False,
                     numLote=2,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
                     codEstoque=1,
-                    # codRequisicao=7,
                 ),
             ]
             for i in items:
-                self.requisicao_db.insert(i)
-
-            self.saida_db.get_by_id(1)
-            self.saida_db.get_by_id(2)
+                self.saida_db.insert(i)
 
             return "Success"
         except Exception as e:

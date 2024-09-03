@@ -1,5 +1,5 @@
 class Lote:
-    def __init__(self, numLote, tipo):
+    def __init__(self, numLote=0, tipo=""):
         self.numLote = numLote
         self.tipo = tipo
 

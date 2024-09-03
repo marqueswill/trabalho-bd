@@ -131,9 +131,9 @@ CREATE TABLE "Compra" (
 CREATE TABLE "Entrada" (
   "codOperacao" serial PRIMARY KEY,
   "descricao" varchar,
-  "dataLancamento" date NOT NULL,
-  "dataConfirmacao" date,
-  "status" varchar(10) DEFAULT 'pendente',
+  "dataLancamento" timestamp NOT NULL DEFAULT NOW(),
+  "dataConfirmacao" timestamp,
+  "status" varchar(10),
   "pendente" bool NOT NULL DEFAULT true,
   "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
@@ -142,33 +142,33 @@ CREATE TABLE "Entrada" (
   "codEstoque" integer NOT NULL
 );
 
-CREATE TABLE "Requisicao" (
-  "codOperacao" serial PRIMARY KEY,
-  "descricao" varchar,
-  "dataLancamento" date NOT NULL,
-  "dataConfirmacao" date,
-  "status" varchar(10) DEFAULT 'pendente',
-  "pendente" bool NOT NULL DEFAULT true,
-  "aprovado" bool NOT NULL DEFAULT false,
-  "numLote" integer NOT NULL,
-  "cpfEstoquista" character(11),
-  "cpfOperador" character(11) NOT NULL,
-  "codEstoque" integer NOT NULL
-);
+-- CREATE TABLE "Requisicao" (
+--   "codOperacao" serial PRIMARY KEY,
+--   "descricao" varchar,
+--   "dataLancamento" date NOT NULL,
+--   "dataConfirmacao" date,
+--   "status" varchar(10) DEFAULT 'pendente',
+--   "pendente" bool NOT NULL DEFAULT true,
+--   "aprovado" bool NOT NULL DEFAULT false,
+--   "numLote" integer NOT NULL,
+--   "cpfEstoquista" character(11),
+--   "cpfOperador" character(11) NOT NULL,
+--   "codEstoque" integer NOT NULL
+-- );
 
 CREATE TABLE "Saida" (
   "codOperacao" serial PRIMARY KEY,
   "descricao" varchar,
-  "dataLancamento" date NOT NULL,
-  "dataConfirmacao" date,
-  "status" varchar(10) DEFAULT 'pendente',
-  "pendente" bool NOT NULL DEFAULT false,
-  "aprovado" bool NOT NULL DEFAULT true,
+  "dataLancamento" timestamp NOT NULL DEFAULT NOW(),
+  "dataConfirmacao" timestamp,
+  "status" varchar(10),
+  "pendente" bool NOT NULL DEFAULT true,
+  "aprovado" bool NOT NULL DEFAULT false,
   "numLote" integer NOT NULL,
   "cpfEstoquista" character(11),
   "cpfOperador" character(11) NOT NULL,
-  "codEstoque" integer NOT NULL,
-  "codRequisicao" integer NOT NULL
+  "codEstoque" integer NOT NULL
+  -- "codRequisicao" integer NOT NULL
 );
 
 -- CREATE TABLE "Ajuste" (
@@ -221,15 +221,15 @@ ALTER TABLE "Entrada" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codE
 -- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("codProduto","codEstoque","dataInv") REFERENCES "Inventario" ("codProduto","codEstoque","dataInv");
 -- ALTER TABLE "Ajuste" ADD CONSTRAINT lote_unico_ajuste UNIQUE ("numLote");
 
-ALTER TABLE "Requisicao" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
-ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
-ALTER TABLE "Requisicao" ADD CONSTRAINT lote_unico_requisicao UNIQUE ("numLote");
-ALTER TABLE "Requisicao" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
+-- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
+-- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
+-- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
+-- ALTER TABLE "Requisicao" ADD CONSTRAINT lote_unico_requisicao UNIQUE ("numLote");
+-- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
 
 ALTER TABLE "Saida" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
-ALTER TABLE "Saida" ADD FOREIGN KEY ("codRequisicao") REFERENCES "Requisicao" ("codOperacao");
+-- ALTER TABLE "Saida" ADD FOREIGN KEY ("codRequisicao") REFERENCES "Requisicao" ("codOperacao");
 ALTER TABLE "Saida" ADD CONSTRAINT lote_unico_saida UNIQUE ("numLote");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");

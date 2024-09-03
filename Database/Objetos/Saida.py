@@ -2,18 +2,17 @@ class Saida:
 
     def __init__(
         self,
-        codOperacao,
-        descricao,
-        dataLancamento,
-        dataConfirmacao,
-        status,
-        pendente,
-        aprovado,
-        numLote,
-        cpfEstoquista,
-        cpfOperador,
-        codEstoque,
-        codRequisicao,
+        codOperacao=None,
+        descricao=None,
+        dataLancamento=None,
+        dataConfirmacao=None,
+        status="pendente",
+        pendente=True,
+        aprovado=False,
+        numLote=None,
+        cpfEstoquista=None,
+        cpfOperador=None,
+        codEstoque=None,
     ):
         self.descricao = descricao
         self.dataLancamento = dataLancamento
@@ -24,7 +23,6 @@ class Saida:
         self.numLote = numLote
         self.cpfEstoquista = cpfEstoquista
         self.cpfOperador = cpfOperador
-        self.codRequisicao = codRequisicao
         self.codEstoque = codEstoque
         self.codOperacao = codOperacao
 
@@ -39,7 +37,6 @@ class Saida:
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
-            self.codRequisicao,
             self.codEstoque,
             self.codOperacao,
         )
@@ -55,7 +52,6 @@ class Saida:
             '"numLote"',
             '"cpfEstoquista"',
             '"cpfOperador"',
-            '"codRequisicao"',
             '"codEstoque"',
             '"codOperacao"',
         )
