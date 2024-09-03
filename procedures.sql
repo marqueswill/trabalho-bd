@@ -139,6 +139,7 @@ $$;
 -- $$;
 
 -- Primeiro, defina o tipo composto para a lista de tuplas
+DROP TYPE IF EXISTS produto_quantidade CASCADE;
 CREATE TYPE produto_quantidade AS (
     codProduto INTEGER,
     quantidade INTEGER
@@ -183,12 +184,13 @@ BEGIN
                       AND "codEstoque" = estoque_destino
                 ) THEN
                     UPDATE "ProdutoEstoque"
-                    SET "estoqueAtual" = "estoqueAtual" + item.quantidade
+                    SET "estoqueAtual" = "estoqueAtual" + item.quantidade,
+                        "estoqueDisp" = "estoqueDisp" + item.quantidade
                     WHERE "codProduto" = item.codProduto
                       AND "codEstoque" = estoque_destino;
                 ELSE
                     INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueAtual", "estoqueMax", "estoqueMin", "estoqueDisp", "ultimoInv")
-                    VALUES (item.codProduto, estoque_destino, item.quantidade, 0, 0, 0, NULL);
+                    VALUES (item.codProduto, estoque_destino, item.quantidade, 0, 0, item.quantidade, NULL);
                 END IF;
             ELSE
                 RAISE NOTICE 'Produto % não tem estoque suficiente no estoque de origem.', item.codProduto;
