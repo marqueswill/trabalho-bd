@@ -34,51 +34,51 @@ CREATE VIEW View_Produtos_Fornecedores AS
     JOIN 
         "Produto" p ON c."codProduto" = p."codProduto";
 
--- CREATE VIEW Operacoes_Estoque AS
---     SELECT 
---         'Entrada' AS "tipo_operacao",
---         "codOperacao",
---         "descricao",
---         "dataLancamento",
---         "dataConfirmacao",
---         "status",
---         "pendente",
---         "aprovado",
---         "numLote",
---         "cpfEstoquista",
---         "cpfOperador"
---     FROM "Entrada"
+CREATE VIEW Operacoes_Estoque AS
+    SELECT 
+        'Entrada' AS "tipo_operacao",
+        "codOperacao",
+        "descricao",
+        "dataLancamento",
+        "dataConfirmacao",
+        "status",
+        "pendente",
+        "aprovado",
+        "numLote",
+        "cpfEstoquista",
+        "cpfOperador"
+    FROM "Entrada"
 
---     UNION ALL
+    UNION ALL
 
---     SELECT 
---         'Requisicao' AS "tipo_operacao",
---         "codOperacao",
---         "descricao",
---         "dataLancamento",
---         "dataConfirmacao",
---         "status",
---         "pendente",
---         "aprovado",
---         "numLote",
---         "cpfEstoquista",
---         "cpfOperador"
---     FROM "Requisicao"
+    SELECT 
+        'Requisicao' AS "tipo_operacao",
+        "codOperacao",
+        "descricao",
+        "dataLancamento",
+        "dataConfirmacao",
+        "status",
+        "pendente",
+        "aprovado",
+        "numLote",
+        "cpfEstoquista",
+        "cpfOperador"
+    FROM "Requisicao"
 
---     UNION ALL
+    UNION ALL
 
---     SELECT 
---         'Saida' AS "tipo_operacao",
---         "codOperacao",
---         "descricao",
---         "dataLancamento",
---         "dataConfirmacao",
---         "status",
---         "pendente",
---         "aprovado",
---         "numLote",
---         "cpfEstoquista",
---         "cpfOperador"
---     FROM "Saida"
-
---     ORDER BY "dataLancamento";
+    SELECT 
+        'Saida' AS "tipo_operacao",
+        "codOperacao",
+        "descricao",
+        "dataLancamento",
+        "dataConfirmacao",
+        "status",
+        "pendente",
+        "aprovado",
+        "numLote",
+        "cpfEstoquista",
+        "cpfOperador"
+    FROM "Saida"
+    WHERE "codEstoque" = 1
+    ORDER BY "dataLancamento";

@@ -15,7 +15,7 @@ class TesteRequisicao(TesteBase):
                     descricao="Requisicao sucos",
                     dataLancamento="2024-08-01",
                     dataConfirmacao="2024-08-02",
-                    status="aprovado",
+                    status="pendente",
                     pendente=True,
                     aprovado=False,
                     numLote=1,
@@ -27,7 +27,7 @@ class TesteRequisicao(TesteBase):
                     descricao="Requisicao carnes",
                     dataLancamento="2024-08-05",
                     dataConfirmacao=None,
-                    status="pendente",
+                    status="",
                     pendente=False,
                     aprovado=True,
                     numLote=2,
@@ -62,9 +62,9 @@ class TesteRequisicao(TesteBase):
     def test_update(self):
         try:
             requisicao = self.requisicao_db.get_by_id(7)
-            requisicao.status = "recusado"
             requisicao.pendente = False
             requisicao.aprovado = False
+            requisicao.dataConfirmacao = "2024-08-06"
 
             self.requisicao_db.update(requisicao)
             return "Success"

@@ -65,9 +65,8 @@ class TesteEntrada(TesteBase):
         try:
             entrada = self.entrada_db.get_by_id(22)
             entrada.descricao = "Entrada de varias coisas e tal"
-            entrada.status = ("recusado",)
-            entrada.pendente = (False,)
-            entrada.aprovado = (False,)
+            entrada.pendente = False
+            entrada.aprovado = False
             self.entrada_db.update(entrada=self.entrada_db.get_by_id(22))
             return "Success"
 
