@@ -12,19 +12,88 @@ INSERT INTO "Funcionario" ("cpfFuncionario", "sexo", "telefone", "nome", "dataCo
 
 -- Categoria
 INSERT INTO "Categoria" ("nome") VALUES
+('Carnes'),
 ('Bebidas'),
 ('Laticínios'),
-('Carnes'),
 ('Hortifrúti'),
-('Grãos');
+('Grãos'),
+('Pães e Bolos'),
+('Doces e Sobremesas'),
+('Enlatados'),
+('Temperos'),
+('Frios e Embutidos');
 
 -- Produto
 INSERT INTO "Produto" ("unidade", "quantidade", "nome", "descricao", "codCategoria") VALUES
-('kg', 5.0, 'Arroz', 'Arroz branco tipo 1', 5),
-('lt', 2.0, 'Leite', 'Leite integral', 2),
-('un', 12.0, 'Cerveja', 'Cerveja Pilsen 350ml', 1),
-('kg', 1.5, 'Tomate', 'Tomate italiano', 4),
-('kg', 3.0, 'Carne bovina', 'Contrafilé', 3);
+-- Carnes (Categoria 1)
+('kg', 1, 'Filé Mignon', 'Carne de alta qualidade', 1),
+('kg', 1, 'Picanha', 'Corte nobre de carne bovina', 1),
+('kg', 1, 'Frango Inteiro', 'Frango inteiro resfriado', 1),
+('kg', 1, 'Costela Suína', 'Carne suína com osso', 1),
+('kg', 1, 'Alcatra', 'Carne bovina de primeira', 1),
+
+-- Bebidas (Categoria 2)
+('ml', 500, 'Água Mineral', 'Garrafa de 500ml', 2),
+('ml', 350, 'Refrigerante', 'Lata de 350ml', 2),
+('ml', 350, 'Cerveja', 'Lata de 350ml', 2),
+('ml', 750 , 'Vinho Tinto', 'Garrafa de 750ml', 2),
+('L', 1 , 'Suco de Laranja', 'Caixa de 1L', 2),
+
+-- Laticínios (Categoria 3)
+('L', 1, 'Leite Integral', 'Leite integral pasteurizado', 3),
+('g', 200, 'Queijo Mussarela', 'Queijo mussarela fatiado', 3),
+('g', 200, 'Iogurte Natural', 'Iogurte natural sem açúcar', 3),
+('g', 200, 'Manteiga', 'Manteiga com sal', 3),
+('g', 400, 'Requeijão', 'Requeijão cremoso', 3),
+
+-- Hortifrúti (Categoria 4)
+('kg', 1, 'Maçã', 'Maçã vermelha', 4),
+('kg', 1, 'Banana', 'Banana prata', 4),
+('kg', 1, 'Tomate', 'Tomate italiano', 4),
+('kg', 1, 'Alface', 'Alface crespa', 4),
+('kg', 1, 'Batata', 'Batata inglesa', 4),
+
+-- Grãos (Categoria 5)
+('kg', 1, 'Arroz Branco', 'Arroz branco tipo 1', 5),
+('kg', 1, 'Feijão Preto', 'Feijão preto', 5),
+('g', 500, 'Lentilha', 'Lentilha seca', 5),
+('g', 500, 'Grão de Bico', 'Grão de bico', 5),
+('g', 500, 'Quinoa', 'Quinoa em grãos', 5),
+
+-- Pães e Bolos (Categoria 6)
+('g', 500, 'Pão de Forma', 'Pão de forma integral', 6),
+('g', 300, 'Baguete', 'Pão baguete', 6),
+('g', 400, 'Bolo de Chocolate', 'Bolo de chocolate caseiro', 6),
+('g', 400, 'Croissant', 'Croissant de manteiga', 6),
+('g', 400, 'Pão de Queijo', 'Pão de queijo tradicional', 6),
+
+-- Doces e Sobremesas (Categoria 7)
+('g', 200, 'Chocolate ao Leite', 'Chocolate ao leite', 7),
+('g', 250, 'Doce de Leite', 'Doce de leite cremoso', 7),
+('g', 200, 'Brigadeiro', 'Brigadeiro tradicional', 7),
+('g', 100, 'Goiabada', 'Goiabada em pedaços', 7),
+('g', 250, 'Pudim', 'Pudim de leite condensado', 7),
+
+-- Enlatados (Categoria 8)
+('g', 400, 'Milho em Conserva', 'Milho verde em conserva', 8),
+('g', 400, 'Ervilha em Conserva', 'Ervilha verde em conserva', 8),
+('g', 400, 'Sardinha em Óleo', 'Sardinha em óleo vegetal', 8),
+('g', 400, 'Atum em Água', 'Atum em conserva', 8),
+('g', 300, 'Tomate Pelado', 'Tomate pelado em lata', 8),
+
+-- Temperos (Categoria 9)
+('g', 100, 'Sal', 'Sal refinado', 9),
+('g', 50, 'Pimenta do Reino', 'Pimenta do reino moída', 9),
+('g', 50, 'Orégano', 'Orégano seco', 9),
+('g', 50, 'Açafrão', 'Açafrão da terra', 9),
+('g', 50, 'Manjericão', 'Manjericão desidratado', 9),
+
+-- Frios e Embutidos (Categoria 10)
+('g', 200, 'Presunto', 'Presunto fatiado', 10),
+('g', 200, 'Mortadela', 'Mortadela fatiada', 10),
+('g', 150, 'Salame', 'Salame italiano', 10),
+('g', 200, 'Peito de Peru', 'Peito de peru fatiado', 10),
+('g', 300, 'Salsicha', 'Salsicha tipo viena', 10);
 
 -- Fornecedor
 INSERT INTO "Fornecedor" ("cnpjFornecedor", "endereco", "razao", "nome", "telefone") VALUES
@@ -32,7 +101,13 @@ INSERT INTO "Fornecedor" ("cnpjFornecedor", "endereco", "razao", "nome", "telefo
 ('23456789000188', 'Rua B, 456', 'Fornecedor B Ltda', 'Fornecedor B', 2345678901),
 ('34567890000177', 'Rua C, 789', 'Fornecedor C Ltda', 'Fornecedor C', 3456789012),
 ('45678901000166', 'Rua D, 101', 'Fornecedor D Ltda', 'Fornecedor D', 4567890123),
-('56789012000155', 'Rua E, 202', 'Fornecedor E Ltda', 'Fornecedor E', 5678901234);
+('56789012000155', 'Rua E, 202', 'Fornecedor E Ltda', 'Fornecedor E', 5678901234),
+
+('67890123000144', 'Rua F, 303', 'Fornecedor F Ltda', 'Fornecedor F', 6789012345),
+('78901234000133', 'Rua G, 404', 'Fornecedor G Ltda', 'Fornecedor G', 7890123456),
+('89012345000122', 'Rua H, 505', 'Fornecedor H Ltda', 'Fornecedor H', 8901234567),
+('90123456000111', 'Rua I, 606', 'Fornecedor I Ltda', 'Fornecedor I', 9012345678),
+('01234567000100', 'Rua J, 707', 'Fornecedor J Ltda', 'Fornecedor J', 1234567809);
 
 -- Restaurante
 INSERT INTO "Restaurante" ("cnpjRestaurante", "endereco", "razao", "nome", "telefone", "cnpjMatriz", "cpfGerente") VALUES
@@ -44,30 +119,96 @@ INSERT INTO "Restaurante" ("cnpjRestaurante", "endereco", "razao", "nome", "tele
 
 -- Cotacao
 INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
-('15.00', 1, '12345678000199'),
-('4.50', 2, '23456789000188'),
-('2.00', 3, '34567890000177'),
-('3.20', 4, '45678901000166'),
-('30.00', 5, '56789012000155');
+(150.00, 1, '12345678000199'),  
+(120.00, 2, '12345678000199'),   
+(25.00, 3, '12345678000199'),    
+(70.00, 4, '12345678000199'),    
+(95.00, 5, '12345678000199'),    
+
+(155.00, 1, '23456789000188'),  
+(160.00, 2, '23456789000188'),   
+(30.00, 3, '23456789000188'),    
+(60.00, 4, '23456789000188'),    
+(109.00, 5, '23456789000188'),  
+
+(125.00, 1, '34567890000177'),  
+(190.00, 2, '34567890000177'),   
+(38.00, 3,  '34567890000177'),    
+(71.00, 4,  '34567890000177'),    
+(97.00, 5, '34567890000177'),  
+
+(2.00, 6, '23456789000188'),  
+(4.50, 7, '23456789000188'),    
+(5.50, 8, '23456789000188'),    
+(25.00, 9, '23456789000188'),   
+(8.00, 10, '23456789000188'),  
+
+(6.00, 11, '34567890000177'),   
+(8.00, 12, '34567890000177'),  
+(4.00, 13, '34567890000177'),   
+(9.00, 14, '34567890000177'),   
+(7.00, 15, '34567890000177'),  
+
+(4.50, 16, '45678901000166'),
+(3.20, 17, '45678901000166'),
+(5.80, 18, '45678901000166'),
+(2.30, 19, '45678901000166'),
+(3.50, 20, '45678901000166'),
+
+(7.00,  21, '56789012000155'),
+(6.00,  22, '56789012000155'),
+(12.00, 23, '56789012000155'),
+(10.00, 24, '56789012000155'),
+(15.00, 25, '56789012000155'),
+
+(5.50, 26, '67890123000144'),
+(3.20, 27, '67890123000144'),
+(15.00, 28, '67890123000144'),
+(4.00, 29, '67890123000144'),
+(6.00, 30, '67890123000144'), 
+
+(4.50, 31, '78901234000133'),
+(6.00, 32, '78901234000133'),
+(5.00, 33, '78901234000133'),
+(3.50, 34, '78901234000133'),
+(7.00, 35, '78901234000133'),
+
+(2.50, 36, '89012345000122'),
+(3.00, 37, '89012345000122'),
+(4.00, 38, '89012345000122'),
+(5.00, 39, '89012345000122'),
+(3.20, 40, '89012345000122'),
+
+(1.00, 41, '90123456000111'),
+(2.00, 42, '90123456000111'),
+(2.50, 43, '90123456000111'),
+(3.00, 44, '90123456000111'),
+(2.20, 45, '90123456000111'),
+
+(12.00, 46, '01234567000100'),
+(10.00, 47, '01234567000100'),
+(15.00, 48, '01234567000100'),
+(13.00, 49, '01234567000100'),
+(9.00, 50, '01234567000100');
 
 -- Estoque
 INSERT INTO "Estoque" ("nome", "cnpjRestaurante") VALUES
-('Estoque Central', '98765432000199'),
-('Estoque Secundário', '98765432000199'),
+('Estoque de Carnes', '98765432000199'),
 ('Estoque de Bebidas', '98765432000199'),
+('Estoque de Laticínios Central', '98765432000199'),
 ('Estoque de Hortifrúti', '98765432000199'),
-('Estoque de Carnes', '98765432000199');
+('Estoque de Enlatados', '98765432000199');
 
 -- ProdutoEstoque
 INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoqueMin", "estoqueAtual", "estoqueDisp", "ultimoInv") VALUES
-(1, 1, 100, 20, 50, 30, '2024-08-01'),
-(2, 1, 200, 50, 120, 100, '2024-08-02'),
-(3, 1, 300, 100, 250, 200, '2024-08-03'),
-(4, 1, 150, 30, 80, 50, '2024-08-04'),
-(5, 1, 400, 150, 350, 300, '2024-08-05');
+(1, 1, 100, 20, 0, 0, '2024-09-01'),
+(2, 1, 200, 50, 0, 0, '2024-09-01'),
+(3, 1, 300, 100, 0, 0, '2024-09-01'),
+(4, 1, 150, 30, 0, 0, '2024-09-01'),
+(5, 1, 400, 150, 0, 0, '2024-09-01');
 
 -- Inventario
-INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cpfEstoquista") VALUES
+INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cpfOperador") VALUES
 (1, 1, '2024-08-01', 45, '56789012345'),
 (2, 1, '2024-08-02', 115, '45678901234'),
 (3, 1, '2024-08-03', 240, '56789012345'),
@@ -81,38 +222,46 @@ INSERT INTO "Lote" ("tipo") VALUES
 ('entrada'),
 ('entrada'),
 ('entrada'),
-('requisicao'),
-('requisicao'),
-('requisicao'),
-('requisicao'),
-('requisicao'),
 ('saida'),
 ('saida'),
 ('saida'),
 ('saida'),
-('saida'),
-('ajuste'),
-('ajuste'),
-('ajuste'),
-('ajuste'),
-('ajuste');
+('saida');
 
 -- ProdutoLote
 INSERT INTO "ProdutoLote" ("codProduto", "codEstoque", "numLote", "quantidade") VALUES
-(1, 1, 1, 45),
-(2, 1, 2, 115),
-(3, 1, 3, 240),
-(4, 1, 4, 75),
-(5, 1, 5, 330);
+--entradas lote de carnes
+(1, 1, 1, 100),
+(2, 1, 1, 50),
+(3, 1, 1, 50),
+(4, 1, 1, 50),
+(5, 1, 1, 50),
+
+(2, 1, 2, 50),
+(3, 1, 3, 50),
+(4, 1, 4, 50),
+(5, 1, 5, 50),
+
+--requisicoes lote de carnes
+(1, 1, 6, 10),
+(2, 1, 6, 10),
+(3, 1, 6, 10),
+(4, 1, 6, 10),
+(5, 1, 6, 10),
+
+(2, 1, 7, 10),
+(3, 1, 8, 20),
+(4, 1, 9, 30),
+(5, 1, 10, 40);
 
 
 -- Entrada
-INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
-('Entrada de carnes', '2024-08-20', '2024-08-21', 'aprovado', false, true, 1, '12345678901', '23456789012'),
-('Entrada de bebidas', '2024-08-22', '2024-08-23', 'aprovado', false, true, 2, '23456789012', '34567890123'),
-('Entrada de produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 3, '34567890123', '45678901234'),
-('Entrada de itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 4, '45678901234', '56789012345'),
-('Entrada de ingredientes perecíveis', '2024-08-28', '2024-08-29', 'aprovado', false, true, 5, '56789012345', '12345678901');
+INSERT INTO "Entrada" ("descricao", "dataLancamento", "numLote", "cpfEstoquista", "cpfOperador","codEstoque","pendente","aprovado") VALUES
+('Entrada de carnes', '2024-08-20', 1, '12345678901', '23456789012',1,false,true),
+('Entrada de bebidas', '2024-08-22', 2, '23456789012', '34567890123',1,false,true),
+('Entrada de produtos de limpeza', '2024-08-24', 3, '34567890123', '45678901234',1,false,true),
+('Entrada de itens de higiene', '2024-08-26', 4, '45678901234', '56789012345',1,false,true),
+('Entrada de ingredientes perecíveis', '2024-08-28', 5, '56789012345', '12345678901',1,false,true);
 
 -- Compra 
 -- INSERT INTO "Compra" ("codOperacao", "cnpjFornecedor", "cnpjRestaurante", "notaFiscal", "data", "quantidade") VALUES
@@ -122,26 +271,20 @@ INSERT INTO "Entrada" ("descricao", "dataLancamento", "dataConfirmacao", "status
 -- (4, '45678901000166', '98765432000199', decode('FEEDFACE', 'hex'), '2024-08-26', 300),
 -- (5, '56789012000155', '98765432000199', decode('BADF00D', 'hex'), '2024-08-28', 250);
 
--- Requisicao
-INSERT INTO "Requisicao" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador") VALUES
-('Requisição de ingredientes', '2024-08-25', '2024-08-26', 'aprovado', false, true, 6, '56789012345', '12345678901'),
-('Requisição de bebidas', '2024-08-26', NULL, 'pendente', true, false, 7, '45678901234', '23456789012'),
-('Requisição de produtos de limpeza', '2024-08-27', '2024-08-28', 'aprovado', false, true, 8, '34567890123', '34567890123'),
-('Requisição de itens de higiene', '2024-08-28', NULL, 'pendente', true, false, 9, '23456789012', '45678901234'),
-('Requisição de carnes', '2024-08-29', '2024-08-30', 'aprovado', false, true, 10, '12345678901', '56789012345');
 
 -- Saida
-INSERT INTO "Saida" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codRequisicao") VALUES
-('Saída de ingredientes para preparo', '2024-08-20', '2024-08-21', 'aprovado', false, true, 11, '12345678901', '23456789012', 6),
-('Saída de bebidas para reposição', '2024-08-22', '2024-08-23', 'aprovado', false, true, 12, '23456789012', '34567890123', 7),
-('Saída de produtos de limpeza', '2024-08-24', '2024-08-25', 'aprovado', false, true, 13, '34567890123', '45678901234', 8),
-('Saída de itens de higiene', '2024-08-26', '2024-08-27', 'aprovado', false, true, 14, '45678901234', '56789012345', 9),
-('Saída de carnes para preparo', '2024-08-28', '2024-08-29', 'aprovado', false, true, 15, '56789012345', '12345678901', 10);
+INSERT INTO "Saida" ("descricao","dataLancamento",  "numLote", "cpfEstoquista", "cpfOperador", "codEstoque","pendente","aprovado") VALUES
+('Saída de carnes', '2024-08-25',  6, '56789012345', '12345678901',1,true,false),
+('Saída de bebidas', '2024-08-26', 7, '45678901234', '23456789012',1,true,false),
+('Saída de produtos de limpeza', '2024-08-27',  8, '34567890123', '34567890123',1,true,false),
+('Saída de itens de higiene', '2024-08-28',  9, '23456789012', '45678901234',1,true,false),
+('Saída de ingredientes', '2024-08-29',  10, '12345678901', '56789012345',1,true,false);
+
 
 -- Ajuste
-INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
-('Ajuste de estoque inicial', '2024-08-10', '2024-08-12', 'confirmado', false, true, 16, '56789012345', '23456789012', 1, 1, '2024-08-01'),
-('Correção de contagem', '2024-08-11', NULL, 'pendente', true, false, 17, '45678901234', '34567890123', 2, 1, '2024-08-02'),
-('Ajuste pós-inventário', '2024-08-15', '2024-08-16', 'confirmado', false, true, 18, '56789012345', '23456789012', 3, 1, '2024-08-03'),
-('Correção de lote', '2024-08-20', NULL, 'pendente', true, false, 19, '45678901234', '34567890123', 4, 1, '2024-08-04'),
-('Ajuste final de estoque', '2024-08-25', '2024-08-26', 'confirmado', false, true, 20, '56789012345', '23456789012', 5, 1, '2024-08-05');
+-- INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
+-- ('Correção de contagem', '2024-08-10', '2024-08-12', 'confirmado', false, true, 16, '56789012345', '23456789012', 1, 1, '2024-08-01'),
+-- ('Ajuste de estoque inicial', '2024-08-11', NULL, 'pendente', true, false, 17, '45678901234', '34567890123', 2, 1, '2024-08-02'),
+-- ('Ajuste pós-inventário', '2024-08-15', '2024-08-16', 'confirmado', false, true, 18, '56789012345', '23456789012', 3, 1, '2024-08-03'),
+-- ('Correção de lote', '2024-08-20', NULL, 'pendente', true, false, 19, '45678901234', '34567890123', 4, 1, '2024-08-04'),
+-- ('Ajuste final de estoque', '2024-08-25', '2024-08-26', 'confirmado', false, true, 20, '56789012345', '23456789012', 5, 1, '2024-08-05');

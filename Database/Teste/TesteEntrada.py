@@ -19,9 +19,10 @@ class TesteEntrada(TesteBase):
                     status="Confirmado",
                     pendente=False,
                     aprovado=True,
-                    numLote=1,
+                    numLote=6,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
                 Entrada(
                     codOperacao=22,
@@ -31,9 +32,10 @@ class TesteEntrada(TesteBase):
                     status="Pendente",
                     pendente=True,
                     aprovado=False,
-                    numLote=2,
+                    numLote=7,
                     cpfEstoquista="45678901234",
                     cpfOperador="23456789012",
+                    codEstoque=1,
                 ),
             ]
             for i in items:
@@ -63,9 +65,8 @@ class TesteEntrada(TesteBase):
         try:
             entrada = self.entrada_db.get_by_id(22)
             entrada.descricao = "Entrada de varias coisas e tal"
-            entrada.status = ("recusado",)
-            entrada.pendente = (False,)
-            entrada.aprovado = (False,)
+            entrada.pendente = False
+            entrada.aprovado = False
             self.entrada_db.update(entrada=self.entrada_db.get_by_id(22))
             return "Success"
 
