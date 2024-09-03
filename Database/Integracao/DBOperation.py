@@ -17,6 +17,7 @@ class DBOperation:
         with open("views.sql", "r") as file:
             views_query = file.read()
 
+        
         self.db.execute_query(
             setup_query + triggers_query + procedures_query + views_query
         )
