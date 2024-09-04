@@ -1,4 +1,4 @@
-from DBConection import Database
+
 
 
 class TesteBase:
