@@ -47,10 +47,7 @@ class DBRestaurante(DBOperation):
         self.db.execute_query(sql_delete, [cnpjRestaurante])
     
     def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Restaurante"
-        """
-        self.db.execute_query(sql_delete_all)
+        pass
 
     def get_by_id(self, cnpjRestaurante):
         sql_select = """

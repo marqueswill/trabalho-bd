@@ -44,10 +44,7 @@ class DBFornecedor(DBOperation):
         self.db.execute_query(sql_delete, [cnpjFornecedor])
     
     def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Fornecedor"
-        """
-        self.db.execute_query(sql_delete_all)
+        pass
 
     def get_by_id(self, cnpjFornecedor):
         sql_select = """
