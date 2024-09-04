@@ -122,7 +122,7 @@ CREATE TABLE "Compra" (
   "cnpjRestaurante" char(14),
   "notaFiscal" bytea NOT NULL,
   "data" date NOT NULL,
-  "quantidade" integer NOT NULL,
+  --"quantidade" integer NOT NULL,
   PRIMARY KEY ("codOperacao", "cnpjFornecedor", "cnpjRestaurante")
 );
 
