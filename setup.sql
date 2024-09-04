@@ -51,7 +51,7 @@ CREATE TABLE "Fornecedor" (
 CREATE TABLE "Restaurante" (
   "cnpjRestaurante" character(14) PRIMARY KEY,
   "endereco" varchar,
-  "razao" varchar UNIQUE NOT NULL,
+  "razao" varchar NOT NULL,
   "nome" varchar NOT NULL,
   "telefone" bigint,
   "cnpjMatriz" character(14),
