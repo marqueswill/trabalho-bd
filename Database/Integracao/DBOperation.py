@@ -1,4 +1,4 @@
-from Database.DBConection import Database
+from DBConection import Database
 
 
 class DBOperation:

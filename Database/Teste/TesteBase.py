@@ -1,6 +1,3 @@
-
-
-
 class TesteBase:
 
     def run(self):

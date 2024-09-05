@@ -1,5 +1,5 @@
-from Database.Integracao.DBOperation import DBOperation
-from Database.Objetos.Fornecedor import Fornecedor
+from Integracao.DBOperation import DBOperation
+from Objetos.Fornecedor import Fornecedor
 
 
 
