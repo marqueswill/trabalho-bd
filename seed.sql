@@ -8,7 +8,10 @@ INSERT INTO "Funcionario" ("cpfFuncionario", "sexo", "telefone", "nome", "dataCo
 ('23456789012', 'F', 11976543210, 'Maria Oliveira', '2022-05-22', 'O'),
 ('34567890123', 'M', 11965432109, 'Carlos Souza', '2021-11-03', 'O'),
 ('45678901234', 'F', 11954321098, 'Ana Pereira', '2023-07-12', 'E'),
-('56789012345', 'M', 11943210987, 'José Fernandes', '2022-09-30', 'E');
+('56789012345', 'M', 11943210987, 'José Fernandes', '2022-09-30', 'E'),
+('78901234568', 'F', 11921098766, 'Renata Costa', '2022-12-27', 'E'),
+('89012345679', 'M', 11910987655, 'Daniel Alves', '2023-08-19', 'O'),
+('90123456780', 'F', 11909876544, 'Vanessa Teixeira', '2022-07-04', 'G');
 
 -- Categoria
 INSERT INTO "Categoria" ("nome") VALUES
