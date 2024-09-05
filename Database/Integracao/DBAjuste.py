@@ -4,32 +4,11 @@ from Integracao.DBOperation import DBOperation
 
 class DBAjuste(DBOperation):
 
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Ajuste" (
-        "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
-        "descricao" varchar,
-        "dataLancamento" date NOT NULL,
-        "dataConfirmacao" date,
-        "status" varchar(10) DEFAULT 'pendente',
-        "pendente" bool NOT NULL DEFAULT true,
-        "aprovado" bool NOT NULL DEFAULT false,
-        "numLote" integer NOT NULL,
-        "cpfEstoquista" character(11),
-        "cpfOperador" character(11) NOT NULL,
-        "codProduto" integer NOT NULL,
-        "codEstoque" integer NOT NULL,
-        "dataInv" date NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
-
     def insert(self, ajuste: Ajuste):
         sql_insert = f"""
         INSERT INTO "Ajuste" ({",".join(ajuste.columns())})
         VALUES ({",".join(["%s"]*len(ajuste.columns()))})
         """
-        # print(sql_insert)
         self.db.execute_query(sql_insert, ajuste.to_tuple())
 
     def update(self, ajuste: Ajuste):
@@ -46,12 +25,6 @@ class DBAjuste(DBOperation):
         WHERE "codOperacao" = %s
         """
         self.db.execute_query(sql_delete, [codOperacao])
-
-    def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Ajuste"
-        """
-        self.db.execute_query(sql_delete_all)
 
     def get_by_id(self, codOperacao):
         sql_select = """

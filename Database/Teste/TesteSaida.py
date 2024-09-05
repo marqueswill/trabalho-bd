@@ -87,9 +87,4 @@ class TesteSaida(TesteBase):
         except Exception as e:
             return f"Failed - {str(e)}"
 
-    def test_delete_all(self):
-        try:
-            self.saida_db.delete_all()
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"
+

@@ -79,10 +79,3 @@ class TesteEntrada(TesteBase):
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
-
-    def delete_all(self):
-        try:
-            self.entrada_db.delete_all()
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"

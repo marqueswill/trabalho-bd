@@ -78,10 +78,3 @@ class TesteFornecedor(TesteBase):
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
-        
-    def test_delete_all(self):
-        try:
-            self.fornecedor_db.delete_all()
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"
