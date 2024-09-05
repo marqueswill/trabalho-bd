@@ -1,4 +1,4 @@
-from base64 import decode
+from base64 import decode, encode
 from Teste.TesteBase import TesteBase
 from Integracao.DBCompra import DBCompra
 from Objetos.Compra import Compra
@@ -11,10 +11,25 @@ class TesteCompra(TesteBase):
 
     def test_insert(self):
         try:
+            # print("_________")
+
             compras = [
-                Compra(codOperacao=1, cnpjFornecedor='12345678000199', cnpjRestaurante='98765432000199', notaFiscal=decode('DEADBEEF', 'hex'), data='2024-09-02', quantidade=100),
-                Compra(codOperacao=2, cnpjFornecedor='23456789000188', cnpjRestaurante='98765432000199', notaFiscal=decode('CAFEBABE', 'hex'), data='2024-09-02', quantidade=200),
+                Compra(
+                    codOperacao=1,
+                    cnpjFornecedor="12345678000199",
+                    cnpjRestaurante="98765432000199",
+                    notaFiscal=encode("DEADBEEF", "hex"),
+                    data="2024-09-02",
+                ),
+                Compra(
+                    codOperacao=2,
+                    cnpjFornecedor="23456789000188",
+                    cnpjRestaurante="98765432000199",
+                    notaFiscal=encode("CAFEBABE", "hex"),
+                    data="2024-09-02",
+                ),
             ]
+
             for c in compras:
                 self.compra_db.insert(c)
             return "Success"
@@ -23,7 +38,7 @@ class TesteCompra(TesteBase):
 
     def test_get_by_id(self):
         try:
-            compra = self.compra_db.get_by_id(1, '12345678000199', '98765432000199')
+            compra = self.compra_db.get_by_id(1, "12345678000199", "98765432000199")
             if compra:
                 return "Success"
             else:
@@ -37,10 +52,10 @@ class TesteCompra(TesteBase):
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
-        
+
     def test_update(self):
         try:
-            compra = self.compra_db.get_by_id(2, '23456789000188', '98765432000199')
+            compra = self.compra_db.get_by_id(2, "23456789000188", "98765432000199")
             compra.quantidade = 1000
             self.compra_db.update(compra)
             return "Success"
@@ -50,7 +65,7 @@ class TesteCompra(TesteBase):
 
     def test_delete(self):
         try:
-            self.compra_db.delete(1, '12345678000199', '98765432000199')
+            self.compra_db.delete(1, "12345678000199", "98765432000199")
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
