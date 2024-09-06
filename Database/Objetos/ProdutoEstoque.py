@@ -34,11 +34,11 @@ class ProdutoEstoque:
 
     def columns(self):
         return [
-            "'codProduto'",
-            "'codEstoque'",
-            "'estoqueMax'",
-            "'estoqueMin'",
-            "'estoqueAtual'",
-            "'estoqueDisp'",
-            "'ultimoInv'",
+            '"codProduto"',
+            '"codEstoque"',
+            '"estoqueMax"',
+            '"estoqueMin"',
+            '"estoqueAtual"',
+            '"estoqueDisp"',
+            '"ultimoInv"',
         ]

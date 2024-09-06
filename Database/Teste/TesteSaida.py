@@ -1,6 +1,6 @@
-from Teste.TesteLote import TesteLote
-from Teste.TesteBase import TesteBase
-from Teste.TesteFuncionario import TesteFuncionario
+from Database.Teste.TesteLote import TesteLote
+from Database.Teste.TesteBase import TesteBase
+from Database.Teste.TesteFuncionario import TesteFuncionario
 
 from Database.Integracao.DBSaida import DBSaida
 from Database.Integracao.DBLote import DBLote

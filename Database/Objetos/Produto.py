@@ -31,10 +31,10 @@ class Produto:
 
     def columns(self):
         return [
-            "'idProduto'",
-            "'unidade'",
-            "'quantidade'",
-            "'descricao'",
-            "'idCategoria'",
-            "'nome'",
+            '"idProduto"',
+            '"unidade"',
+            '"quantidade"',
+            '"descricao"',
+            '"idCategoria"',
+            '"nome"',
         ]

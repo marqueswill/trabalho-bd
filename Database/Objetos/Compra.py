@@ -28,9 +28,9 @@ class Compra:
 
     def columns(self):
         return [
-            "'codOperacao'",
-            "'cnpjFornecedor'",
-            "'cnpjRestaurante'",
-            "'notaFiscal'",
-            "'data'",
+            '"codOperacao"',
+            '"cnpjFornecedor"',
+            '"cnpjRestaurante"',
+            '"notaFiscal"',
+            '"data"',
         ]

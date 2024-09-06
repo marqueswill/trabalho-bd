@@ -33,7 +33,7 @@ objects = {
 
 
 def linha():
-    print("_" * 100)
+    print("_" * 50)
 
 
 def limpar():
@@ -41,7 +41,6 @@ def limpar():
 
 
 def TelaInicial():
-    limpar()
     linha()
     print("Tela Inicial")
     linha()
@@ -52,13 +51,15 @@ def TelaInicial():
     try:
         escolha = int(input("Selecione uma opção: "))
     except ValueError:
+        limpar()
         print("Entrada inválida, por favor, selecione uma opção válida.")
-        linha()
         return
 
     if escolha == 1:
+        limpar()
         TelaEscolha()
     elif escolha == 2:
+        limpar()
         exit()  # Use exit() to terminate the program
     else:
         print("Opção inválida, tente novamente.")
@@ -66,10 +67,9 @@ def TelaInicial():
 
 
 def TelaEscolha():
-    limpar()
     linha()
     print("Escolha uma Entidade")
-    # linha()
+    linha()
     for number, obj in objects.items():
         print(f"{number:>2} - {obj}")
     print("14 - Voltar")
@@ -77,16 +77,19 @@ def TelaEscolha():
     try:
         escolha = int(input("Selecione uma entidade: "))
     except ValueError:
+        limpar()
         print("Entrada inválida, por favor, selecione um número válido.")
         linha()
-        return
+        return TelaEscolha()
 
     if escolha == 14:
+        limpar()
         return TelaInicial()
     elif escolha not in objects:
+        limpar()
         print("Entidade inválida, tente novamente.")
         linha()
-        return
+        return TelaEscolha()
 
     TelaCRUD(objects[escolha])
 

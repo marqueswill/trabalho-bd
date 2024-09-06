@@ -1,4 +1,4 @@
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
 from Database.Integracao.DBEntrada import DBEntrada
 from Database.Objetos.Entrada import Entrada

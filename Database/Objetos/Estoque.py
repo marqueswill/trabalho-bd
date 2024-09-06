@@ -17,7 +17,7 @@ class Estoque:
 
     def columns(self):
         return [
-            "'codEstoque'",
-            "'nome'",
-            "'cnpjRestaurante'",
+            '"codEstoque"',
+            '"nome"',
+            '"cnpjRestaurante"',
         ]

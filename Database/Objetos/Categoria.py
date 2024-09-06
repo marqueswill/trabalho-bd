@@ -13,8 +13,8 @@ class Categoria:
             self.nome,
         )
 
-    def to_tuple(self):
+    def columns(self):
         return [
-            "'codCategoria'",
-            "'nome'",
+            '"codCategoria"',
+            '"nome"',
         ]

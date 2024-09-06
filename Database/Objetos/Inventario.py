@@ -33,11 +33,11 @@ class Inventario:
 
     def columns(self):
         return [
-            "'codProduto'",
-            "'codEstoque'",
-            "'data'",
-            "'contagem'",
-            "'diferenca'",
-            "'ajustado'",
-            "'cpfEstoquista'",
+            '"codProduto"',
+            '"codEstoque"',
+            '"data"',
+            '"contagem"',
+            '"diferenca"',
+            '"ajustado"',
+            '"cpfEstoquista"',
         ]

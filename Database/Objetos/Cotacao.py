@@ -17,7 +17,7 @@ class Cotacao:
 
     def columns(self):
         return [
-            "'valor'",
-            "'codProduto'",
-            "'cnpjFornecedor'",
+            '"valor"',
+            '"codProduto"',
+            '"cnpjFornecedor"',
         ]
