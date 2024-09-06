@@ -4,30 +4,12 @@ from Integracao.DBOperation import DBOperation
 
 class DBEntrada(DBOperation):
 
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Entrada" (
-        "codOperacao" integer PRIMARY KEY DEFAULT nextval('codOperacao_seq'),
-        "descricao" varchar,
-        "dataLancamento" date NOT NULL,
-        "dataConfirmacao" date,
-        "status" varchar(10) DEFAULT 'pendente',
-        "pendente" bool NOT NULL DEFAULT true,
-        "aprovado" bool NOT NULL DEFAULT false,
-        "numLote" integer NOT NULL,
-        "cpfEstoquista" character(11),
-        "cpfOperador" character(11) NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
-
     def insert(self, entrada: Entrada):
         sql_insert = f"""
-        INSERT INTO "Entrada" ({",".join(entrada.columns())})
-        VALUES ({",".join(["%s"]*len(entrada.columns()))})
+        INSERT INTO "Entrada" ({",".join(entrada.columns()[:-2])})
+        VALUES ({",".join(["%s"]*len(entrada.columns()[:-2]))})
         """
-        # print(sql_insert)
-        self.db.execute_query(sql_insert, entrada.to_tuple())
+        self.db.execute_query(sql_insert, entrada.to_tuple()[:-2])
 
     def update(self, entrada: Entrada):
         sql_update = f"""
@@ -43,12 +25,6 @@ class DBEntrada(DBOperation):
         WHERE "codOperacao" = %s
         """
         self.db.execute_query(sql_delete, [codOperacao])
-
-    def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Entrada"
-        """
-        self.db.execute_query(sql_delete_all)
 
     def get_by_id(self, codOperacao):
         sql_select = """

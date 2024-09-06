@@ -3,6 +3,13 @@ CREATE OR REPLACE FUNCTION atualizar_estoque_entrada()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW."pendente" = true THEN --pendente
+        IF NEW."status" = 'pendente' THEN
+            RETURN NEW;
+        END IF;
+
+        UPDATE "Entrada"
+        SET "status" = 'pendente', "dataConfirmacao" = NOW()
+        WHERE "codOperacao" = NEW."codOperacao";
         RETURN NEW;
     END IF;
 
@@ -103,40 +110,48 @@ CREATE OR REPLACE FUNCTION atualizar_estoque_saida()
     END;
     $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION ajustar_estoque()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Rejeita as saidas pendentes
-    UPDATE "Saida" s
-    SET 
-        "aprovado" = false,
-        "pendente" = false
-    WHERE 
-        s."pendente" = true
-        AND s."codProduto" = NEW."codProduto"
-        AND s."codEstoque" = NEW."codEstoque";
+-- CREATE OR REPLACE FUNCTION ajustar_estoque()
+-- RETURNS TRIGGER AS $$
+-- BEGIN
+--     -- Rejeita as saidas pendentes
+--     UPDATE "Saida" s
+--     SET 
+--         "aprovado" = false,
+--         "pendente" = false
+--     WHERE 
+--         s."pendente" = true
+--         AND s."codProduto" = NEW."codProduto"
+--         AND s."codEstoque" = NEW."codEstoque";
 
-    -- Atualiza os valores em ProdutoEstoque
-    UPDATE "ProdutoEstoque" pe
-    SET 
-        pe."estoqueAtual" = NEW."valorNovo",
-        pe."estoqueDisp" = NEW."valorNovo"
-    WHERE 
-        pe."codProduto" = NEW."codProduto" 
-        AND pe."codEstoque" = NEW."codEstoque";
+--     -- Atualiza os valores em ProdutoEstoque
+--     UPDATE "ProdutoEstoque" pe
+--     SET 
+--         pe."estoqueAtual" = NEW."valorNovo",
+--         pe."estoqueDisp" = NEW."valorNovo"
+--     WHERE 
+--         pe."codProduto" = NEW."codProduto" 
+--         AND pe."codEstoque" = NEW."codEstoque";
 
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+--     RETURN NEW;
+-- END;
+-- $$ LANGUAGE plpgsql;
 
 -- FUNCOES
 CREATE OR REPLACE FUNCTION atualizar_ultimo_inventario()
 RETURNS TRIGGER AS $$
 BEGIN
     UPDATE "ProdutoEstoque" pe
-    SET "ultimoInv" = NEW."dataInv"
+    SET "ultimoInv" = NEW."data"
     WHERE pe."codProduto" = NEW."codProduto"
         AND pe."codEstoque" = NEW."codEstoque";
+
+    UPDATE "Inventario" inv
+    SET "diferenca" = inv."contagem" - pe."estoqueAtual"
+    FROM "ProdutoEstoque" pe
+    WHERE   inv."codProduto" = NEW."codProduto"
+        AND inv."codEstoque" = NEW."codEstoque"
+        AND inv."data" = NEW."data";
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -152,10 +167,10 @@ AFTER INSERT OR UPDATE ON "Saida"
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_estoque_saida();
 
-CREATE TRIGGER trigger_ajuste
-AFTER INSERT ON "Ajuste"
-FOR EACH ROW
-EXECUTE FUNCTION ajustar_estoque();
+-- CREATE TRIGGER trigger_ajuste
+-- AFTER INSERT ON "Ajuste"
+-- FOR EACH ROW
+-- EXECUTE FUNCTION ajustar_estoque();
 
 CREATE TRIGGER trigger_inventario
 AFTER INSERT ON "Inventario"

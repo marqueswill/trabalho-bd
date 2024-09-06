@@ -36,12 +36,6 @@ class DBLote(DBOperation):
         """
         self.db.execute_query(sql_delete, [numLote])
 
-    def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Lote"
-        """
-        self.db.execute_query(sql_delete_all)
-
     def get_by_id(self, numLote):
         sql_select = """
         SELECT * FROM "Lote" 
