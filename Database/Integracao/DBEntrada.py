@@ -1,5 +1,5 @@
-from Objetos.Entrada import Entrada
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Entrada import Entrada
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBEntrada(DBOperation):

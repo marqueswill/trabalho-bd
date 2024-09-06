@@ -1,5 +1,5 @@
-from Objetos.ProdutoLote import ProdutoLote
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.ProdutoLote import ProdutoLote
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBProdutoLote(DBOperation):

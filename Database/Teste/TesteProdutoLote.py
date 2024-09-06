@@ -1,15 +1,15 @@
-from Objetos.Lote import Lote
+from Database.Objetos.Lote import Lote
 from Teste.TesteBase import TesteBase
-from Integracao.DBProdutoLote import DBProdutoLote
-from Integracao.DBLote import DBLote
+from Database.Integracao.DBProdutoLote import DBProdutoLote
+from Database.Integracao.DBLote import DBLote
 
-from Objetos.ProdutoLote import ProdutoLote
+from Database.Objetos.ProdutoLote import ProdutoLote
 
 
 class TesteProdutoLote(TesteBase):
     def __init__(self):
         self.produtolote_db = DBProdutoLote(teste=True)
-        self.lote_db = DBLote(teste=True)        
+        self.lote_db = DBLote(teste=True)
 
     def test_insert(self):
         self.lote_db.insert(Lote("entrada"))

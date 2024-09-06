@@ -1,9 +1,8 @@
-from Teste.TesteLote import TesteLote
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
 
-from Integracao.DBFuncionario import DBFuncionario
-from Objetos.Funcionario import Funcionario
+from Database.Integracao.DBFuncionario import DBFuncionario
+from Database.Objetos.Funcionario import Funcionario
 
 
 class TesteFuncionario(TesteBase):
