@@ -36,6 +36,6 @@ class Funcionario:
             '"nome"',
             '"dataContratacao"',
             '"cargo"',
-            '"cnpjRestaurante"'
+            '"cnpjRestaurante"',
             '"cpfFuncionario"',
         ]

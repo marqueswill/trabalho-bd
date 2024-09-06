@@ -41,13 +41,7 @@ class DBFuncionario(DBOperation):
 
     def get_all(self):
         sql_select = """
-        SELECT
-            "sexo",
-            "telefone",
-            "nome",
-            "dataContratacao",
-            "cargo",
-            "cpfFuncionario"
+        SELECT *
         FROM "Funcionario"
         """
         results = self.db.execute_query(sql_select, fetch=True)

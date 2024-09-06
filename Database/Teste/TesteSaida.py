@@ -54,7 +54,7 @@ class TesteSaida(TesteBase):
 
     def test_get_by_id(self):
         try:
-            saida = self.saida_db.get_by_id(1)
+            saida = self.saida_db.get_by_id(6)
             if saida:
                 return "Success"
             else:
@@ -71,14 +71,14 @@ class TesteSaida(TesteBase):
 
     def test_delete(self):
         try:
-            self.saida_db.delete(1)
+            self.saida_db.delete(6)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
-            saida = self.saida_db.get_by_id(2)
+            saida = self.saida_db.get_by_id(6)
             saida.descricao = "Saida de varias coisas e tal"
 
             self.saida_db.update(saida)

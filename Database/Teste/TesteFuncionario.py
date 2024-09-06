@@ -20,6 +20,7 @@ class TesteFuncionario(TesteBase):
                     nome="John Doe",
                     dataContratacao="2024-01-01",
                     cargo="G",
+                    cnpjRestaurante="87654321000188",
                 ),
                 Funcionario(
                     cpfFuncionario="09876543211",
@@ -28,6 +29,7 @@ class TesteFuncionario(TesteBase):
                     nome="Jane Smith",
                     dataContratacao="2024-02-15",
                     cargo="O",
+                    cnpjRestaurante="87654321000188",
                 ),
                 Funcionario(
                     cpfFuncionario="12345678999",
@@ -36,6 +38,7 @@ class TesteFuncionario(TesteBase):
                     nome="João Pedro",
                     dataContratacao="2023-02-15",
                     cargo="E",
+                    cnpjRestaurante="87654321000188",
                 ),
             ]
 
