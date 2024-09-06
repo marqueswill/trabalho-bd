@@ -36,7 +36,6 @@ AS $$
         FROM "Entrada" e
         WHERE e."codEstoque" = p_codEstoque;
 
-        -- Inserir as operações de Requisicao
         INSERT INTO "historico_operacoes"
         SELECT 
             'Requisicao' AS tipo_operacao,
@@ -53,7 +52,6 @@ AS $$
         FROM "Requisicao" r
         WHERE r."codEstoque" = p_codEstoque;
 
-        -- Inserir as operações de Saida
         INSERT INTO "historico_operacoes"
         SELECT 
             'Saida' AS tipo_operacao,
@@ -69,14 +67,6 @@ AS $$
             s."cpfOperador"
         FROM "Saida" s
         WHERE s."codEstoque" = p_codEstoque;
-
-        -- Os resultados estão agora na tabela "historico_operacoes".
-        -- Essa tabela pode ser consultada após a execução da procedure.
-        -- Caso você queira transferir esses dados para uma tabela permanente:
-        -- INSERT INTO historico_operacoes_estq (tipo_operacao, codOperacao, descricao, dataLancamento, etc.)
-        -- SELECT * FROM "historico_operacoes";
-
-        -- Não é necessário um retorno aqui, pois é uma PROCEDURE.
 
     END;
 $$;
@@ -99,19 +89,15 @@ DECLARE
     item produto_quantidade;
     estoque_atual INTEGER;
 BEGIN
-    -- Loop through the list of products and quantities
     FOREACH item IN ARRAY produtos_quantidades
     LOOP
-        -- Check if the product exists in the source stock
         SELECT "estoqueAtual" INTO estoque_atual
         FROM "ProdutoEstoque"
         WHERE "codProduto" = item.codProduto
           AND "codEstoque" = estoque_origem;
 
         IF FOUND THEN
-            -- Check if there is enough stock
             IF estoque_atual >= item.quantidade THEN
-                -- Cancela requisições pendentes
                 UPDATE "Saida" s
                 SET "pendente" = false, "aprovado" = false
                 FROM "Lote" l
@@ -121,15 +107,13 @@ BEGIN
                 AND s."codEstoque" = estoque_origem
                 AND pl."codProduto" = item.codProduto;
 
-                -- Update the stock in the source stock
                 UPDATE "ProdutoEstoque"
                 SET "estoqueAtual" = "estoqueAtual" - item.quantidade,
                     "estoqueDisp" = "estoqueDisp" - item.quantidade
                 WHERE "codProduto" = item.codProduto
                   AND "codEstoque" = estoque_origem;
 
-                -- Update the stock in the destination stock
-                -- Check if the product already exists in the destination stock
+
                 IF EXISTS (
                     SELECT 1
                     FROM "ProdutoEstoque"
@@ -166,3 +150,4 @@ $$;
 -- );
 
 -- SELECT * FROM "ProdutoEstoque" ORDER BY "codEstoque", "codProduto";
+

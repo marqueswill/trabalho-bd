@@ -1,15 +1,8 @@
-from Objetos.Categoria import Categoria
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Categoria import Categoria
+from Database.Integracao.DBOperation import DBOperation
+
 
 class DBCategoria(DBOperation):
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Categoria" (
-            "codCategoria" serial PRIMARY KEY,
-            "nome" varchar NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
 
     def insert(self, categoria):
         sql_insert = """
@@ -33,10 +26,6 @@ class DBCategoria(DBOperation):
         WHERE "codCategoria" = %s
         """
         self.db.execute_query(sql_delete, [codCategoria])
-
-    def delete_all(self):
-        # Implementation for deleting all categories
-        pass
 
     def get_by_id(self, codCategoria):
         sql_select = """

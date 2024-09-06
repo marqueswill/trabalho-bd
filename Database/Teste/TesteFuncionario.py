@@ -1,9 +1,8 @@
-from Teste.TesteLote import TesteLote
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
 
-from Integracao.DBFuncionario import DBFuncionario
-from Objetos.Funcionario import Funcionario
+from Database.Integracao.DBFuncionario import DBFuncionario
+from Database.Objetos.Funcionario import Funcionario
 
 
 class TesteFuncionario(TesteBase):
@@ -20,6 +19,7 @@ class TesteFuncionario(TesteBase):
                     nome="John Doe",
                     dataContratacao="2024-01-01",
                     cargo="G",
+                    cnpjRestaurante="87654321000188",
                 ),
                 Funcionario(
                     cpfFuncionario="09876543211",
@@ -28,6 +28,7 @@ class TesteFuncionario(TesteBase):
                     nome="Jane Smith",
                     dataContratacao="2024-02-15",
                     cargo="O",
+                    cnpjRestaurante="87654321000188",
                 ),
                 Funcionario(
                     cpfFuncionario="12345678999",
@@ -36,6 +37,7 @@ class TesteFuncionario(TesteBase):
                     nome="João Pedro",
                     dataContratacao="2023-02-15",
                     cargo="E",
+                    cnpjRestaurante="87654321000188",
                 ),
             ]
 
@@ -79,13 +81,6 @@ class TesteFuncionario(TesteBase):
     def test_delete(self):
         try:
             self.funcionario_db.delete("02345678900")
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"
-
-    def test_delete_all(self):
-        try:
-            self.funcionario_db.delete_all()
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

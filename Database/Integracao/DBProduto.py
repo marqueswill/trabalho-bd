@@ -1,21 +1,9 @@
 # from Database.DBConection import Database
-from Objetos.Produto import Produto
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Produto import Produto
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBProduto(DBOperation):
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Produto" (
-            "codProduto" serial PRIMARY KEY,
-            "unidade" varchar NOT NULL,
-            "quantidade" real NOT NULL,
-            "nome" varchar NOT NULL,
-            "descricao" varchar,
-            "codCategoria" integer NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
 
     def insert(self, produto):
         sql_insert_produto = """
@@ -47,9 +35,6 @@ class DBProduto(DBOperation):
         WHERE idProduto = %s
         """
         self.db.execute_query(sql_delete_produto, (idProduto))
-
-    def delete_all(self):
-        pass
 
     def get_by_id(self, idProduto):
         sql_select_produto = """

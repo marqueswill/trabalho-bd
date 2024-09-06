@@ -1,5 +1,5 @@
-from Objetos.Lote import Lote
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Lote import Lote
+from Database.Integracao.DBOperation import DBOperation
 from typing import List
 
 
@@ -35,12 +35,6 @@ class DBLote(DBOperation):
         WHERE "numLote" = %s
         """
         self.db.execute_query(sql_delete, [numLote])
-
-    def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Lote"
-        """
-        self.db.execute_query(sql_delete_all)
 
     def get_by_id(self, numLote):
         sql_select = """

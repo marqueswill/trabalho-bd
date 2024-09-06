@@ -2,13 +2,13 @@ from Teste.TesteLote import TesteLote
 from Teste.TesteBase import TesteBase
 from Teste.TesteFuncionario import TesteFuncionario
 
-from Integracao.DBSaida import DBSaida
-from Integracao.DBLote import DBLote
-from Integracao.DBProdutoLote import DBProdutoLote
+from Database.Integracao.DBSaida import DBSaida
+from Database.Integracao.DBLote import DBLote
+from Database.Integracao.DBProdutoLote import DBProdutoLote
 
-from Objetos.Saida import Saida
-from Objetos.Lote import Lote
-from Objetos.ProdutoLote import ProdutoLote
+from Database.Objetos.Saida import Saida
+from Database.Objetos.Lote import Lote
+from Database.Objetos.ProdutoLote import ProdutoLote
 
 
 class TesteSaida(TesteBase):
@@ -20,8 +20,8 @@ class TesteSaida(TesteBase):
     def test_insert(self):
         try:
             self.lote_db.insert(Lote(tipo="saida"))
-            self.produtolote_db.insert(ProdutoLote(1,1,11,10))
-            
+            self.produtolote_db.insert(ProdutoLote(1, 1, 11, 10))
+
             items = [
                 Saida(
                     descricao="Saida sucos",
@@ -54,7 +54,7 @@ class TesteSaida(TesteBase):
 
     def test_get_by_id(self):
         try:
-            saida = self.saida_db.get_by_id(1)
+            saida = self.saida_db.get_by_id(6)
             if saida:
                 return "Success"
             else:
@@ -71,25 +71,18 @@ class TesteSaida(TesteBase):
 
     def test_delete(self):
         try:
-            self.saida_db.delete(1)
+            self.saida_db.delete(6)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
 
     def test_update(self):
         try:
-            saida = self.saida_db.get_by_id(2)
+            saida = self.saida_db.get_by_id(6)
             saida.descricao = "Saida de varias coisas e tal"
 
             self.saida_db.update(saida)
             return "Success"
 
-        except Exception as e:
-            return f"Failed - {str(e)}"
-
-    def test_delete_all(self):
-        try:
-            self.saida_db.delete_all()
-            return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

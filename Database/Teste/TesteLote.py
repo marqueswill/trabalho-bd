@@ -1,6 +1,6 @@
 from Teste.TesteBase import TesteBase
-from Integracao.DBLote import DBLote
-from Objetos.Lote import Lote
+from Database.Integracao.DBLote import DBLote
+from Database.Objetos.Lote import Lote
 
 
 class TesteLote(TesteBase):
@@ -51,13 +51,6 @@ class TesteLote(TesteBase):
     def test_delete(self):
         try:
             self.lote_db.delete(11)
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"
-
-    def test_delete_all(self):
-        try:
-            self.lote_db.delete_all()
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

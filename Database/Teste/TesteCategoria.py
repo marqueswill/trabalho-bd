@@ -1,6 +1,6 @@
 from Teste.TesteBase import TesteBase
-from Integracao.DBCategoria import DBCategoria
-from Objetos.Categoria import Categoria
+from Database.Integracao.DBCategoria import DBCategoria
+from Database.Objetos.Categoria import Categoria
 
 
 class TesteCategoria(TesteBase):
@@ -33,8 +33,6 @@ class TesteCategoria(TesteBase):
     def test_get_all(self):
         try:
             select_all = self.categoria_db.get_all()
-            # for categoria in select_all:
-            #     return(f"ID: {categoria.codCategoria}, Nome: {categoria.nome}")
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
@@ -42,15 +40,6 @@ class TesteCategoria(TesteBase):
     def test_delete(self):
         try:
             self.categoria_db.delete(1)
-            return "Success"
-        except Exception as e:
-            return f"Failed - {str(e)}"
-
-    def delete_all(self):
-        try:
-            all_categorias = self.categoria_db.get_all()
-            for categoria in all_categorias:
-                self.categoria_db.delete(categoria.codCategoria)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
