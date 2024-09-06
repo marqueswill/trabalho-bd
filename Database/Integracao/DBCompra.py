@@ -1,6 +1,7 @@
 from Objetos.Compra import Compra
 from Integracao.DBOperation import DBOperation
 
+
 class DBCompra(DBOperation):
     def create_table(self):
         sql_create = """
@@ -20,6 +21,7 @@ class DBCompra(DBOperation):
         INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante")
         VALUES (%s, %s, %s, %s, %s)
         """
+        print(sql_insert)
         self.db.execute_query(sql_insert, compra.to_tuple())
 
     def update(self, compra):
@@ -36,7 +38,9 @@ class DBCompra(DBOperation):
         DELETE FROM "Compra"
         WHERE "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
         """
-        self.db.execute_query(sql_delete, [codOperacao, cnpjFornecedor, cnpjRestaurante])
+        self.db.execute_query(
+            sql_delete, [codOperacao, cnpjFornecedor, cnpjRestaurante]
+        )
 
     def delete_all(self):
         # Implementation for deleting all categories
@@ -47,7 +51,9 @@ class DBCompra(DBOperation):
         SELECT * FROM "Compra"
         WHERE "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
         """
-        result = self.db.execute_query(sql_select, [codOperacao, cnpjFornecedor, cnpjRestaurante], fetch=True)
+        result = self.db.execute_query(
+            sql_select, [codOperacao, cnpjFornecedor, cnpjRestaurante], fetch=True
+        )
         if result:
             return Compra(*result)
         return None

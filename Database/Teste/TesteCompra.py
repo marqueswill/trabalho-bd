@@ -29,6 +29,7 @@ class TesteCompra(TesteBase):
                 Compra(codOperacao=1, cnpjFornecedor='12345678000199', cnpjRestaurante='98765432000199', notaFiscal=pdf_1, data='2024-09-02'),
                 Compra(codOperacao=2, cnpjFornecedor='23456789000188', cnpjRestaurante='98765432000199', notaFiscal=pdf_1, data='2024-09-02'),
             ]
+
             for c in compras:
                 self.compra_db.insert(c)
             return "Success"
@@ -58,7 +59,7 @@ class TesteCompra(TesteBase):
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
-        
+
     def test_update(self):
         try:
             compra = self.compra_db.get_by_id(2, '23456789000188', '98765432000199')
@@ -71,7 +72,7 @@ class TesteCompra(TesteBase):
 
     def test_delete(self):
         try:
-            self.compra_db.delete(1, '12345678000199', '98765432000199')
+            self.compra_db.delete(1, "12345678000199", "98765432000199")
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
