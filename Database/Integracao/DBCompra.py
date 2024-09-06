@@ -21,7 +21,6 @@ class DBCompra(DBOperation):
         INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante")
         VALUES (%s, %s, %s, %s, %s)
         """
-        print(sql_insert)
         self.db.execute_query(sql_insert, compra.to_tuple())
 
     def update(self, compra):
