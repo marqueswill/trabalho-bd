@@ -1,6 +1,6 @@
 from Teste.TesteBase import TesteBase
-from Integracao.DBLote import DBLote
-from Objetos.Lote import Lote
+from Database.Integracao.DBLote import DBLote
+from Database.Objetos.Lote import Lote
 
 
 class TesteLote(TesteBase):
