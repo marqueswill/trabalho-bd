@@ -164,9 +164,6 @@ ALTER TABLE "ProdutoEstoque" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque"
 
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Inventario" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
-
--- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("codProduto","codEstoque","data") REFERENCES "Inventario" ("codProduto","codEstoque","data");
 
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
@@ -177,21 +174,8 @@ ALTER TABLE "Entrada" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" (
 ALTER TABLE "Entrada" ADD CONSTRAINT lote_unico_entrada UNIQUE ("numLote");
 ALTER TABLE "Entrada" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
 
--- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
--- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Ajuste" ADD FOREIGN KEY ("codProduto","codEstoque","data") REFERENCES "Inventario" ("codProduto","codEstoque","data");
--- ALTER TABLE "Ajuste" ADD CONSTRAINT lote_unico_ajuste UNIQUE ("numLote");
-
--- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
--- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Requisicao" ADD CONSTRAINT lote_unico_requisicao UNIQUE ("numLote");
--- ALTER TABLE "Requisicao" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
-
 ALTER TABLE "Saida" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
--- ALTER TABLE "Saida" ADD FOREIGN KEY ("codRequisicao") REFERENCES "Requisicao" ("codOperacao");
 ALTER TABLE "Saida" ADD CONSTRAINT lote_unico_saida UNIQUE ("numLote");
 ALTER TABLE "Saida" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
