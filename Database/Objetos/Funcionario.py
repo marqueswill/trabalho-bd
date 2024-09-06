@@ -2,13 +2,13 @@ class Funcionario:
 
     def __init__(
         self,
-        cpfFuncionario,
-        sexo,
-        telefone,
-        nome,
-        dataContratacao,
-        cargo,
-        cnpjRestaurante,
+        cpfFuncionario=None,
+        sexo=None,
+        telefone=None,
+        nome=None,
+        dataContratacao=None,
+        cargo=None,
+        cnpjRestaurante=None,
     ):
         self.sexo = sexo
         self.telefone = telefone
@@ -17,6 +17,9 @@ class Funcionario:
         self.cargo = cargo
         self.cnpjRestaurante = cnpjRestaurante
         self.cpfFuncionario = cpfFuncionario
+
+    def __str__(self):
+        return "Funcionario"
 
     def to_tuple(self):
         return (

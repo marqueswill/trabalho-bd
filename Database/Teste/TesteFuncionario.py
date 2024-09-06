@@ -1,6 +1,5 @@
 from Database.Teste.TesteBase import TesteBase
 
-
 from Database.Integracao.DBFuncionario import DBFuncionario
 from Database.Objetos.Funcionario import Funcionario
 
