@@ -1,7 +1,7 @@
 from Objetos.Compra import Compra
 from Integracao.DBOperation import DBOperation
 
-class DBCategoria(DBOperation):
+class DBCompra(DBOperation):
     def create_table(self):
         sql_create = """
         CREATE TABLE "Compra" (
@@ -10,7 +10,6 @@ class DBCategoria(DBOperation):
             "cnpjRestaurante" char(14),
             "notaFiscal" bytea not null,
             "data" date not null,
-            "quantidade" integer not null,
             PRIMARY KEY ("codOperacao", "cnpjFornecedor", "cnpjRestaurante")
         );
         """
@@ -18,23 +17,23 @@ class DBCategoria(DBOperation):
 
     def insert(self, compra):
         sql_insert = """
-        INSERT INTO "Compra" ("codOperacao", "cnpjFornecedor","cnpjRestaurante","notaFiscal","data","quantidade")
-        VALUES (%s, %s, %s, %s, %s, %s)
+        INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante")
+        VALUES (%s, %s, %s, %s, %s)
         """
         self.db.execute_query(sql_insert, compra.to_tuple())
 
     def update(self, compra):
         sql_update = """
         UPDATE "Compra" 
-        SET "quantidade" = %s 
-        WHERE  "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
+        SET "data" = %s, "notaFiscal" = %s
+        WHERE "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
         """
-        params = (compra.nome, compra.codCategoria)
-        self.db.execute_query(sql_update, params)
+        params = (compra.codOperacao, compra.cnpjFornecedor, compra.cnpjRestaurante)
+        self.db.execute_query(sql_update, compra.to_tuple())
 
     def delete(self, codOperacao, cnpjFornecedor, cnpjRestaurante):
         sql_delete = """
-        DELETE FROM "Categoria"
+        DELETE FROM "Compra"
         WHERE "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
         """
         self.db.execute_query(sql_delete, [codOperacao, cnpjFornecedor, cnpjRestaurante])

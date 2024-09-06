@@ -5,11 +5,15 @@ from Teste.TesteProdutoLote import TesteProdutoLote
 from Teste.TesteSaida import TesteSaida
 from Teste.TesteFuncionario import TesteFuncionario
 from Teste.TesteEntrada import TesteEntrada
+from Teste.TesteCompra import TesteCompra
 # from Teste.TesteAjuste import TesteAjuste
 
 db = DBOperation()
 db.reset()
 db.seed()
+
+teste_compra = TesteCompra()
+teste_compra.run()
 
 # teste_funcionario = TesteFuncionario()
 # teste_funcionario.run()
