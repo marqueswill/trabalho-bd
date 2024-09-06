@@ -148,9 +148,13 @@ BEGIN
     UPDATE "Inventario" inv
     SET "diferenca" = inv."contagem" - pe."estoqueAtual"
     FROM "ProdutoEstoque" pe
-    WHERE   inv."codProduto" = NEW."codProduto"
+    WHERE pe."codProduto" = inv."codProduto"
+        AND pe."codEstoque" = inv."codEstoque"
+        AND inv."codProduto" = NEW."codProduto"
         AND inv."codEstoque" = NEW."codEstoque"
         AND inv."data" = NEW."data";
+
+
 
     RETURN NEW;
 END;
