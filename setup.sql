@@ -90,7 +90,7 @@ CREATE TABLE "Inventario" (
   "data" date,
   "contagem" integer,
   "diferenca" integer,
-  "ajustado" boolean,
+  "ajustado" boolean DEFAULT false,
   "cpfOperador" character(11) NOT NULL,
   PRIMARY KEY ("codProduto", "codEstoque", "data")
 );

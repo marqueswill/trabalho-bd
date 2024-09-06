@@ -3,6 +3,13 @@ CREATE OR REPLACE FUNCTION atualizar_estoque_entrada()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW."pendente" = true THEN --pendente
+        IF NEW."status" = 'pendente' THEN
+            RETURN NEW;
+        END IF;
+
+        UPDATE "Entrada"
+        SET "status" = 'pendente', "dataConfirmacao" = NOW()
+        WHERE "codOperacao" = NEW."codOperacao";
         RETURN NEW;
     END IF;
 
@@ -137,6 +144,14 @@ BEGIN
     SET "ultimoInv" = NEW."data"
     WHERE pe."codProduto" = NEW."codProduto"
         AND pe."codEstoque" = NEW."codEstoque";
+
+    UPDATE "Inventario" inv
+    SET "diferenca" = inv."contagem" - pe."estoqueAtual"
+    FROM "ProdutoEstoque" pe
+    WHERE   inv."codProduto" = NEW."codProduto"
+        AND inv."codEstoque" = NEW."codEstoque"
+        AND inv."data" = NEW."data";
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;

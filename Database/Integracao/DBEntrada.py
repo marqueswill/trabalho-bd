@@ -6,10 +6,10 @@ class DBEntrada(DBOperation):
 
     def insert(self, entrada: Entrada):
         sql_insert = f"""
-        INSERT INTO "Entrada" ({",".join(entrada.columns())})
-        VALUES ({",".join(["%s"]*len(entrada.columns()))})
+        INSERT INTO "Entrada" ({",".join(entrada.columns()[:-2])})
+        VALUES ({",".join(["%s"]*len(entrada.columns()[:-2]))})
         """
-        self.db.execute_query(sql_insert, entrada.to_tuple())
+        self.db.execute_query(sql_insert, entrada.to_tuple()[:-2])
 
     def update(self, entrada: Entrada):
         sql_update = f"""
