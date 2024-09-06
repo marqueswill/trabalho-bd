@@ -110,31 +110,37 @@ CREATE OR REPLACE FUNCTION atualizar_estoque_saida()
     END;
     $$ LANGUAGE plpgsql;
 
--- CREATE OR REPLACE FUNCTION ajustar_estoque()
--- RETURNS TRIGGER AS $$
--- BEGIN
---     -- Rejeita as saidas pendentes
---     UPDATE "Saida" s
---     SET 
---         "aprovado" = false,
---         "pendente" = false
---     WHERE 
---         s."pendente" = true
---         AND s."codProduto" = NEW."codProduto"
---         AND s."codEstoque" = NEW."codEstoque";
+CREATE OR REPLACE FUNCTION ajustar_estoque()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW."ajustado" = true THEN 
+        UPDATE "Saida" s
+        SET 
+            "aprovado" = false,
+            "pendente" = false
+        FROM 
+            "Lote" l
+            JOIN "ProdutoLote" pl ON l."numLote" = pl."numLote"
+        WHERE 
+            s."numLote" = l."numLote"
+            AND s."pendente" = true
+            AND pl."codProduto" = NEW."codProduto"
+            AND pl."codEstoque" = NEW."codEstoque";
 
---     -- Atualiza os valores em ProdutoEstoque
---     UPDATE "ProdutoEstoque" pe
---     SET 
---         pe."estoqueAtual" = NEW."valorNovo",
---         pe."estoqueDisp" = NEW."valorNovo"
---     WHERE 
---         pe."codProduto" = NEW."codProduto" 
---         AND pe."codEstoque" = NEW."codEstoque";
 
---     RETURN NEW;
--- END;
--- $$ LANGUAGE plpgsql;
+        UPDATE "ProdutoEstoque"
+        SET 
+            "estoqueAtual" = NEW."contagem",
+            "estoqueDisp" = NEW."contagem"
+        WHERE 
+            "codProduto" = NEW."codProduto" 
+            AND "codEstoque" = NEW."codEstoque";
+
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
 -- FUNCOES
 CREATE OR REPLACE FUNCTION atualizar_ultimo_inventario()
@@ -154,8 +160,6 @@ BEGIN
         AND inv."codEstoque" = NEW."codEstoque"
         AND inv."data" = NEW."data";
 
-
-
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -171,10 +175,10 @@ AFTER INSERT OR UPDATE ON "Saida"
 FOR EACH ROW
 EXECUTE FUNCTION atualizar_estoque_saida();
 
--- CREATE TRIGGER trigger_ajuste
--- AFTER INSERT ON "Ajuste"
--- FOR EACH ROW
--- EXECUTE FUNCTION ajustar_estoque();
+CREATE TRIGGER trigger_ajuste
+AFTER INSERT OR UPDATE ON "Inventario"
+FOR EACH ROW
+EXECUTE FUNCTION ajustar_estoque();
 
 CREATE TRIGGER trigger_inventario
 AFTER INSERT ON "Inventario"
