@@ -38,15 +38,10 @@ class TesteCompra(TesteBase):
 
     def test_get_by_id(self):
         try:
-            c = canvas.Canvas("arquivo-output.pdf")
-            c.showPage()
-            c.save()
             compra = self.compra_db.get_by_id(1, '12345678000199', '98765432000199')
             if compra:
                  
-                with open("arquivo-output.pdf", 'wb') as output_file:
-                    output_file.write(compra.notaFiscal)
-                    os.remove("arquivo-output.pdf")
+                compra.export_pdf(".")
                 return "Success"
             else:
                 return "Failed - No category found"
