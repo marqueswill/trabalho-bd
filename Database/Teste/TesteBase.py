@@ -1,6 +1,3 @@
-from DBConection import Database
-
-
 class TesteBase:
 
     def run(self):
