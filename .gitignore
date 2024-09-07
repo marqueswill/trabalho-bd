@@ -1,4 +1,5 @@
 dbConfig.json
 arquivoTeste.py
 arquivoInit.py
-__pycache__/
+
+__pycache__
