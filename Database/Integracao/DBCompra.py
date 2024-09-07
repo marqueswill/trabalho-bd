@@ -1,5 +1,5 @@
-from Objetos.Compra import Compra
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Compra import Compra
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBCompra(DBOperation):
@@ -63,3 +63,4 @@ class DBCompra(DBOperation):
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Compra(*row) for row in results] if results else []
+

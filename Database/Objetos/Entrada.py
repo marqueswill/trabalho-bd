@@ -26,6 +26,9 @@ class Entrada:
         self.codEstoque = codEstoque
         self.cpfOperador = cpfOperador
 
+    def __str__(self):
+        return "Entrada"
+
     def to_tuple(self):
         return (
             self.descricao,

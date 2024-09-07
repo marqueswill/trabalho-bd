@@ -1,4 +1,3 @@
-# from Database.DBConection import Database
 from Database.Objetos.Produto import Produto
 from Database.Integracao.DBOperation import DBOperation
 

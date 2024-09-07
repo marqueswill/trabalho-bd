@@ -1,6 +1,6 @@
 from Database.Integracao.DBFornecedor import DBFornecedor
 from Database.Objetos.Fornecedor import Fornecedor
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
 
 class TesteFornecedor(TesteBase):
