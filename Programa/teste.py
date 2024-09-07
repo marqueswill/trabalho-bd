@@ -1,11 +1,11 @@
 from Database.Integracao import *
 from Database.Teste import *
 
-dbcat = DBCategoria()
+dbEstoque = DBEstoque()
 
-for c in dbcat.get_all():
-    print(c.nome)
+for e in dbEstoque.get_all():
+    print(e.nome)
 
 
-teste = TesteLote()
+teste = TesteEstoque()
 teste.run()

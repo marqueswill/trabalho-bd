@@ -5,7 +5,7 @@ from .TesteCategoria import TesteCategoria
 from .TesteFornecedor import TesteFornecedor
 from .TesteRestaurante import TesteRestaurante
 # from .TesteCotacao import TesteCotacao
-# from .TesteEstoque import TesteEstoque
+from .TesteEstoque import TesteEstoque
 # from .TesteProdutoEstoque import TesteProdutoEstoque
 # from .TesteInventario import TesteInventario
 from .TesteLote import TesteLote
