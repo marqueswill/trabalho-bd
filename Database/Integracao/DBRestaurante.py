@@ -26,7 +26,6 @@ class DBRestaurante(DBOperation):
         DELETE FROM "Restaurante"
         WHERE "cnpjRestaurante" = %s
         """
-        print(sql_delete, [restaurante.cnpjRestaurante])
         self.db.execute_query(sql_delete, [restaurante.cnpjRestaurante])
 
     def get_by_id(self, cnpjRestaurante):

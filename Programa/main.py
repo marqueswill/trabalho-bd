@@ -228,18 +228,18 @@ def TelaDelete(entidade):
     linha()
     escolha = input("Selecione o registro que deseja deletar: ")
 
-    selecionado = selecionar(entidade, escolha)
     linha()
 
-    print(f"Deletando registro de {entidade}")
     try:
+        selecionado = selecionar(entidade, escolha)
+        print(f"Deletando registro de {entidade}")
         entidade.delete(selecionado)
     except:
         input("Não foi possível deletar o registro!")
-        return TelaDelete()
+        return TelaDelete(entidade)
 
     input("Registro deletado com sucesso!")
-    return TelaCRUD
+    return TelaCRUD(entidade)
 
 
 while True:
