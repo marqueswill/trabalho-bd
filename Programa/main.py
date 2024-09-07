@@ -2,6 +2,7 @@ from Database.Objetos import *
 from Database.Integracao import *
 import os
 
+# teste
 categoria, db_categoria = Categoria(), DBCategoria()
 compra, db_compra = Compra(), DBCompra()
 cotacao, db_cotacao = Cotacao(), DBCotacao()
