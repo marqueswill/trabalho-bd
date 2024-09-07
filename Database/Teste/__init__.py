@@ -10,6 +10,6 @@ from .TesteRestaurante import TesteRestaurante
 # from .TesteInventario import TesteInventario
 from .TesteLote import TesteLote
 from .TesteProdutoLote import TesteProdutoLote
-# from .TesteCompra import TesteCompra
+from .TesteCompra import TesteCompra
 from .TesteEntrada import TesteEntrada
 from .TesteSaida import TesteSaida
