@@ -7,6 +7,8 @@ class DBCategoria(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
+
+
     def insert(self, categoria):
         sql_insert = """
         INSERT INTO "Categoria" ("codCategoria", "nome")

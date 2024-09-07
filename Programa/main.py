@@ -177,6 +177,30 @@ def TelaCRUD(entidade):
         linha()
 
 
+def generate_object(entidade, valores):
+    entidades = {
+        "Categoria": Categoria,
+        "Cotacao": Cotacao,
+        "Compra": Compra,
+        "Entrada": Entrada,
+        "Estoque": Estoque,
+        "Fornecedor": Fornecedor,
+        "Funcionario": Funcionario,
+        "Inventario": Inventario,
+        "Lote": Lote,
+        "Produto": Produto,
+        "ProdutoEstoque": ProdutoEstoque,
+        "Restaurante": Restaurante,
+        "Saida": Saida,
+    }
+
+    cls = entidades.get(str(entidade))
+    if cls:
+        return cls(*valores)
+    else:
+        raise ValueError(f"Entidade {entidade} não reconhecida.")
+
+
 def TelaCreate(entidade):
     limpar()
 
@@ -184,15 +208,22 @@ def TelaCreate(entidade):
     print(f"Criando novo registro para {entidade}:")
     linha()
 
-    valores = {}
-    for col in entidade.columns():
-        c = col.replace('"', "")
-        valores[c] = input(c + ": ")
+    valores = []
+    for col in objetos[str(entidade)].columns():
+        valores.append(input(col.replace('"', "") + ": "))
 
-    input()
     try:
-        pass
+        obj = generate_object(entidade, valores)
+        entidade.insert(obj)
+        
+        input("Registro inserido com sucesso!")
+        return TelaCRUD(entidade)
     except:
+        opcao = input("Não foi possível atualizar o registro! Deseja continuar? (S/N)")
+        if opcao.lower() in ["s", "y"]:
+            return TelaCreate(entidade)
+        else:
+            return TelaCRUD(entidade)
         pass
     return
 
@@ -215,10 +246,28 @@ def TelaRead(entidade):
 
 def TelaUpdate(entidade):
     limpar()
+    linha()
+    listar(entidade)
+    linha()
+    escolha = input("Selecione o registro que deseja atualizar: ")
 
     linha()
-    print(f"Atualizando registro de {entidade}:")
-    linha()
+
+    try:
+        selecionado = selecionar(entidade, escolha)
+
+        valores = []
+        for c in selecionado.columns()[:-1]:
+            valores += input(c.replace('"', "") + ": ")
+        print(f"Atualizando registro de {entidade}")
+        atualizado = entidade.generate(valores)
+        entidade.update(atualizado)
+    except:
+        input("Não foi possível atualizar o registro!")
+        return TelaDelete(entidade)
+
+    input("Registro atualizar com sucesso!")
+    return TelaCRUD(entidade)
 
 
 def TelaDelete(entidade):
