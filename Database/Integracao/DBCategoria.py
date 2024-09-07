@@ -7,25 +7,24 @@ class DBCategoria(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
-
-
-    def insert(self, categoria):
+    def insert(self, categoria: Categoria):
         sql_insert = """
         INSERT INTO "Categoria" ("codCategoria", "nome")
         VALUES (%s, %s)
         """
         self.db.execute_query(sql_insert, categoria.to_tuple())
 
-    def update(self, categoria):
+    def update(self, categoria: Categoria):
         sql_update = """
         UPDATE "Categoria" 
         SET nome = %s 
-        WHERE codCategoria = %s
+        WHERE "codCategoria" = %s
         """
         params = (categoria.nome, categoria.codCategoria)
+        print(sql_update, params)
         self.db.execute_query(sql_update, params)
 
-    def delete(self, categoria):
+    def delete(self, categoria: Categoria):
         sql_delete = """
         DELETE FROM "Categoria"
         WHERE "codCategoria" = %s

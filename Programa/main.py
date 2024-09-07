@@ -177,7 +177,7 @@ def TelaCRUD(entidade):
         linha()
 
 
-def generate_object(entidade, valores):
+def generate_object(entidade, valores, valores_antigos=None):
     entidades = {
         "Categoria": Categoria,
         "Cotacao": Cotacao,
@@ -195,6 +195,8 @@ def generate_object(entidade, valores):
     }
 
     cls = entidades.get(str(entidade))
+
+
     if cls:
         return cls(*valores)
     else:
@@ -215,7 +217,7 @@ def TelaCreate(entidade):
     try:
         obj = generate_object(entidade, valores)
         entidade.insert(obj)
-        
+
         input("Registro inserido com sucesso!")
         return TelaCRUD(entidade)
     except:
@@ -256,18 +258,27 @@ def TelaUpdate(entidade):
     try:
         selecionado = selecionar(entidade, escolha)
 
+        valores_velhos = selecionado.to_tuple()
         valores = []
-        for c in selecionado.columns()[:-1]:
-            valores += input(c.replace('"', "") + ": ")
-        print(f"Atualizando registro de {entidade}")
-        atualizado = entidade.generate(valores)
-        entidade.update(atualizado)
-    except:
-        input("Não foi possível atualizar o registro!")
-        return TelaDelete(entidade)
+        for i, c in enumerate(selecionado.columns()):
+            valor_input = input(
+                c.replace('"', "") + " (deixe em branco para manter o valor antigo): "
+            )
+            if valor_input.strip() == "":
+                valores.append(valores_velhos[i])
+            else:
+                valores.append(valor_input)
 
-    input("Registro atualizar com sucesso!")
-    return TelaCRUD(entidade)
+        print(valores_velhos,valores)
+        print(f"Atualizando registro de {entidade}")
+        atualizado = generate_object(entidade, valores)
+        entidade.update(atualizado)
+        
+        return TelaCRUD(entidade)
+    except Exception as e:
+        print(f"Não foi possível atualizar o registro! Erro: {e}")
+        input("Pressione Enter para continuar...")
+        return TelaDelete(entidade)
 
 
 def TelaDelete(entidade):
