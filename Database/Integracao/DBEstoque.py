@@ -26,3 +26,27 @@ class DBEstoque(DBOperation):
         WHERE "codEstoque" = %s
         """
         self.db.execute_query(sql_update, estoque.to_tuple())
+
+    def delete(self, codEstoque):
+        sql_delete = """
+        DELETE FROM "Estoque"
+        WHERE "codEstoque" = %s
+        """
+        self.db.execute_query(sql_delete, codEstoque)
+
+    def get_by_id(self, codEstoque):
+        sql_select = """
+        SELECT * FROM "Estoque"
+        WHERE "codEstoque" = %s
+        """
+        result = self.db.execute_query(sql_select, codEstoque, fetch=True)
+        if result:
+            return Estoque(*result)
+        return None
+    
+    def get_all(self):
+        sql_select = """
+        SELECT * FROM "Estoque"
+        """
+        results = self.db.execute_query(sql_select, fetch=True)
+        return [Estoque(*row) for row in results] if results else[]
