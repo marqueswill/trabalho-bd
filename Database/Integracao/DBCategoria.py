@@ -4,6 +4,9 @@ from Database.Integracao.DBOperation import DBOperation
 
 class DBCategoria(DBOperation):
 
+    def __init__(self, teste=False):
+        super().__init__(teste)
+
     def insert(self, categoria):
         sql_insert = """
         INSERT INTO "Categoria" ("codCategoria", "nome")
@@ -20,12 +23,12 @@ class DBCategoria(DBOperation):
         params = (categoria.nome, categoria.codCategoria)
         self.db.execute_query(sql_update, params)
 
-    def delete(self, codCategoria):
+    def delete(self, categoria):
         sql_delete = """
         DELETE FROM "Categoria"
         WHERE "codCategoria" = %s
         """
-        self.db.execute_query(sql_delete, [codCategoria])
+        self.db.execute_query(sql_delete, [categoria.codCategoria])
 
     def get_by_id(self, codCategoria):
         sql_select = """

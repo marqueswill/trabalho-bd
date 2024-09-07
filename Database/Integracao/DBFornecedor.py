@@ -21,12 +21,12 @@ class DBFornecedor(DBOperation):
         """
         self.db.execute_query(sql_update, fornecedor.to_tuple())
 
-    def delete(self, cnpjFornecedor):
+    def delete(self, fornecedor):
         sql_delete = """
         DELETE FROM "Fornecedor"
         WHERE "cnpjFornecedor" = %s
         """
-        self.db.execute_query(sql_delete, [cnpjFornecedor])
+        self.db.execute_query(sql_delete, [fornecedor.cnpjFornecedor])
 
     def get_by_id(self, cnpjFornecedor):
         sql_select = """
