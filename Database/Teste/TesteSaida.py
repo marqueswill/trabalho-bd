@@ -2,13 +2,13 @@ from Teste.TesteLote import TesteLote
 from Teste.TesteBase import TesteBase
 from Teste.TesteFuncionario import TesteFuncionario
 
-from Integracao.DBSaida import DBSaida
-from Integracao.DBLote import DBLote
-from Integracao.DBProdutoLote import DBProdutoLote
+from Database.Integracao.DBSaida import DBSaida
+from Database.Integracao.DBLote import DBLote
+from Database.Integracao.DBProdutoLote import DBProdutoLote
 
-from Objetos.Saida import Saida
-from Objetos.Lote import Lote
-from Objetos.ProdutoLote import ProdutoLote
+from Database.Objetos.Saida import Saida
+from Database.Objetos.Lote import Lote
+from Database.Objetos.ProdutoLote import ProdutoLote
 
 
 class TesteSaida(TesteBase):
@@ -20,8 +20,8 @@ class TesteSaida(TesteBase):
     def test_insert(self):
         try:
             self.lote_db.insert(Lote(tipo="saida"))
-            self.produtolote_db.insert(ProdutoLote(1,1,11,10))
-            
+            self.produtolote_db.insert(ProdutoLote(1, 1, 11, 10))
+
             items = [
                 Saida(
                     descricao="Saida sucos",
@@ -86,5 +86,3 @@ class TesteSaida(TesteBase):
 
         except Exception as e:
             return f"Failed - {str(e)}"
-
-

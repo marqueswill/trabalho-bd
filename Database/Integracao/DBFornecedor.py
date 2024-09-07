@@ -1,5 +1,5 @@
-from Integracao.DBOperation import DBOperation
-from Objetos.Fornecedor import Fornecedor
+from Database.Integracao.DBOperation import DBOperation
+from Database.Objetos.Fornecedor import Fornecedor
 
 
 class DBFornecedor(DBOperation):

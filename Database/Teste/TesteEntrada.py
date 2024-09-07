@@ -1,7 +1,7 @@
 from Teste.TesteBase import TesteBase
 
-from Integracao.DBEntrada import DBEntrada
-from Objetos.Entrada import Entrada
+from Database.Integracao.DBEntrada import DBEntrada
+from Database.Objetos.Entrada import Entrada
 
 
 class TesteEntrada(TesteBase):

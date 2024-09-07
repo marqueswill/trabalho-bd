@@ -1,5 +1,5 @@
-from Objetos.Funcionario import Funcionario
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Funcionario import Funcionario
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBFuncionario(DBOperation):

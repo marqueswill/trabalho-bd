@@ -1,5 +1,5 @@
-from Database.Teste.TesteAjuste import TesteAjuste
+from Database.Teste.TesteFuncionario import TesteFuncionario
 
 
-teste = TesteAjuste()
+teste = TesteFuncionario()
 teste.run()

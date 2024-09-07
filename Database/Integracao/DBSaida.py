@@ -1,5 +1,5 @@
-from Objetos.Saida import Saida
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Saida import Saida
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBSaida(DBOperation):

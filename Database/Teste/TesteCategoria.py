@@ -1,6 +1,6 @@
 from Teste.TesteBase import TesteBase
-from Integracao.DBCategoria import DBCategoria
-from Objetos.Categoria import Categoria
+from Database.Integracao.DBCategoria import DBCategoria
+from Database.Objetos.Categoria import Categoria
 
 
 class TesteCategoria(TesteBase):

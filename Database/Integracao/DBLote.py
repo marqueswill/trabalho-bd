@@ -1,5 +1,5 @@
-from Objetos.Lote import Lote
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Lote import Lote
+from Database.Integracao.DBOperation import DBOperation
 from typing import List
 
 

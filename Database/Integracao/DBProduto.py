@@ -1,6 +1,6 @@
 # from Database.DBConection import Database
-from Objetos.Produto import Produto
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Produto import Produto
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBProduto(DBOperation):

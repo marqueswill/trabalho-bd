@@ -1,5 +1,5 @@
-from Objetos.Categoria import Categoria
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Categoria import Categoria
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBCategoria(DBOperation):
