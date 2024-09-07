@@ -1,4 +1,4 @@
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 from Database.Integracao.DBCategoria import DBCategoria
 from Database.Objetos.Categoria import Categoria
 
@@ -11,8 +11,8 @@ class TesteCategoria(TesteBase):
     def test_insert(self):
         try:
             categorias = [
-                Categoria(codCategoria=1, nome="sucos"),
-                Categoria(codCategoria=2, nome="carnes"),
+                Categoria(codCategoria=20, nome="sucos"),
+                Categoria(codCategoria=21, nome="carnes"),
             ]
             for c in categorias:
                 self.categoria_db.insert(c)

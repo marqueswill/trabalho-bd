@@ -1,4 +1,4 @@
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 from Database.Integracao.DBLote import DBLote
 from Database.Objetos.Lote import Lote
 

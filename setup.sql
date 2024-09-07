@@ -147,7 +147,7 @@ CREATE TABLE "Saida" (
   "codEstoque" integer NOT NULL
 );
 
-ALTER TABLE "Produto" ADD FOREIGN KEY ("codCategoria") REFERENCES "Categoria" ("codCategoria");
+ALTER TABLE "Produto" ADD FOREIGN KEY ("codCategoria") REFERENCES "Categoria" ("codCategoria") ON DELETE CASCADE;
 
 ALTER TABLE "Funcionario" ADD FOREIGN KEY ("cnpjRestaurante") REFERENCES "Restaurante" ("cnpjRestaurante");
 
