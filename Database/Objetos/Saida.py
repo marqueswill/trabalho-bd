@@ -26,6 +26,9 @@ class Saida:
         self.codEstoque = codEstoque
         self.codOperacao = codOperacao
 
+    def __str__(self):
+        return "Saida"
+
     def to_tuple(self):
         return (
             self.descricao,

@@ -1,8 +1,9 @@
 class ProdutoEstoque:
+
     def __init__(
         self,
-        codProduto,
-        codEstoque,
+        codProduto=None,
+        codEstoque=None,
         estoqueMax=None,
         estoqueMin=None,
         estoqueAtual=None,
@@ -17,6 +18,9 @@ class ProdutoEstoque:
         self.estoqueDisp = estoqueDisp
         self.ultimoInv = ultimoInv
 
+    def __str__(self):
+        return "ProdutoEstoque"
+
     def to_tuple(self):
         return (
             self.codProduto,
@@ -27,3 +31,14 @@ class ProdutoEstoque:
             self.estoqueDisp,
             self.ultimoInv,
         )
+
+    def columns(self):
+        return [
+            '"codProduto"',
+            '"codEstoque"',
+            '"estoqueMax"',
+            '"estoqueMin"',
+            '"estoqueAtual"',
+            '"estoqueDisp"',
+            '"ultimoInv"',
+        ]

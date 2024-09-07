@@ -1,6 +1,6 @@
 from Database.Integracao.DBRestaurante import DBRestaurante
 from Database.Objetos.Restaurante import Restaurante
-from Teste.TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
 
 class TesteRestaurante(TesteBase):
