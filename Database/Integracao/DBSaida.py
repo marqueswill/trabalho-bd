@@ -22,12 +22,12 @@ class DBSaida(DBOperation):
         """
         self.db.execute_query(sql_update, saida.to_tuple())
 
-    def delete(self, codOperacao):
+    def delete(self, saida):
         sql_delete = """
         DELETE FROM "Saida"
         WHERE "codOperacao" = %s
         """
-        self.db.execute_query(sql_delete, [codOperacao])
+        self.db.execute_query(sql_delete, [saida.codOperacao])
 
     def get_by_id(self, codOperacao):
         sql_select = """

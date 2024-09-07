@@ -22,12 +22,12 @@ class DBFuncionario(DBOperation):
         """
         self.db.execute_query(sql_update, funcionario.to_tuple())
 
-    def delete(self, cpfFuncionario):
+    def delete(self, funcionario):
         sql_delete = """
         DELETE FROM "Funcionario"
         WHERE "cpfFuncionario" = %s
         """
-        self.db.execute_query(sql_delete, [cpfFuncionario])
+        self.db.execute_query(sql_delete, [funcionario.cpfFuncionario])
 
     def get_by_id(self, cpfFuncionario):
         sql_select = """

@@ -4,14 +4,9 @@ from typing import List
 
 
 class DBLote(DBOperation):
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Lote" (
-        "numLote" serial PRIMARY KEY,
-        "tipo" varchar
-        );
-        """
-        self.db.execute_query(sql_create)
+
+    def __init__(self, teste=False):
+        super().__init__(teste)
 
     def insert(self, lote: Lote):
         sql_insert = f"""
@@ -29,12 +24,12 @@ class DBLote(DBOperation):
 
         self.db.execute_query(sql_update, lote.to_tuple())
 
-    def delete(self, numLote):
+    def delete(self, lote):
         sql_delete = """
         DELETE FROM "Lote"
         WHERE "numLote" = %s
         """
-        self.db.execute_query(sql_delete, [numLote])
+        self.db.execute_query(sql_delete, [lote.numLote])
 
     def get_by_id(self, numLote):
         sql_select = """

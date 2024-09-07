@@ -1,40 +1,48 @@
 from Database.Objetos import *
 from Database.Integracao import *
 import os
+import pandas as pd
+from tabulate import tabulate
+from Database.Integracao.DBOperation import DBOperation
 
-categoria, db_categoria = Categoria(), DBCategoria()
-compra, db_compra = Compra(), DBCompra()
-cotacao, db_cotacao = Cotacao(), DBCotacao()
-entrada, db_entrada = Entrada(), DBEntrada()
-estoque, db_estoque = Estoque(), DBEstoque()
-fornecedor, db_fornecedor = Fornecedor(), DBFornecedor()
-funcionario, db_funcionario = Funcionario(), DBFuncionario()
-inventario, db_inventario = Inventario(), DBInventario()
-lote, db_lote = Lote(), DBLote()
-produto_estoque, db_produto_estoque = ProdutoEstoque(), DBProdutoEstoque()
-produto_lote, db_produto_lote = ProdutoLote(), DBProdutoLote()
-restaurante, db_restaurante = Restaurante(), DBRestaurante()
-saida, db_saida = Saida(), DBSaida()
+db = DBOperation()
+db.setup()
 
 entitites = {
-    1: {"obj": categoria, "conn": db_categoria},
-    2: {"obj": compra, "conn": db_compra},
-    3: {"obj": cotacao, "conn": db_cotacao},
-    4: {"obj": entrada, "conn": db_entrada},
-    5: {"obj": estoque, "conn": db_estoque},
-    6: {"obj": fornecedor, "conn": db_fornecedor},
-    7: {"obj": funcionario, "conn": db_funcionario},
-    8: {"obj": inventario, "conn": db_inventario},
-    9: {"obj": lote, "conn": db_lote},
-    10: {"obj": produto_estoque, "conn": db_produto_estoque},
-    11: {"obj": produto_lote, "conn": db_produto_lote},
-    12: {"obj": restaurante, "conn": db_restaurante},
-    13: {"obj": saida, "conn": db_saida},
+    1: DBCategoria(),
+    2: DBCompra(),
+    3: DBCotacao(),
+    4: DBEntrada(),
+    5: DBEstoque(),
+    6: DBFornecedor(),
+    7: DBFuncionario(),
+    8: DBInventario(),
+    9: DBLote(),
+    10: DBProdutoEstoque(),
+    11: DBProdutoLote(),
+    12: DBRestaurante(),
+    13: DBSaida(),
+}
+
+objetos = {
+    "Categoria": Categoria(),
+    "Compra": Compra(),
+    "Cotacao": Cotacao(),
+    "Entrada": Entrada(),
+    "Estoque": Estoque(),
+    "Fornecedor": Fornecedor(),
+    "Funcionario": Funcionario(),
+    "Inventario": Inventario(),
+    "Lote": Lote(),
+    "ProdutoEstoque": ProdutoEstoque(),
+    "ProdutoLote": ProdutoLote(),
+    "Restaurante": Restaurante(),
+    "Saida": Saida(),
 }
 
 
 def linha():
-    print("_" * 50)
+    print("+" * 50)
 
 
 def limpar():
@@ -42,6 +50,8 @@ def limpar():
 
 
 def TelaInicial():
+    limpar()
+
     linha()
     print("Tela Inicial")
     linha()
@@ -52,15 +62,13 @@ def TelaInicial():
     try:
         escolha = int(input("Selecione uma opção: "))
     except ValueError:
-        limpar()
+
         print("Entrada inválida, por favor, selecione uma opção válida.")
         return
 
     if escolha == 1:
-        limpar()
         TelaEscolha()
     elif escolha == 2:
-        limpar()
         exit()  # Use exit() to terminate the program
     else:
         print("Opção inválida, tente novamente.")
@@ -68,27 +76,28 @@ def TelaInicial():
 
 
 def TelaEscolha():
+    limpar()
     linha()
     print("Escolha uma Entidade")
     linha()
+    print(" 0 - Voltar\n")
     for number, e in entitites.items():
 
-        print(f"{number:>2} - {e['obj']}")
-    print("14 - Voltar")
+        print(f"{number:>2} - {e}")
     linha()
     try:
         escolha = int(input("Selecione uma entidade: "))
     except ValueError:
-        limpar()
+
         print("Entrada inválida, por favor, selecione um número válido.")
         linha()
         return TelaEscolha()
 
-    if escolha == 14:
-        limpar()
+    if escolha == 0:
+
         return TelaInicial()
     elif escolha not in entitites:
-        limpar()
+
         print("Entidade inválida, tente novamente.")
         linha()
         return TelaEscolha()
@@ -96,16 +105,55 @@ def TelaEscolha():
     TelaCRUD(entitites[escolha])
 
 
+import pandas as pd
+
+
+def listar(entidade):
+    linhas = entidade.get_all()
+
+    headers = [c.replace('"', "") for c in objetos[str(entidade)].columns()]
+    valores = {}
+    for h in headers:
+        valores[h] = []
+    for l in linhas:
+        col = l.to_tuple()
+        for i in range(len(col)):
+            valores[headers[i]].append(col[i])
+
+    df = pd.DataFrame(valores)
+
+    df.reset_index(drop=True, inplace=True)
+
+    print(tabulate(df, headers="keys", tablefmt="psql", showindex=True))
+
+    return
+
+
+def selecionar(entidade, escolha):
+    linhas = entidade.get_all()
+
+    registros = {}
+    for i in range(len(linhas)):
+        registros[i] = linhas[i]
+    return registros[int(escolha)]
+
+
 def TelaCRUD(entidade):
     limpar()
+
     linha()
-    print(f"CRUD de {entidade['obj']}")
+    print(f"CRUD de {entidade}")
     linha()
 
-    opcoes = {1: "Criar", 2: "Ler", 3: "Atualizar", 4: "Deletar", 5: "Voltar"}
+    opcoes = {
+        0: "Voltar\n",
+        1: "Criar",
+        2: "Ler",
+        3: "Atualizar",
+        4: "Deletar",
+    }
     for op in opcoes.items():
         print(f"{op[0]} - {op[1]}")
-    # linha()
     try:
         escolha = int(input("Selecione uma operação: "))
     except ValueError:
@@ -113,7 +161,9 @@ def TelaCRUD(entidade):
         linha()
         return
 
-    if escolha == 1:
+    if escolha == 0:
+        return TelaEscolha()
+    elif escolha == 1:
         TelaCreate(entidade)
     elif escolha == 2:
         TelaRead(entidade)
@@ -121,39 +171,135 @@ def TelaCRUD(entidade):
         TelaUpdate(entidade)
     elif escolha == 4:
         TelaDelete(entidade)
-    elif escolha == 5:
-        return TelaEscolha()
+
     else:
         print("Opção inválida, tente novamente.")
         linha()
 
 
+def generate_object(entidade, valores, valores_antigos=None):
+    entidades = {
+        "Categoria": Categoria,
+        "Cotacao": Cotacao,
+        "Compra": Compra,
+        "Entrada": Entrada,
+        "Estoque": Estoque,
+        "Fornecedor": Fornecedor,
+        "Funcionario": Funcionario,
+        "Inventario": Inventario,
+        "Lote": Lote,
+        "Produto": Produto,
+        "ProdutoEstoque": ProdutoEstoque,
+        "Restaurante": Restaurante,
+        "Saida": Saida,
+    }
+
+    cls = entidades.get(str(entidade))
+
+
+    if cls:
+        return cls(*valores)
+    else:
+        raise ValueError(f"Entidade {entidade} não reconhecida.")
+
+
 def TelaCreate(entidade):
     limpar()
+
     linha()
     print(f"Criando novo registro para {entidade}:")
     linha()
 
+    valores = []
+    for col in objetos[str(entidade)].columns():
+        valores.append(input(col.replace('"', "") + ": "))
+
+    try:
+        obj = generate_object(entidade, valores)
+        entidade.insert(obj)
+
+        input("Registro inserido com sucesso!")
+        return TelaCRUD(entidade)
+    except:
+        opcao = input("Não foi possível atualizar o registro! Deseja continuar? (S/N)")
+        if opcao.lower() in ["s", "y"]:
+            return TelaCreate(entidade)
+        else:
+            return TelaCRUD(entidade)
+        pass
+    return
+
 
 def TelaRead(entidade):
     limpar()
+
     linha()
     print(f"Lendo registros de {entidade}:")
     linha()
+    listar(entidade)
+    linha()
+
+    try:
+        escolha = int(input("Aperte qualquer tecla para voltar"))
+        return TelaCRUD(entidade)
+    except ValueError:
+        return TelaCRUD(entidade)
 
 
 def TelaUpdate(entidade):
     limpar()
     linha()
-    print(f"Atualizando registro de {entidade}:")
+    listar(entidade)
     linha()
+    escolha = input("Selecione o registro que deseja atualizar: ")
+
+    linha()
+
+    try:
+        selecionado = selecionar(entidade, escolha)
+
+        valores_velhos = selecionado.to_tuple()
+        valores = []
+        for i, c in enumerate(selecionado.columns()):
+            valor_input = input(
+                c.replace('"', "") + " (deixe em branco para manter o valor antigo): "
+            )
+            if valor_input.strip() == "":
+                valores.append(valores_velhos[i])
+            else:
+                valores.append(valor_input)
+
+        print(valores_velhos,valores)
+        print(f"Atualizando registro de {entidade}")
+        atualizado = generate_object(entidade, valores)
+        entidade.update(atualizado)
+        
+        return TelaCRUD(entidade)
+    except Exception as e:
+        print(f"Não foi possível atualizar o registro! Erro: {e}")
+        input("Pressione Enter para continuar...")
+        return TelaDelete(entidade)
 
 
 def TelaDelete(entidade):
     limpar()
     linha()
-    print(f"Deletando registro de {entidade}:")
+    listar(entidade)
     linha()
+    escolha = input("Selecione o registro que deseja deletar: ")
+
+    linha()
+
+    try:
+        selecionado = selecionar(entidade, escolha)
+        print(f"Deletando registro de {entidade}")
+        entidade.delete(selecionado)
+    except:
+        input("Não foi possível deletar o registro!")
+        return TelaDelete(entidade)
+
+    input("Registro deletado com sucesso!")
+    return TelaCRUD(entidade)
 
 
 while True:

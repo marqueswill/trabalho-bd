@@ -28,12 +28,12 @@ class DBProduto(DBOperation):
         )
         self.db.execute_query(sql_update_produto, params)
 
-    def delete(self, idProduto):
+    def delete(self, produto):
         sql_delete_produto = """
         DELETE FROM "Produto"
         WHERE idProduto = %s
         """
-        self.db.execute_query(sql_delete_produto, (idProduto))
+        self.db.execute_query(sql_delete_produto, (produto.codProduto))
 
     def get_by_id(self, idProduto):
         sql_select_produto = """
