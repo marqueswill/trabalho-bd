@@ -44,7 +44,7 @@ class TesteCompra(TesteBase):
                 compra.export_pdf(".")
                 return "Success"
             else:
-                return "Failed - No category found"
+                return "Failed - No compra found"
         except Exception as e:
             return f"Failed - {str(e)}"
 

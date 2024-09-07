@@ -7,5 +7,5 @@ for e in dbEstoque.get_all():
     print(e.nome)
 
 
-teste = TesteLote()
+teste = TesteEstoque()
 teste.run()

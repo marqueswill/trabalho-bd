@@ -1,5 +1,5 @@
-from Objetos.Estoque import Estoque
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Estoque import Estoque
+from Database.Integracao.DBOperation import DBOperation
 
 class DBEstoque(DBOperation):
     def create_table(self):
@@ -14,7 +14,7 @@ class DBEstoque(DBOperation):
 
     def insert(self, estoque):
         sql_insert = """
-        INSERT INTO "Estoque" ("codEstoque","nome","cnpjRestaurante")
+        INSERT INTO "Estoque" ("nome","cnpjRestaurante","codEstoque")
         VALUES (%s, %s, %s)
         """
         self.db.execute_query(sql_insert, estoque.to_tuple())
@@ -32,14 +32,14 @@ class DBEstoque(DBOperation):
         DELETE FROM "Estoque"
         WHERE "codEstoque" = %s
         """
-        self.db.execute_query(sql_delete, codEstoque)
+        self.db.execute_query(sql_delete, [codEstoque])
 
     def get_by_id(self, codEstoque):
         sql_select = """
         SELECT * FROM "Estoque"
         WHERE "codEstoque" = %s
         """
-        result = self.db.execute_query(sql_select, codEstoque, fetch=True)
+        result = self.db.execute_query(sql_select, [codEstoque], fetch=True)
         if result:
             return Estoque(*result)
         return None

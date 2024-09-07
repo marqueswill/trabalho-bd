@@ -1,6 +1,6 @@
-from Teste.TesteBase import TesteBase
-from Integracao.DBEstoque import DBEstoque
-from Objetos.Estoque import Estoque
+from Database.Teste.TesteBase import TesteBase
+from Database.Integracao.DBEstoque import DBEstoque
+from Database.Objetos.Estoque import Estoque
 
 class TesteEstoque(TesteBase):
     def __init__(self):
@@ -10,8 +10,8 @@ class TesteEstoque(TesteBase):
     def test_insert(self):
         try:
             estoques = [
-                Estoque(codEstoque= 1, nome="Estoque 1" ,cnpjRestaurante="98765432000199"),
-                Estoque(codEstoque= 2, nome="Estoque 2" ,cnpjRestaurante="98765432000199")
+                Estoque(nome="Estoque 1" ,cnpjRestaurante="98765432000199",codEstoque= 10),
+                Estoque(nome="Estoque 2" ,cnpjRestaurante="98765432000199",codEstoque= 20),
             ]
             for estoque in estoques:
                 self.estoque_db.insert(estoque)
@@ -19,9 +19,18 @@ class TesteEstoque(TesteBase):
         except Exception as e:
             f"Failed - {str(e)}"
 
+    def test_update(self):
+        try:
+            estoque = self.estoque_db.get_by_id(10)
+            estoque.nome = "Estoque Update"
+            self.estoque_db.update(estoque)
+            return "Success"
+        except Exception as e:
+            return f"Failed - {str(e)}"
+
     def test_get_by_id(self):
         try:
-            estoque = self.estoque_db.get_by_id(1)
+            estoque = self.estoque_db.get_by_id(10)
             if estoque:
                 return "Success"
             else:
@@ -31,14 +40,14 @@ class TesteEstoque(TesteBase):
     
     def test_get_all(self):
         try:
-            select_all = self.estoque_db.get_all()
+            self.estoque_db.get_all()
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
         
     def test_delete(self):
         try:
-            self.estoque_db.delete(1)
+            self.estoque_db.delete(10)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
