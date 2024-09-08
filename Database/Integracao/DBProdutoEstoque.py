@@ -46,8 +46,9 @@ class DBProdutoEstoque(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "ProdutoEstoque"
+        pe = ProdutoEstoque()
+        sql_select = f"""
+        SELECT {",".join(pe.columns())} FROM "ProdutoEstoque"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [ProdutoEstoque(*row) for row in results] if results else []

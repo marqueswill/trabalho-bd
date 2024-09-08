@@ -40,8 +40,9 @@ class DBSaida(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "Saida"
+        s = Saida()
+        sql_select = f"""
+        SELECT {",".join(s.columns())} FROM "Saida"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Saida(*row) for row in results] if results else []

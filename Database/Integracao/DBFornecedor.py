@@ -39,13 +39,9 @@ class DBFornecedor(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT
-            "cnpjFornecedor",
-            "endereco",
-            "razao",
-            "nome",
-            "telefone"
+        f = Fornecedor()
+        sql_select = f"""
+        SELECT {",".join(f.columns())}
         FROM "Fornecedor"
         """
         results = self.db.execute_query(sql_select, fetch=True)

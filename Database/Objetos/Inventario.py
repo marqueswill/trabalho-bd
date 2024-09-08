@@ -41,3 +41,15 @@ class Inventario:
             '"ajustado"',
             '"cpfEstoquista"',
         ]
+
+    def auto_columns(self):
+        return [
+            '"diferenca"',
+        ]
+
+    def keys(self):
+        return [
+            '"codProduto"',
+            '"codEstoque"',
+            '"data"',
+        ]

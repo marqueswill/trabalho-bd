@@ -53,3 +53,13 @@ class Compra:
             '"data"',
             '"numNF"',
         ]
+
+    def auto_columns(self):
+        return [
+            '"codOperacao"',
+        ]
+
+    def keys(self):
+        return [
+            '"numNF"',
+        ]

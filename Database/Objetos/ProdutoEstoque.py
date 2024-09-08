@@ -2,13 +2,13 @@ class ProdutoEstoque:
 
     def __init__(
         self,
-        codProduto=None,
-        codEstoque=None,
         estoqueMax=None,
         estoqueMin=None,
         estoqueAtual=None,
         estoqueDisp=None,
         ultimoInv=None,
+        codProduto=None,
+        codEstoque=None,
     ):
         self.codProduto = codProduto
         self.codEstoque = codEstoque
@@ -34,11 +34,26 @@ class ProdutoEstoque:
 
     def columns(self):
         return [
-            '"codProduto"',
-            '"codEstoque"',
             '"estoqueMax"',
             '"estoqueMin"',
             '"estoqueAtual"',
             '"estoqueDisp"',
             '"ultimoInv"',
+            '"codProduto"',
+            '"codEstoque"',
+        ]
+
+    def auto_columns(self):
+        return [
+            '"estoqueMax"',
+            '"estoqueMin"',
+            '"estoqueAtual"',
+            '"estoqueDisp"',
+            '"ultimoInv"',
+        ]
+
+    def keys(self):
+        return [
+            '"codProduto"',
+            '"codEstoque"',
         ]

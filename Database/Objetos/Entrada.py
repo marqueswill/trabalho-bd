@@ -2,17 +2,17 @@ class Entrada:
 
     def __init__(
         self,
-        codOperacao=None,
         descricao=None,
         dataLancamento=None,
         dataConfirmacao=None,
-        status=None,
         pendente=None,
         aprovado=None,
         numLote=None,
         cpfEstoquista=None,
         cpfOperador=None,
         codEstoque=None,
+        status=None,
+        codOperacao=None,
     ):
         self.codOperacao = codOperacao
         self.descricao = descricao
@@ -45,7 +45,7 @@ class Entrada:
         )
 
     def columns(self):
-        return (
+        return [
             '"descricao"',
             '"dataLancamento"',
             '"dataConfirmacao"',
@@ -57,4 +57,16 @@ class Entrada:
             '"codEstoque"',
             '"status"',
             '"codOperacao"',
-        )
+        ]
+
+    def auto_columns(self):
+        return [
+            '"codOperacao"',
+            '"dataConfirmacao"',
+            '"status"',
+        ]
+
+    def keys(self):
+        return [
+            '"codOperacao"',
+        ]

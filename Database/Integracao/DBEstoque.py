@@ -9,10 +9,10 @@ class DBEstoque(DBOperation):
 
     def insert(self, estoque: Estoque):
         sql_insert = """
-        INSERT INTO "Estoque" ("nome","cnpjRestaurante","codEstoque")
-        VALUES (%s, %s, %s)
+        INSERT INTO "Estoque" ("nome","cnpjRestaurante")
+        VALUES (%s, %s)
         """
-        self.db.execute_query(sql_insert, estoque.to_tuple())
+        self.db.execute_query(sql_insert, estoque.to_tuple()[:-1])
 
     def update(self, estoque: Estoque):
         sql_update = """
@@ -40,8 +40,9 @@ class DBEstoque(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "Estoque"
+        e = Estoque()
+        sql_select = f"""
+        SELECT {",".join(e.columns())} FROM "Estoque"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Estoque(*row) for row in results] if results else []
