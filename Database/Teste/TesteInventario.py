@@ -1,7 +1,7 @@
-from TesteBase import TesteBase
+from Database.Teste.TesteBase import TesteBase
 
-from Integracao.DBInventario import DBInventario
-from Objetos.Inventario import Inventario
+from Database.Integracao.DBInventario import DBInventario
+from Database.Objetos.Inventario import Inventario
 
 class TesteInventario(TesteBase):
     def __init__(self):
@@ -11,44 +11,44 @@ class TesteInventario(TesteBase):
         try:
             inventarios = [
                 Inventario(
-                    codProduto="0001",
-                    codEstoque="0001",
-                    dataInv="2024-08-11",
+                    codProduto=1,
+                    codEstoque=1,
+                    data="2024-08-11",
                     contagem= 2068,
                     diferenca=0,
                     ajustado=False,
-                    cpfEstoquista="12345678900"
+                    cpfEstoquista="12345678901"
 
                 ),
                 Inventario(
-                    codProduto="0002",
-                    codEstoque="0002",
-                    dataInv="2024-09-03",
+                    codProduto=2,
+                    codEstoque=1,
+                    data="2024-09-03",
                     contagem=1906,
                     diferenca=0,
                     ajustado=False,
-                    cpfEstoquista="12345678900"
+                    cpfEstoquista="12345678901"
 
                 ),
                 Inventario(
-                    codProduto="0003",
-                    codEstoque="0001",
-                    dataInv="2024-08-11",
+                    codProduto=3,
+                    codEstoque=1,
+                    data="2024-08-11",
                     contagem=2068,
                     diferenca=0,
                     ajustado=False,
-                    cpfEstoquista="12345678900"
+                    cpfEstoquista="12345678901"
 
                 )
             ]
             for i in inventarios:
                 self.inventario_db.insert(i)
-            return "Sucess"
+            return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
     def test_get_by_id(self):
         try:
-            inventario = self.inventario_db.get_by_id("0001")
+            inventario = self.inventario_db.get_one(2,1,"2024-08-02")
             if inventario:
                 return "Success"
             else:
@@ -65,7 +65,7 @@ class TesteInventario(TesteBase):
 
     def test_delete(self):
         try:
-            self.inventario_db.delete("0001")
+            self.inventario_db.delete(1,1,"2024-08-01")
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
