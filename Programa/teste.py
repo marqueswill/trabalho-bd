@@ -20,6 +20,7 @@ testes = [
     TesteSaida(),
     TesteCompra(),
     TesteProdutoEstoque(),
+    TesteProduto(),
     TesteCotacao(),
     TesteInventario(),
 ]
