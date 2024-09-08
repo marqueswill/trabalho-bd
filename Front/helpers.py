@@ -95,7 +95,7 @@ def generate_object(entidade, valores):
         "Saida": Saida,
     }
 
-    cls = entidades.get(str(entidade))
+    wrapper = entidades.get(str(entidade))
     for i, v in enumerate(valores):
         if v:
             if str(v).lower() == "true":
@@ -103,7 +103,19 @@ def generate_object(entidade, valores):
             elif str(v).lower() == "false":
                 valores[i] = False
 
-    if cls:
-        return cls(*valores)
+    if wrapper:
+        return wrapper(*valores)
     else:
         raise ValueError(f"Entidade {entidade} não reconhecida.")
+
+
+def escolher_arquivo():
+    arquivos = os.listdir("./Input/")
+
+    print("\tEscolha um arquivo:")
+    for index, nome_arquivo in enumerate(arquivos):
+        print(f"\t\t{index}: {nome_arquivo}")
+
+    escolha = int(input("\tDigite o índice do arquivo desejado: "))
+
+    return os.path.join("./Input/", arquivos[escolha])
