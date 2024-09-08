@@ -1,3 +1,4 @@
+from datetime import datetime
 from Database.Objetos.Entrada import Entrada
 from Database.Integracao.DBOperation import DBOperation
 
@@ -12,6 +13,8 @@ class DBEntrada(DBOperation):
         INSERT INTO "Entrada" ({",".join(entrada.columns()[:-2])})
         VALUES ({",".join(["%s"]*len(entrada.columns()[:-2]))})
         """
+
+        # print(sql_insert, entrada.to_tuple()[:-2])
         self.db.execute_query(sql_insert, entrada.to_tuple()[:-2])
 
     def update(self, entrada: Entrada):
@@ -40,8 +43,9 @@ class DBEntrada(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "Entrada"
+        e = Entrada()
+        sql_select = f"""
+        SELECT {",".join(e.columns())} FROM "Entrada"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Entrada(*row) for row in results] if results else []

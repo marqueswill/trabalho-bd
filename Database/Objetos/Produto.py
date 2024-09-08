@@ -31,10 +31,20 @@ class Produto:
 
     def columns(self):
         return [
-            '"idProduto"',
+            '"codProduto"',
             '"unidade"',
             '"quantidade"',
             '"descricao"',
-            '"idCategoria"',
+            '"codCategoria"',
             '"nome"',
+        ]
+
+    def auto_columns(self):
+        return [
+            '"codProduto"',
+        ]
+
+    def keys(self):
+        return [
+            '"codProduto"',
         ]

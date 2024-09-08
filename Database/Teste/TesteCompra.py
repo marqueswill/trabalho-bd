@@ -8,17 +8,9 @@ class TesteCompra(TesteBase):
         super().__init__()
         self.compra_db = DBCompra(teste=True)
 
-    def ler_pdf_como_bytea(self, pdf_path):
-        try:
-            with open(pdf_path, "rb") as file:
-                return file.read()
-        except Exception as e:
-            print(f"Erro ao ler o arquivo PDF: {e}")
-            return None
-
     def test_insert(self):
         try:
-            pdf_1 = self.ler_pdf_como_bytea("./Input/nota-fiscal.pdf")
+            pdf_1 = self.compra_db.get_as_bytea("./Input/nota-fiscal.pdf")
 
             compras = [
                 Compra(

@@ -18,3 +18,13 @@ class Categoria:
             '"codCategoria"',
             '"nome"',
         ]
+
+    def auto_columns(self):
+        return [
+            '"codCategoria"',
+        ]
+
+    def keys(self):
+        return [
+            '"codCategoria"',
+        ]

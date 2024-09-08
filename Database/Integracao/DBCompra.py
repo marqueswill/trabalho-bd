@@ -6,11 +6,20 @@ class DBCompra(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
+    def get_as_bytea(self, pdf_path):
+        try:
+            with open(pdf_path, "rb") as file:
+                return file.read()
+        except Exception as e:
+            print(f"Erro ao ler o arquivo PDF: {e}")
+            return None
+
     def insert(self, compra: Compra):
         sql_insert = """
         INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante","numNF")
         VALUES (%s, %s, %s, %s, %s, %s)
         """
+
         self.db.execute_query(sql_insert, compra.to_tuple())
 
     def update(self, compra: Compra):

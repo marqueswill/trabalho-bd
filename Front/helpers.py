@@ -88,13 +88,22 @@ def generate_object(entidade, valores):
         "Inventario": Inventario,
         "Lote": Lote,
         "Produto": Produto,
+        "ProdutoLote": ProdutoLote,
         "ProdutoEstoque": ProdutoEstoque,
         "Restaurante": Restaurante,
         "Saida": Saida,
     }
 
     cls = entidades.get(str(entidade))
+    print(valores)
+    for i, v in enumerate(valores):
+        if v:
+            if str(v).lower() == "true":
+                valores[i] = True
+            elif str(v).lower() == "false":
+                valores[i] = False
 
+    print(valores)
     if cls:
         return cls(*valores)
     else:

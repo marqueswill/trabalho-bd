@@ -67,7 +67,7 @@ CREATE TABLE "Cotacao" (
 );
 
 CREATE TABLE "Estoque" (
-  "codEstoque" integer PRIMARY KEY,
+  "codEstoque" serial PRIMARY KEY,
   "nome" varchar NOT NULL,
   "cnpjRestaurante" character(14) NOT NULL
 );

@@ -105,17 +105,26 @@ def TelaCreate(entidade):
     print(f"Criando novo registro para {entidade}:")
     linha()
 
+    value_obj = objetos[str(entidade)]
     valores = []
-    for col in objetos[str(entidade)].columns():
-        valores.append(input(col.replace('"', "") + ": "))
-
+    for col in value_obj.columns():
+        if col not in value_obj.auto_columns():
+            entrada = input(col.replace('"', "") + ": ")
+            if entrada == "":
+                entrada = None
+            valores.append(entrada)
+        else:
+            valores.append(None)
+    linha()
     try:
+        print(valores)
         obj = generate_object(entidade, valores)
         entidade.insert(obj)
 
         input("Registro inserido com sucesso!")
         return TelaCRUD(entidade)
-    except:
+    except Exception as e:
+        print(e)
         opcao = input("Não foi possível atualizar o registro! Deseja continuar? (S/N)")
         if opcao.lower() in ["s", "y"]:
             return TelaCreate(entidade)
@@ -130,22 +139,24 @@ def TelaRead(entidade):
     print(f"Lendo registros de {entidade}:")
     linha()
     registros = listar(entidade)
+    input()
     linha()
+    return TelaCRUD(entidade)
 
-    opcoes = {
-        0: "Voltar",
-        # 1: "Detalhar",
-    }
+    # opcoes = {
+    #     0: "Voltar",
+    #     1: "Detalhar",
+    # }
 
-    for op in opcoes.items():
-        print(f"{op[0]} - {op[1]}")
-    try:
-        escolha = int(input("Selecione uma opção: "))
-    except ValueError:
-        return TelaRead(entidade)
+    # for op in opcoes.items():
+    #     print(f"{op[0]} - {op[1]}")
+    # try:
+    #     escolha = int(input("Selecione uma opção: "))
+    # except ValueError:
+    #     return TelaRead(entidade)
 
-    if escolha == 0:
-        return TelaCRUD(entidade)
+    # if escolha == 0:
+    #     return TelaCRUD(entidade)
     # elif escolha == 1:
     #     linha()
     #     index = input("Escolha o registro que deseja detalhar: ")
@@ -158,11 +169,11 @@ def TelaRead(entidade):
     #     input()
     #     return TelaRead(entidade)
 
-    else:
-        linha()
-        print("Opção inválida, tente novamente.")
-        input()
-        return TelaRead(entidade)
+    # else:
+    #     linha()
+    #     print("Opção inválida, tente novamente.")
+    #     input()
+    #     return TelaRead(entidade)
 
 
 def TelaUpdate(entidade):
@@ -171,22 +182,20 @@ def TelaUpdate(entidade):
     listar(entidade)
     linha()
     escolha = input("Selecione o registro que deseja atualizar: ")
-
+    print("Deixe em branco para manter o valor antigo")
     linha()
-
     try:
         selecionado = selecionar(entidade, escolha)
 
-        valores_velhos = selecionado.to_tuple()
-        valores = []
+        valores = list(selecionado.to_tuple())
+        print(valores)
+
         for i, c in enumerate(selecionado.columns()):
-            valor_input = input(
-                c.replace('"', "") + " (deixe em branco para manter o valor antigo): "
-            )
-            if valor_input.strip() == "":
-                valores.append(valores_velhos[i])
-            else:
-                valores.append(valor_input)
+            if c not in selecionado.keys():
+                valor_input = input(c.replace('"', "") + ": ")
+                if valor_input.strip() != "":
+                    valores[i] = valor_input
+        linha()
 
         print(f"Atualizando registro de {entidade}")
         atualizado = generate_object(entidade, valores)
@@ -194,7 +203,8 @@ def TelaUpdate(entidade):
 
         input("Registro atualizado com sucesso!")
         return TelaCRUD(entidade)
-    except:
+    except Exception as e:
+        print(e)
         opcao = input("Não foi possível atualizar o registro! Deseja continuar? (S/N)")
         if opcao.lower() in ["s", "y"]:
             return TelaUpdate(entidade)

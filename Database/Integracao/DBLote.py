@@ -42,8 +42,9 @@ class DBLote(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT "numLote", "tipo" FROM "Lote"
+        l = Lote()
+        sql_select = f"""
+        SELECT {",".join(l.columns())} FROM "Lote"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Lote(*row) for row in results] if results else []
