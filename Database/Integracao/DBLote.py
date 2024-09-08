@@ -32,8 +32,9 @@ class DBLote(DBOperation):
         self.db.execute_query(sql_delete, [lote.numLote])
 
     def get_by_id(self, numLote):
-        sql_select = """
-        SELECT * FROM "Lote" 
+        l = Lote()
+        sql_select = f"""
+        SELECT {",".join(l.columns())} FROM "Lote"
         WHERE "numLote" = %s
         """
         result = self.db.execute_query(sql_select, [numLote], fetch=True)

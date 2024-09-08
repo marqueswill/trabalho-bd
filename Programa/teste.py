@@ -13,14 +13,14 @@ testes = [
     TesteFuncionario(),
     TesteFornecedor(),
     TesteRestaurante(),
-    # TesteEstoque(),
     TesteLote(),
+    TesteEstoque(),
     TesteProdutoLote(),
     TesteEntrada(),
     TesteSaida(),
     TesteCompra(),
-    TesteCotacao(),
     TesteProdutoEstoque(),
+    TesteCotacao(),
 ]
 
 for t in testes:

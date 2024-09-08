@@ -10,13 +10,13 @@ class ProdutoEstoque:
         codProduto=None,
         codEstoque=None,
     ):
-        self.codProduto = codProduto
-        self.codEstoque = codEstoque
         self.estoqueMax = estoqueMax
         self.estoqueMin = estoqueMin
         self.estoqueAtual = estoqueAtual
         self.estoqueDisp = estoqueDisp
         self.ultimoInv = ultimoInv
+        self.codProduto = codProduto
+        self.codEstoque = codEstoque
 
     def __str__(self):
         return "ProdutoEstoque"

@@ -30,10 +30,12 @@ class DBEstoque(DBOperation):
         self.db.execute_query(sql_delete, [estoque.codEstoque])
 
     def get_by_id(self, codEstoque):
-        sql_select = """
-        SELECT * FROM "Estoque"
+        e = Estoque()
+        sql_select = f"""
+        SELECT {",".join(e.columns())} FROM "Estoque"
         WHERE "codEstoque" = %s
         """
+        # print(sql_select, [codEstoque])
         result = self.db.execute_query(sql_select, [codEstoque], fetch=True)
         if result:
             return Estoque(*result)

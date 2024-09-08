@@ -6,12 +6,12 @@ class Compra:
 
     def __init__(
         self,
-        numNF=None,
         codOperacao=None,
         cnpjFornecedor=None,
         cnpjRestaurante=None,
         notaFiscal=None,
         data=None,
+        numNF=None,
     ):
         self.codOperacao = codOperacao
         self.cnpjFornecedor = cnpjFornecedor
@@ -25,11 +25,11 @@ class Compra:
 
     def to_tuple(self):
         return (
-            self.data,
-            self.notaFiscal,
             self.codOperacao,
             self.cnpjFornecedor,
             self.cnpjRestaurante,
+            self.notaFiscal,
+            self.data,
             self.numNF,
         )
 
