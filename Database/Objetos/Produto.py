@@ -2,12 +2,12 @@ class Produto:
 
     def __init__(
         self,
-        codProduto=None,
-        unidade=None,
-        quantidade=None,
         nome=None,
+        quantidade=None,
+        unidade=None,
         descricao=None,
         codCategoria=None,
+        codProduto=None,
     ):
         self.codProduto = codProduto
         self.unidade = unidade
@@ -21,9 +21,9 @@ class Produto:
 
     def to_tuple(self):
         return (
-            self.unidade,
-            self.quantidade,
             self.nome,
+            self.quantidade,
+            self.unidade,
             self.descricao,
             self.codCategoria,
             self.codProduto,
@@ -31,9 +31,9 @@ class Produto:
 
     def columns(self):
         return [
-            '"unidade"',
-            '"quantidade"',
             '"nome"',
+            '"quantidade"',
+            '"unidade"',
             '"descricao"',
             '"codCategoria"',
             '"codProduto"',

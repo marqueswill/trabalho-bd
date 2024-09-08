@@ -117,7 +117,6 @@ def TelaCreate(entidade):
             valores.append(None)
     linha()
     try:
-        print(valores)
         obj = generate_object(entidade, valores)
         entidade.insert(obj)
 
@@ -188,7 +187,6 @@ def TelaUpdate(entidade):
         selecionado = selecionar(entidade, escolha)
 
         valores = list(selecionado.to_tuple())
-        print(valores)
 
         for i, c in enumerate(selecionado.columns()):
             if c not in selecionado.keys():

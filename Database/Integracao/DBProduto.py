@@ -6,15 +6,15 @@ class DBProduto(DBOperation):
 
     def insert(self, produto):
         sql_insert = """
-        INSERT INTO "Produto" ("unidade", "quantidade", "nome", "descricao", "codCategoria","codProduto")
-        VALUES (%s, %s, %s, %s, %s, %s)
+        INSERT INTO "Produto" ("nome", "quantidade","unidade",  "descricao", "codCategoria")
+        VALUES (%s, %s, %s, %s, %s)
         """
-        self.db.execute_query(sql_insert, produto.to_tuple())
+        self.db.execute_query(sql_insert, produto.to_tuple()[:-1])
 
     def update(self, produto):
         sql_update = """
         UPDATE "Produto"
-        SET "unidade" = %s, "quantidade" = %s, "nome" = %s, "descricao" = %s, "codCategoria" = %s
+        SET "nome" = %s,"quantidade" = %s,"unidade" = %s,   "descricao" = %s, "codCategoria" = %s
         WHERE "codProduto" = %s
         """
         self.db.execute_query(sql_update, produto.to_tuple())
@@ -27,8 +27,9 @@ class DBProduto(DBOperation):
         self.db.execute_query(sql_delete, [produto.codProduto])
 
     def get_by_id(self, codProduto):
-        sql_select = """
-        SELECT * FROM "Produto"
+        p = Produto()
+        sql_select = f"""
+        SELECT {",".join(p.columns())} FROM "Produto"
         WHERE "codProduto" = %s
         """
         cursor = self.db.execute_query(sql_select, [codProduto], fetch=True)
@@ -39,8 +40,9 @@ class DBProduto(DBOperation):
         return None
 
     def get_all(self):
-        sql_select= """
-        SELECT * FROM "Produto"
+        p = Produto()
+        sql_select = f"""
+        SELECT {",".join(p.columns())} FROM "Produto"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Produto(*row) for row in results] if results else []

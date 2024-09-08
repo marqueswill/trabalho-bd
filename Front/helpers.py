@@ -32,6 +32,7 @@ objetos = {
     "Funcionario": Funcionario(),
     "Inventario": Inventario(),
     "Lote": Lote(),
+    "Produto": Produto(),
     "ProdutoEstoque": ProdutoEstoque(),
     "ProdutoLote": ProdutoLote(),
     "Restaurante": Restaurante(),
@@ -95,7 +96,6 @@ def generate_object(entidade, valores):
     }
 
     cls = entidades.get(str(entidade))
-    print(valores)
     for i, v in enumerate(valores):
         if v:
             if str(v).lower() == "true":
@@ -103,7 +103,6 @@ def generate_object(entidade, valores):
             elif str(v).lower() == "false":
                 valores[i] = False
 
-    print(valores)
     if cls:
         return cls(*valores)
     else:
