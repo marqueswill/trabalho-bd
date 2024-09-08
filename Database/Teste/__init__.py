@@ -5,11 +5,11 @@ from .TesteCategoria import TesteCategoria
 from .TesteFornecedor import TesteFornecedor
 from .TesteRestaurante import TesteRestaurante
 # from .TesteCotacao import TesteCotacao
-# from .TesteEstoque import TesteEstoque
+from .TesteEstoque import TesteEstoque
 from .TesteProdutoEstoque import TesteProdutoEstoque
 # from .TesteInventario import TesteInventario
 from .TesteLote import TesteLote
 from .TesteProdutoLote import TesteProdutoLote
-# from .TesteCompra import TesteCompra
+from .TesteCompra import TesteCompra
 from .TesteEntrada import TesteEntrada
 from .TesteSaida import TesteSaida

@@ -69,7 +69,7 @@ class TesteEntrada(TesteBase):
 
     def test_delete(self):
         try:
-            e = self.entrada_db.delete(11)
+            e = self.entrada_db.get_by_id(11)
             self.entrada_db.delete(e)
             return "Success"
         except Exception as e:

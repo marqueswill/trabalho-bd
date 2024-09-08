@@ -1,9 +1,6 @@
-from reportlab.pdfgen import canvas
-import os
-
-from Teste.TesteBase import TesteBase
-from Integracao.DBCompra import DBCompra
-from Objetos.Compra import Compra
+from Database.Teste.TesteBase import TesteBase
+from Database.Integracao.DBCompra import DBCompra
+from Database.Objetos.Compra import Compra
 
 
 class TesteCompra(TesteBase):
@@ -52,7 +49,6 @@ class TesteCompra(TesteBase):
         try:
             compra = self.compra_db.get_by_id(101)
             if compra:
-
                 compra.export_pdf("./Output/")
                 return "Success"
             else:
@@ -79,7 +75,8 @@ class TesteCompra(TesteBase):
 
     def test_delete(self):
         try:
-            self.compra_db.delete(101)
+            c = self.compra_db.get_by_id(101)
+            self.compra_db.delete(c)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
