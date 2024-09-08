@@ -1,34 +1,16 @@
-from Integracao.DBOperation import DBOperation
-from Objetos.Restaurante import Restaurante
+from Database.Integracao.DBOperation import DBOperation
+from Database.Objetos.Restaurante import Restaurante
 
 
 class DBRestaurante(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
-    def create_table(self):
-        sql_create = """
-            CREATE TABLE "Restaurante" (
-                "cnpjRestaurante" char(14) PRIMARY KEY,
-                "endereco" varchar,
-                "razao" varchar NOT,
-                "nome" varchar NOT NULL,
-                "telefone" bigint,
-                "cnpjMatriz" char(14)  NOT NULL UNIQUE,
-                "cpfGerente" char(11) NOT NULL UNIQUE,
-
-                FOREIGN KEY ("cnpjMatriz") REFERENCES "Restaurante"("cnpjRestaurante"),
-                FOREIGN KEY ("cpfGerente") REFERENCES "Funcionario"("cpfFuncionario")
-            );
-        """
-        self.db.execute_query(sql_create)
-
     def insert(self, restaurante: Restaurante):
         sql_insert = f"""
         INSERT INTO "Restaurante" ({",".join(restaurante.columns())})
         VALUES ({",".join(["%s"] * len(restaurante.columns()))})
         """
-        # print(sql_insert)
         self.db.execute_query(sql_insert, restaurante.to_tuple())
 
     def update(self, restaurante: Restaurante):
@@ -39,15 +21,12 @@ class DBRestaurante(DBOperation):
         """
         self.db.execute_query(sql_update, restaurante.to_tuple())
 
-    def delete(self, cnpjRestaurante):
+    def delete(self, restaurante: Restaurante):
         sql_delete = """
         DELETE FROM "Restaurante"
         WHERE "cnpjRestaurante" = %s
         """
-        self.db.execute_query(sql_delete, [cnpjRestaurante])
-    
-    def delete_all(self):
-        pass
+        self.db.execute_query(sql_delete, [restaurante.cnpjRestaurante])
 
     def get_by_id(self, cnpjRestaurante):
         sql_select = """
@@ -58,20 +37,17 @@ class DBRestaurante(DBOperation):
         if result:
             return Restaurante(*result)
         return None
-    
+
     def get_all(self):
-        sql_select = """
-        SELECT
-            "cnpjRestaurante",
-            "endereco",
-            "razao",
-            "nome",
-            "telefone",
-            "cnpjMatriz",
-            "cpfGerente"
+        sql_select = f"""
+        SELECT "endereco",
+                "razao",
+                "nome",
+                "telefone",
+                "cnpjMatriz",
+                "cpfGerente",
+                "cnpjRestaurante"
         FROM "Restaurante"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Restaurante(*row) for row in results] if results else []
-
-

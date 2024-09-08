@@ -120,6 +120,8 @@ INSERT INTO "Restaurante" ("cnpjRestaurante", "endereco", "razao", "nome", "tele
 ('65432100000166', 'Rua W, 654', 'Restaurante W Ltda', 'Restaurante W', 6543210987, '87654321000188', '89012345678'),
 ('54321000000155', 'Rua V, 543', 'Restaurante V Ltda', 'Restaurante V', 5432109876, NULL, '90123456789');
 
+UPDATE "Funcionario" SET "cnpjRestaurante" = '98765432000199';
+
 -- Cotacao
 INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
 (150.00, 1, '12345678000199'),  
@@ -195,12 +197,12 @@ INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
 (9.00, 50, '01234567000100');
 
 -- Estoque
-INSERT INTO "Estoque" ("nome", "cnpjRestaurante") VALUES
-('Estoque de Carnes', '98765432000199'),
-('Estoque de Bebidas', '98765432000199'),
-('Estoque de Laticínios Central', '98765432000199'),
-('Estoque de Hortifrúti', '98765432000199'),
-('Estoque de Enlatados', '98765432000199');
+INSERT INTO "Estoque" ("codEstoque","nome", "cnpjRestaurante") VALUES
+(1,'Estoque de Carnes', '98765432000199'),
+(2,'Estoque de Bebidas', '98765432000199'),
+(3,'Estoque de Laticínios Central', '98765432000199'),
+(4,'Estoque de Hortifrúti', '98765432000199'),
+(5,'Estoque de Enlatados', '98765432000199');
 
 -- ProdutoEstoque
 INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoqueMin", "estoqueAtual", "estoqueDisp", "ultimoInv") VALUES
@@ -209,14 +211,6 @@ INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoque
 (3, 1, 300, 100, 0, 0, '2024-09-01'),
 (4, 1, 150, 30, 0, 0, '2024-09-01'),
 (5, 1, 400, 150, 0, 0, '2024-09-01');
-
--- Inventario
-INSERT INTO "Inventario" ("codProduto", "codEstoque", "dataInv", "contagem", "cpfOperador") VALUES
-(1, 1, '2024-08-01', 45, '56789012345'),
-(2, 1, '2024-08-02', 115, '45678901234'),
-(3, 1, '2024-08-03', 240, '56789012345'),
-(4, 1, '2024-08-04', 75, '45678901234'),
-(5, 1, '2024-08-05', 330, '56789012345');
 
 -- Lote
 INSERT INTO "Lote" ("tipo") VALUES
@@ -283,11 +277,10 @@ INSERT INTO "Saida" ("descricao","dataLancamento",  "numLote", "cpfEstoquista", 
 ('Saída de itens de higiene', '2024-08-28',  9, '23456789012', '45678901234',1,true,false),
 ('Saída de ingredientes', '2024-08-29',  10, '12345678901', '56789012345',1,true,false);
 
-
--- Ajuste
--- INSERT INTO "Ajuste" ("descricao", "dataLancamento", "dataConfirmacao", "status", "pendente", "aprovado", "numLote", "cpfEstoquista", "cpfOperador", "codProduto", "codEstoque", "dataInv") VALUES
--- ('Correção de contagem', '2024-08-10', '2024-08-12', 'confirmado', false, true, 16, '56789012345', '23456789012', 1, 1, '2024-08-01'),
--- ('Ajuste de estoque inicial', '2024-08-11', NULL, 'pendente', true, false, 17, '45678901234', '34567890123', 2, 1, '2024-08-02'),
--- ('Ajuste pós-inventário', '2024-08-15', '2024-08-16', 'confirmado', false, true, 18, '56789012345', '23456789012', 3, 1, '2024-08-03'),
--- ('Correção de lote', '2024-08-20', NULL, 'pendente', true, false, 19, '45678901234', '34567890123', 4, 1, '2024-08-04'),
--- ('Ajuste final de estoque', '2024-08-25', '2024-08-26', 'confirmado', false, true, 20, '56789012345', '23456789012', 5, 1, '2024-08-05');
+-- Inventario
+INSERT INTO "Inventario" ("codProduto", "codEstoque", "data", "contagem", "cpfOperador") VALUES
+(1, 1, '2024-08-01', 45, '56789012345'),
+(2, 1, '2024-08-02', 115, '45678901234'),
+(3, 1, '2024-08-03', 240, '56789012345'),
+(4, 1, '2024-08-04', 75, '45678901234'),
+(5, 1, '2024-08-05', 330, '56789012345');

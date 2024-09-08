@@ -1,20 +1,43 @@
 class Inventario:
-    def __init__( self, codProduto, codEstoque, dataInv, diferenca, ajustado, contagem=None, cpfEstoquista=None):
+    def __init__(
+        self,
+        codProduto=None,
+        codEstoque=None,
+        data=None,
+        contagem=None,
+        diferenca=None,
+        ajustado=None,
+        cpfEstoquista=None,
+    ):
         self.codProduto = codProduto
         self.codEstoque = codEstoque
-        self.dataInv = dataInv
+        self.data = data
         self.contagem = contagem
         self.diferenca = diferenca
         self.ajustado = ajustado
         self.cpfEstoquista = cpfEstoquista
 
+    def __str__(self):
+        return "Inventario"
+
     def to_tuple(self):
         return (
             self.codProduto,
             self.codEstoque,
-            self.dataInv,
+            self.data,
             self.contagem,
             self.diferenca,
             self.ajustado,
             self.cpfEstoquista,
         )
+
+    def columns(self):
+        return [
+            '"codProduto"',
+            '"codEstoque"',
+            '"data"',
+            '"contagem"',
+            '"diferenca"',
+            '"ajustado"',
+            '"cpfEstoquista"',
+        ]

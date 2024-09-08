@@ -1,42 +1,34 @@
-from Objetos.Categoria import Categoria
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Categoria import Categoria
+from Database.Integracao.DBOperation import DBOperation
+
 
 class DBCategoria(DBOperation):
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Categoria" (
-            "codCategoria" serial PRIMARY KEY,
-            "nome" varchar NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
 
-    def insert(self, categoria):
+    def __init__(self, teste=False):
+        super().__init__(teste)
+
+    def insert(self, categoria: Categoria):
         sql_insert = """
         INSERT INTO "Categoria" ("codCategoria", "nome")
         VALUES (%s, %s)
         """
         self.db.execute_query(sql_insert, categoria.to_tuple())
 
-    def update(self, categoria):
+    def update(self, categoria: Categoria):
         sql_update = """
         UPDATE "Categoria" 
         SET nome = %s 
-        WHERE codCategoria = %s
+        WHERE "codCategoria" = %s
         """
         params = (categoria.nome, categoria.codCategoria)
         self.db.execute_query(sql_update, params)
 
-    def delete(self, codCategoria):
+    def delete(self, categoria: Categoria):
         sql_delete = """
         DELETE FROM "Categoria"
         WHERE "codCategoria" = %s
         """
-        self.db.execute_query(sql_delete, [codCategoria])
-
-    def delete_all(self):
-        # Implementation for deleting all categories
-        pass
+        self.db.execute_query(sql_delete, [categoria.codCategoria])
 
     def get_by_id(self, codCategoria):
         sql_select = """

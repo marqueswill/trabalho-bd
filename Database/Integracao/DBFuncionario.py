@@ -1,30 +1,17 @@
-from Objetos.Funcionario import Funcionario
-from Integracao.DBOperation import DBOperation
+from Database.Objetos.Funcionario import Funcionario
+from Database.Integracao.DBOperation import DBOperation
 
 
 class DBFuncionario(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "Funcionario" (
-        "cpfFuncionario" char(11) PRIMARY KEY,
-        "sexo" char(1),
-        "telefone" bigint,
-        "nome" varchar NOT NULL,
-        "dataContratacao" date NOT NULL,
-        "cargo" char(1) NOT NULL
-        );
-        """
-        self.db.execute_query(sql_create)
-
     def insert(self, funcionario: Funcionario):
         sql_insert = f"""
         INSERT INTO "Funcionario" ({",".join(funcionario.columns())})
         VALUES ({",".join(["%s"]*len(funcionario.columns()))})
         """
-        # print(sql_insert)
+
         self.db.execute_query(sql_insert, funcionario.to_tuple())
 
     def update(self, funcionario: Funcionario):
@@ -35,18 +22,12 @@ class DBFuncionario(DBOperation):
         """
         self.db.execute_query(sql_update, funcionario.to_tuple())
 
-    def delete(self, cpfFuncionario):
+    def delete(self, funcionario):
         sql_delete = """
         DELETE FROM "Funcionario"
         WHERE "cpfFuncionario" = %s
         """
-        self.db.execute_query(sql_delete, [cpfFuncionario])
-
-    def delete_all(self):
-        sql_delete_all = """
-        DELETE FROM "Funcionario"
-        """
-        self.db.execute_query(sql_delete_all)
+        self.db.execute_query(sql_delete, [funcionario.cpfFuncionario])
 
     def get_by_id(self, cpfFuncionario):
         sql_select = """
@@ -60,13 +41,7 @@ class DBFuncionario(DBOperation):
 
     def get_all(self):
         sql_select = """
-        SELECT
-            "sexo",
-            "telefone",
-            "nome",
-            "dataContratacao",
-            "cargo",
-            "cpfFuncionario"
+        SELECT *
         FROM "Funcionario"
         """
         results = self.db.execute_query(sql_select, fetch=True)

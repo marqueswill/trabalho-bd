@@ -2,17 +2,17 @@ class Entrada:
 
     def __init__(
         self,
-        codOperacao,
-        descricao,
-        dataLancamento,
-        dataConfirmacao,
-        status,
-        pendente,
-        aprovado,
-        numLote,
-        cpfEstoquista,
-        cpfOperador,
-        codEstoque,
+        codOperacao=None,
+        descricao=None,
+        dataLancamento=None,
+        dataConfirmacao=None,
+        status=None,
+        pendente=None,
+        aprovado=None,
+        numLote=None,
+        cpfEstoquista=None,
+        cpfOperador=None,
+        codEstoque=None,
     ):
         self.codOperacao = codOperacao
         self.descricao = descricao
@@ -26,18 +26,21 @@ class Entrada:
         self.codEstoque = codEstoque
         self.cpfOperador = cpfOperador
 
+    def __str__(self):
+        return "Entrada"
+
     def to_tuple(self):
         return (
             self.descricao,
             self.dataLancamento,
             self.dataConfirmacao,
-            self.status,
             self.pendente,
             self.aprovado,
             self.numLote,
             self.cpfEstoquista,
             self.cpfOperador,
             self.codEstoque,
+            self.status,
             self.codOperacao,
         )
 
@@ -46,12 +49,12 @@ class Entrada:
             '"descricao"',
             '"dataLancamento"',
             '"dataConfirmacao"',
-            '"status"',
             '"pendente"',
             '"aprovado"',
             '"numLote"',
             '"cpfEstoquista"',
             '"cpfOperador"',
             '"codEstoque"',
+            '"status"',
             '"codOperacao"',
         )
