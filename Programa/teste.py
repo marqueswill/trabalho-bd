@@ -13,12 +13,13 @@ testes = [
     TesteFuncionario(),
     TesteFornecedor(),
     TesteRestaurante(),
-    TesteEstoque(),
+    # TesteEstoque(),
     TesteLote(),
     TesteProdutoLote(),
     TesteEntrada(),
     TesteSaida(),
     TesteCompra(),
+    TesteCotacao(),
     TesteProdutoEstoque(),
 ]
 

@@ -42,7 +42,7 @@ class DBOperation:
     def update(self, obj):
         raise NotImplementedError("Subclasses should implement this method")
 
-    def delete(self, id):
+    def delete(self, obj):
         raise NotImplementedError("Subclasses should implement this method")
 
     def delete_all(self):
