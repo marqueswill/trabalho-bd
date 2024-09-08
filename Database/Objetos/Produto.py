@@ -2,19 +2,19 @@ class Produto:
 
     def __init__(
         self,
-        idProduto=None,
+        codProduto=None,
         unidade=None,
         quantidade=None,
         nome=None,
         descricao=None,
-        idCategoria=None,
+        codCategoria=None,
     ):
-        self.idProduto = idProduto
+        self.codProduto = codProduto
         self.unidade = unidade
         self.quantidade = quantidade
         self.nome = nome
         self.descricao = descricao
-        self.idCategoria = idCategoria
+        self.codCategoria = codCategoria
 
     def __str__(self):
         return "Produto"
@@ -25,8 +25,8 @@ class Produto:
             self.quantidade,
             self.nome,
             self.descricao,
-            self.idCategoria,
-            self.idProduto,
+            self.codCategoria,
+            self.codProduto,
         )
 
     def columns(self):
@@ -35,6 +35,6 @@ class Produto:
             '"quantidade"',
             '"nome"',
             '"descricao"',
-            '"idCategoria"',
-            '"idProduto"',
+            '"codCategoria"',
+            '"codProduto"',
         ]

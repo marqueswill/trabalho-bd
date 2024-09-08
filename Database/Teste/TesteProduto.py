@@ -10,20 +10,20 @@ class TesteProduto(TesteBase):
         try:
             produtos = [
                 Produto(
-                    idProduto=51,
                     unidade="kg",
                     quantidade=75,
                     nome="Picanha",
                     descricao="Picanha embalada a vacuo",
-                    idCategoria=1
+                    codCategoria=1,
+                    codProduto=51,
                 ),
                 Produto(
-                    idProduto=52,
                     unidade="g",
                     quantidade=206,
                     nome="Baccio",
                     descricao="Sorvete de Pistache",
-                    idCategoria=7
+                    codCategoria=7,
+                    codProduto=52,
                 )
             ]
             for f in produtos:
@@ -54,12 +54,9 @@ class TesteProduto(TesteBase):
     def test_update(self):
         try:
             produto = self.produto_db.get_by_id(51)
-            print("Produto teste",vars(produto))
             produto.quantidade = 52
-            produto.unidade=produto.unidade
             produto.descricao = "Suco de laranja natural"
             produto.nome = "JuiceOrange"
-
             self.produto_db.update(produto)
 
             return "Success"
