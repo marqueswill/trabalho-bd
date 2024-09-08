@@ -2,6 +2,7 @@ from Database.Teste.TesteBase import TesteBase
 from Database.Integracao.DBEstoque import DBEstoque
 from Database.Objetos.Estoque import Estoque
 
+
 class TesteEstoque(TesteBase):
     def __init__(self):
         super().__init__()
@@ -10,8 +11,12 @@ class TesteEstoque(TesteBase):
     def test_insert(self):
         try:
             estoques = [
-                Estoque(nome="Estoque 1" ,cnpjRestaurante="98765432000199",codEstoque= 10),
-                Estoque(nome="Estoque 2" ,cnpjRestaurante="98765432000199",codEstoque= 20),
+                Estoque(
+                    nome="Estoque 1", cnpjRestaurante="98765432000199", codEstoque=10
+                ),
+                Estoque(
+                    nome="Estoque 2", cnpjRestaurante="98765432000199", codEstoque=20
+                ),
             ]
             for estoque in estoques:
                 self.estoque_db.insert(estoque)
@@ -37,17 +42,18 @@ class TesteEstoque(TesteBase):
                 return "Failed - No Estoque found"
         except Exception as e:
             return f"Failed - {str(e)}"
-    
+
     def test_get_all(self):
         try:
             self.estoque_db.get_all()
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
-        
+
     def test_delete(self):
         try:
-            self.estoque_db.delete(10)
+            e = self.estoque_db.get_by_id(10)
+            self.estoque_db.delete(e)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

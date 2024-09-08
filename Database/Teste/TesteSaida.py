@@ -71,7 +71,8 @@ class TesteSaida(TesteBase):
 
     def test_delete(self):
         try:
-            self.saida_db.delete(6)
+            s = self.saida_db.get_by_id(6)
+            self.saida_db.delete(s)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

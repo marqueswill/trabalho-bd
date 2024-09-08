@@ -79,7 +79,8 @@ class TesteRestaurante(TesteBase):
 
     def test_delete(self):
         try:
-            self.restaurante_db.delete("56789012000177")
+            r = self.restaurante_db.get_by_id("56789012000177")
+            self.restaurante_db.delete(r)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
