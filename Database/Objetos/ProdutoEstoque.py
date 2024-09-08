@@ -23,13 +23,13 @@ class ProdutoEstoque:
 
     def to_tuple(self):
         return (
-            self.codProduto,
-            self.codEstoque,
             self.estoqueMax,
             self.estoqueMin,
             self.estoqueAtual,
             self.estoqueDisp,
             self.ultimoInv,
+            self.codProduto,
+            self.codEstoque,
         )
 
     def columns(self):

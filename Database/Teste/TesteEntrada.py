@@ -69,7 +69,8 @@ class TesteEntrada(TesteBase):
 
     def test_delete(self):
         try:
-            self.entrada_db.delete(11)
+            e = self.entrada_db.delete(11)
+            self.entrada_db.delete(e)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

@@ -1,11 +1,25 @@
 from Database.Integracao import *
 from Database.Teste.TesteInventario import TesteInventario
 
-dbInventario = DBInventario()
 
-for e in dbInventario.get_all():
-    print(e.codEstoque)
+# dbEstoque = DBEstoque()
+
+# for e in dbEstoque.get_all():
+#     print(e.nome)
 
 
-teste = TesteInventario()
-teste.run()
+testes = [
+    TesteCategoria(),
+    TesteFuncionario(),
+    TesteFornecedor(),
+    TesteRestaurante(),
+    TesteEstoque(),
+    TesteLote(),
+    TesteProdutoLote(),
+    # TesteEntrada(),
+    # TesteSaida(),
+    # TesteCompra(),
+]
+
+for t in testes:
+    t.run()
