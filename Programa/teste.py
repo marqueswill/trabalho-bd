@@ -1,5 +1,5 @@
 from Database.Integracao import *
-from Database.Teste import *
+from Database.Teste.TesteInventario import TesteInventario
 
 
 # dbEstoque = DBEstoque()
