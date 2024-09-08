@@ -15,8 +15,8 @@ class DBCompra(DBOperation):
             return None
 
     def insert(self, compra: Compra):
-        sql_insert = """
-        INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante","numNF")
+        sql_insert = f"""
+        INSERT INTO "Compra" ({",".join(compra.columns())})
         VALUES (%s, %s, %s, %s, %s, %s)
         """
 
@@ -39,8 +39,10 @@ class DBCompra(DBOperation):
         self.db.execute_query(sql_delete, [compra.numNF])
 
     def get_by_id(self, numNF):
-        sql_select = """
-        SELECT * FROM "Compra"
+        c = Compra()
+        sql_select = f"""
+        SELECT {",".join(c.columns())} 
+        FROM "Compra"
         WHERE "numNF" = %s
         """
         result = self.db.execute_query(sql_select, [numNF], fetch=True)
@@ -49,8 +51,10 @@ class DBCompra(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "Compra"
+        c = Compra()
+        sql_select = f"""
+        SELECT {",".join(c.columns())} 
+        FROM "Compra"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Compra(*row) for row in results] if results else []

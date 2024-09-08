@@ -21,6 +21,7 @@ class TesteBase:
         else:
             for name, result in results.items():
                 print(f"    {name}: {result}")
+                
         print("\n")
 
     def test_insert(self):

@@ -11,25 +11,25 @@ class TesteFornecedor(TesteBase):
         try:
             fornecedores = [
                 Fornecedor(
-                    cnpjFornecedor="85920376000145",
                     endereco="Rua A, 123i",
                     razao="Fornecedor Ain Ltda",
                     nome="Fornecedor Ain",
                     telefone=11987654321,
+                    cnpjFornecedor="85920376000145",
                 ),
                 Fornecedor(
-                    cnpjFornecedor="98765432000188",
                     endereco="Avenida B, 456",
                     razao="Fornecedor B ME",
                     nome="Fornecedor B",
                     telefone=11912345678,
+                    cnpjFornecedor="98765432000188",
                 ),
                 Fornecedor(
-                    cnpjFornecedor="56789012000177",
                     endereco="Travessa C, 789",
                     razao="Fornecedor C Comércio",
                     nome="Fornecedor C",
                     telefone=11998765432,
+                    cnpjFornecedor="56789012000177",
                 ),
             ]
             for f in fornecedores:
@@ -59,10 +59,12 @@ class TesteFornecedor(TesteBase):
     def test_update(self):
         try:
             fornecedor = self.fornecedor_db.get_by_id("85920376000145")
+
             fornecedor.endereco = "Avenida das Flores, 987, Jardim Primavera"
             fornecedor.razao = "Flores & Cia Comércio de Plantas Ltda"
             fornecedor.nome = "Flores & Cia"
 
+            # print(fornecedor.to_tuple())
             self.fornecedor_db.update(fornecedor)
 
             return "Success"

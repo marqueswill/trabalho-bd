@@ -33,8 +33,9 @@ class DBEntrada(DBOperation):
         self.db.execute_query(sql_delete, [entrada.codOperacao])
 
     def get_by_id(self, codOperacao):
-        sql_select = """
-        SELECT * FROM "Entrada"
+        e = Entrada()
+        sql_select = f"""
+        SELECT {",".join(e.columns())} FROM "Entrada"
         WHERE "codOperacao" = %s
         """
         result = self.db.execute_query(sql_select, [codOperacao], fetch=True)

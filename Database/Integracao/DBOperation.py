@@ -25,7 +25,7 @@ class DBOperation:
         )
 
     def seed(self):
-        with open("seed.sql", "r") as file:
+        with open("seed.sql", "r", encoding="utf-8") as file:
             seed_query = file.read()
         self.db.execute_query(seed_query)
 

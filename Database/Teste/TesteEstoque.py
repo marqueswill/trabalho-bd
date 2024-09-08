@@ -12,10 +12,10 @@ class TesteEstoque(TesteBase):
         try:
             estoques = [
                 Estoque(
-                    nome="Estoque 1", cnpjRestaurante="98765432000199", codEstoque=10
+                    nome="Estoque 1", cnpjRestaurante="98765432000199"
                 ),
                 Estoque(
-                    nome="Estoque 2", cnpjRestaurante="98765432000199", codEstoque=20
+                    nome="Estoque 2", cnpjRestaurante="98765432000199"
                 ),
             ]
             for estoque in estoques:
@@ -26,7 +26,7 @@ class TesteEstoque(TesteBase):
 
     def test_update(self):
         try:
-            estoque = self.estoque_db.get_by_id(10)
+            estoque = self.estoque_db.get_by_id(6)
             estoque.nome = "Estoque Update"
             self.estoque_db.update(estoque)
             return "Success"
@@ -35,7 +35,7 @@ class TesteEstoque(TesteBase):
 
     def test_get_by_id(self):
         try:
-            estoque = self.estoque_db.get_by_id(10)
+            estoque = self.estoque_db.get_by_id(6)
             if estoque:
                 return "Success"
             else:
@@ -52,7 +52,7 @@ class TesteEstoque(TesteBase):
 
     def test_delete(self):
         try:
-            e = self.estoque_db.get_by_id(10)
+            e = self.estoque_db.get_by_id(6)
             self.estoque_db.delete(e)
             return "Success"
         except Exception as e:
