@@ -70,11 +70,10 @@ def listar(entidade):
 
 def selecionar(entidade, escolha):
     registros = entidade.get_all()
-
-    registros = {}
+    dic = {}
     for i in range(len(registros)):
-        registros[i] = registros[i]
-    return registros[int(escolha)]
+        dic[i] = registros[i]
+    return dic[int(escolha)]
 
 
 def generate_object(entidade, valores):

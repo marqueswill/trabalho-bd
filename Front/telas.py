@@ -21,7 +21,7 @@ def TelaInicial():
         return
 
     if escolha == 0:
-        exit()  
+        exit()
     elif escolha == 1:
         TelaEscolha()
     else:
@@ -121,8 +121,6 @@ def TelaCreate(entidade):
             return TelaCreate(entidade)
         else:
             return TelaCRUD(entidade)
-        pass
-    return
 
 
 def TelaRead(entidade):
@@ -190,16 +188,18 @@ def TelaUpdate(entidade):
             else:
                 valores.append(valor_input)
 
-        print(valores_velhos, valores)
         print(f"Atualizando registro de {entidade}")
         atualizado = generate_object(entidade, valores)
         entidade.update(atualizado)
 
+        input("Registro atualizado com sucesso!")
         return TelaCRUD(entidade)
-    except Exception as e:
-        print(f"Não foi possível atualizar o registro! Erro: {e}")
-        input("Pressione Enter para continuar...")
-        return TelaDelete(entidade)
+    except:
+        opcao = input("Não foi possível atualizar o registro! Deseja continuar? (S/N)")
+        if opcao.lower() in ["s", "y"]:
+            return TelaUpdate(entidade)
+        else:
+            return TelaCRUD(entidade)
 
 
 def TelaDelete(entidade):
@@ -215,9 +215,11 @@ def TelaDelete(entidade):
         selecionado = selecionar(entidade, escolha)
         print(f"Deletando registro de {entidade}")
         entidade.delete(selecionado)
+        input("Registro deletado com sucesso!")
+        return TelaCRUD(entidade)
     except:
-        input("Não foi possível deletar o registro!")
-        return TelaDelete(entidade)
-
-    input("Registro deletado com sucesso!")
-    return TelaCRUD(entidade)
+        opcao = input("Não foi possível deletar o registro! Deseja continuar? (S/N)")
+        if opcao.lower() in ["s", "y"]:
+            return TelaDelete(entidade)
+        else:
+            return TelaCRUD(entidade)

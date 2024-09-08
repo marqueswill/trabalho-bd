@@ -21,7 +21,6 @@ class DBCategoria(DBOperation):
         WHERE "codCategoria" = %s
         """
         params = (categoria.nome, categoria.codCategoria)
-        print(sql_update, params)
         self.db.execute_query(sql_update, params)
 
     def delete(self, categoria: Categoria):
