@@ -15,14 +15,12 @@ class TesteBase:
 
         failed_tests = [name for name, result in results.items() if result != "Success"]
 
-        for name, result in results.items():
-            print(f"    {name}: {result}")
 
         if not failed_tests:
             print("All tests passed")
         else:
-            print("Tests failed: " + ", ".join(failed_tests))
-
+            for name, result in results.items():
+                print(f"    {name}: {result}")
         print("\n")
 
     def test_insert(self):

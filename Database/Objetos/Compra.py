@@ -34,7 +34,7 @@ class Compra:
         )
 
     def export_pdf(self, destino, remove=False):
-        source = destino + self.numNF + "_" + self.data + ".pdf"
+        source = destino + str(self.numNF) + "_" + str(self.data) + ".pdf"
         c = canvas.Canvas(source)
         c.showPage()
         c.save()
