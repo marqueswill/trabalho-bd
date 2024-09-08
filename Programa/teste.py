@@ -20,6 +20,7 @@ testes = [
     TesteSaida(),
     TesteCompra(),
     TesteProdutoEstoque(),
+    TesteProduto()
 ]
 
 for t in testes:

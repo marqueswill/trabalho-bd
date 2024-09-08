@@ -5,36 +5,36 @@ class Produto:
         idProduto=None,
         unidade=None,
         quantidade=None,
+        nome=None,
         descricao=None,
         idCategoria=None,
-        nome=None,
     ):
         self.idProduto = idProduto
         self.unidade = unidade
         self.quantidade = quantidade
+        self.nome = nome
         self.descricao = descricao
         self.idCategoria = idCategoria
-        self.nome = nome
 
     def __str__(self):
         return "Produto"
 
     def to_tuple(self):
         return (
-            self.idProduto,
             self.unidade,
             self.quantidade,
+            self.nome,
             self.descricao,
             self.idCategoria,
-            self.nome,
+            self.idProduto,
         )
 
     def columns(self):
         return [
-            '"idProduto"',
             '"unidade"',
             '"quantidade"',
+            '"nome"',
             '"descricao"',
             '"idCategoria"',
-            '"nome"',
+            '"idProduto"',
         ]

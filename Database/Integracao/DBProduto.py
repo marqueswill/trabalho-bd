@@ -6,16 +6,16 @@ class DBProduto(DBOperation):
 
     def insert(self, produto):
         sql_insert_produto = """
-        INSERT INTO "Produto" (unidade, quantidade, descricao, idCategoria, nome)
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO "Produto" ("codProduto","unidade", "quantidade", "nome", "descricao", "codCategoria")
+        VALUES (%s,%s, %s, %s, %s, %s)
         """
         self.db.execute_query(sql_insert_produto, produto.to_tuple())
 
     def update(self, produto):
         sql_update_produto = """
         UPDATE "Produto"
-        SET unidade = %s, quantidade = %s, descricao = %s, idCategoria = %s, nome = %s
-        WHERE idProduto = %s
+        SET "unidade" = %s, "quantidade" = %s, "descricao" = %s, "codCategoria" = %s, "nome" = %s
+        WHERE "codProduto" = %s
         """
 
         params = (
@@ -26,21 +26,22 @@ class DBProduto(DBOperation):
             produto.nome,
             produto.idProduto,
         )
-        self.db.execute_query(sql_update_produto, params)
+        self.db.execute_query(sql_update_produto, [params])
 
     def delete(self, produto):
+        print("produto",produto)
         sql_delete_produto = """
         DELETE FROM "Produto"
-        WHERE idProduto = %s
+        WHERE "codProduto" = %s
         """
-        self.db.execute_query(sql_delete_produto, (produto.codProduto))
+        self.db.execute_query(sql_delete_produto, [produto.idProduto])
 
     def get_by_id(self, idProduto):
         sql_select_produto = """
         SELECT * FROM "Produto"
-        WHERE idProduto = %s
+        WHERE "codProduto" = %s
         """
-        cursor = self.db.execute_query(sql_select_produto, (idProduto), fetch=True)
+        cursor = self.db.execute_query(sql_select_produto, [idProduto], fetch=True)
         if cursor:
             row = cursor
             if row:
@@ -49,7 +50,7 @@ class DBProduto(DBOperation):
 
     def get_all(self):
         sql_select_produtos = """
-        SELECT idProduto, unidade, quantidade, descricao, idCategoria, nome
+        SELECT "codProduto", "unidade", "quantidade", "descricao", "codCategoria", "nome"
         FROM "Produto"
         """
         cursor = self.db.execute_query(sql_select_produtos, fetch=True)
