@@ -41,3 +41,11 @@ class Restaurante:
             '"cpfGerente"',
             '"cnpjRestaurante"',
         ]
+
+    def auto_columns(self):
+        return []
+
+    def keys(self):
+        return [
+            '"cnpjRestaurante"',
+        ]

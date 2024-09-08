@@ -1,8 +1,13 @@
 class Estoque:
 
-    def __init__(self, codEstoque=None, nome=None, cnpjRestaurante=None):
-        self.codEstoque = codEstoque
+    def __init__(
+        self,
+        nome=None,
+        cnpjRestaurante=None,
+        codEstoque=None,
+    ):
         self.nome = nome
+        self.codEstoque = codEstoque
         self.cnpjRestaurante = cnpjRestaurante
 
     def __str__(self):
@@ -17,7 +22,17 @@ class Estoque:
 
     def columns(self):
         return [
-            '"codEstoque"',
             '"nome"',
             '"cnpjRestaurante"',
+            '"codEstoque"',
+        ]
+
+    def auto_columns(self):
+        return [
+            '"codEstoque"',
+        ]
+
+    def keys(self):
+        return [
+            '"codEstoque"',
         ]

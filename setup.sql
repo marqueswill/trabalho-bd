@@ -67,7 +67,7 @@ CREATE TABLE "Cotacao" (
 );
 
 CREATE TABLE "Estoque" (
-  "codEstoque" integer PRIMARY KEY,
+  "codEstoque" serial PRIMARY KEY,
   "nome" varchar NOT NULL,
   "cnpjRestaurante" character(14) NOT NULL
 );
@@ -91,7 +91,7 @@ CREATE TABLE "Inventario" (
   "contagem" integer,
   "diferenca" integer,
   "ajustado" boolean DEFAULT false,
-  "cpfOperador" character(11) NOT NULL,
+  "cpfEstoquista" character(11) NOT NULL,
   PRIMARY KEY ("codProduto", "codEstoque", "data")
 );
 
@@ -163,7 +163,7 @@ ALTER TABLE "ProdutoEstoque" ADD FOREIGN KEY ("codProduto") REFERENCES "Produto"
 ALTER TABLE "ProdutoEstoque" ADD FOREIGN KEY ("codEstoque") REFERENCES "Estoque" ("codEstoque");
 
 ALTER TABLE "Inventario" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
-ALTER TABLE "Inventario" ADD FOREIGN KEY ("cpfOperador") REFERENCES "Funcionario" ("cpfFuncionario");
+ALTER TABLE "Inventario" ADD FOREIGN KEY ("cpfEstoquista") REFERENCES "Funcionario" ("cpfFuncionario");
 
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("codProduto","codEstoque") REFERENCES "ProdutoEstoque" ("codProduto","codEstoque");
 ALTER TABLE "ProdutoLote" ADD FOREIGN KEY ("numLote") REFERENCES "Lote" ("numLote");

@@ -19,6 +19,7 @@ class DBFornecedor(DBOperation):
         SET {", ".join([f"{c} = %s" for c in fornecedor.columns()[:-1]])}
         WHERE "cnpjFornecedor" = %s
         """
+        # print(sql_update, fornecedor.to_tuple())
         self.db.execute_query(sql_update, fornecedor.to_tuple())
 
     def delete(self, fornecedor):
@@ -29,23 +30,21 @@ class DBFornecedor(DBOperation):
         self.db.execute_query(sql_delete, [fornecedor.cnpjFornecedor])
 
     def get_by_id(self, cnpjFornecedor):
-        sql_select = """
-        SELECT * FROM "Fornecedor"
+        f = Fornecedor()
+        sql_select = f"""
+        SELECT {",".join(f.columns())} FROM "Fornecedor"
         WHERE "cnpjFornecedor" = %s
         """
+        # print(sql_select, [cnpjFornecedor])
         result = self.db.execute_query(sql_select, [cnpjFornecedor], fetch=True)
         if result:
             return Fornecedor(*result)
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT
-            "cnpjFornecedor",
-            "endereco",
-            "razao",
-            "nome",
-            "telefone"
+        f = Fornecedor()
+        sql_select = f"""
+        SELECT {",".join(f.columns())}
         FROM "Fornecedor"
         """
         results = self.db.execute_query(sql_select, fetch=True)

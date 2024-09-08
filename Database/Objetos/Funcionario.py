@@ -2,13 +2,13 @@ class Funcionario:
 
     def __init__(
         self,
-        cpfFuncionario=None,
         sexo=None,
         telefone=None,
         nome=None,
         dataContratacao=None,
         cargo=None,
         cnpjRestaurante=None,
+        cpfFuncionario=None,
     ):
         self.sexo = sexo
         self.telefone = telefone
@@ -40,5 +40,13 @@ class Funcionario:
             '"dataContratacao"',
             '"cargo"',
             '"cnpjRestaurante"',
+            '"cpfFuncionario"',
+        ]
+
+    def auto_columns(self):
+        return []
+
+    def keys(self):
+        return [
             '"cpfFuncionario"',
         ]

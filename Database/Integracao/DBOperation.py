@@ -25,7 +25,7 @@ class DBOperation:
         )
 
     def seed(self):
-        with open("seed.sql", "r") as file:
+        with open("seed.sql", "r", encoding="utf-8") as file:
             seed_query = file.read()
         self.db.execute_query(seed_query)
 
@@ -42,7 +42,7 @@ class DBOperation:
     def update(self, obj):
         raise NotImplementedError("Subclasses should implement this method")
 
-    def delete(self, id):
+    def delete(self, obj):
         raise NotImplementedError("Subclasses should implement this method")
 
     def delete_all(self):

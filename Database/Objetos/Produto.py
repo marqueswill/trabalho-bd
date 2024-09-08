@@ -38,3 +38,13 @@ class Produto:
             '"codCategoria"',
             '"codProduto"',
         ]
+
+    def auto_columns(self):
+        return [
+            '"codProduto"',
+        ]
+
+    def keys(self):
+        return [
+            '"codProduto"',
+        ]

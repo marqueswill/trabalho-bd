@@ -20,6 +20,7 @@ class DBFuncionario(DBOperation):
         SET {", ".join([f"{c} = %s" for c in funcionario.columns()[:-1]])}
         WHERE "cpfFuncionario" = %s
         """
+        # print(sql_update, funcionario.to_tuple())
         self.db.execute_query(sql_update, funcionario.to_tuple())
 
     def delete(self, funcionario):
@@ -30,18 +31,21 @@ class DBFuncionario(DBOperation):
         self.db.execute_query(sql_delete, [funcionario.cpfFuncionario])
 
     def get_by_id(self, cpfFuncionario):
-        sql_select = """
-        SELECT * FROM "Funcionario"
+        f = Funcionario()
+        sql_select = f"""
+        SELECT {",".join(f.columns())} FROM "Funcionario"
         WHERE "cpfFuncionario" = %s
         """
+        # print(sql_select, [cpfFuncionario])
         result = self.db.execute_query(sql_select, [cpfFuncionario], fetch=True)
         if result:
             return Funcionario(*result)
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT *
+        f = Funcionario()
+        sql_select = f"""
+        SELECT {",".join(f.columns())}
         FROM "Funcionario"
         """
         results = self.db.execute_query(sql_select, fetch=True)

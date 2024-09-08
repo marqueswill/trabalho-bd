@@ -2,7 +2,6 @@ class Saida:
 
     def __init__(
         self,
-        codOperacao=None,
         descricao=None,
         dataLancamento=None,
         dataConfirmacao=None,
@@ -13,6 +12,7 @@ class Saida:
         cpfEstoquista=None,
         cpfOperador=None,
         codEstoque=None,
+        codOperacao=None,
     ):
         self.descricao = descricao
         self.dataLancamento = dataLancamento
@@ -56,5 +56,18 @@ class Saida:
             '"cpfEstoquista"',
             '"cpfOperador"',
             '"codEstoque"',
+            '"codOperacao"',
+        )
+
+    def auto_columns(self):
+        return [
+            '"codOperacao"',
+            # '"dataLancamento"',
+            '"dataConfirmacao"',
+            '"status"',
+        ]
+
+    def keys(self):
+        return (
             '"codOperacao"',
         )

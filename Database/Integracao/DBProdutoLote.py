@@ -46,8 +46,9 @@ class DBProdutoLote(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "ProdutoLote"
+        pl = ProdutoLote()
+        sql_select = f"""
+        SELECT {",".join(pl.columns())} FROM "ProdutoLote"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [ProdutoLote(*row) for row in results] if results else []

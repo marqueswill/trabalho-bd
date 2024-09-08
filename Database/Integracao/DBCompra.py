@@ -6,11 +6,20 @@ class DBCompra(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
+    def get_as_bytea(self, pdf_path):
+        try:
+            with open(pdf_path, "rb") as file:
+                return file.read()
+        except Exception as e:
+            print(f"Erro ao ler o arquivo PDF: {e}")
+            return None
+
     def insert(self, compra: Compra):
-        sql_insert = """
-        INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante","numNF")
+        sql_insert = f"""
+        INSERT INTO "Compra" ({",".join(compra.columns())})
         VALUES (%s, %s, %s, %s, %s, %s)
         """
+
         self.db.execute_query(sql_insert, compra.to_tuple())
 
     def update(self, compra: Compra):
@@ -30,8 +39,10 @@ class DBCompra(DBOperation):
         self.db.execute_query(sql_delete, [compra.numNF])
 
     def get_by_id(self, numNF):
-        sql_select = """
-        SELECT * FROM "Compra"
+        c = Compra()
+        sql_select = f"""
+        SELECT {",".join(c.columns())} 
+        FROM "Compra"
         WHERE "numNF" = %s
         """
         result = self.db.execute_query(sql_select, [numNF], fetch=True)
@@ -40,8 +51,10 @@ class DBCompra(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "Compra"
+        c = Compra()
+        sql_select = f"""
+        SELECT {",".join(c.columns())} 
+        FROM "Compra"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Compra(*row) for row in results] if results else []

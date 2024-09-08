@@ -29,8 +29,10 @@ class DBRestaurante(DBOperation):
         self.db.execute_query(sql_delete, [restaurante.cnpjRestaurante])
 
     def get_by_id(self, cnpjRestaurante):
-        sql_select = """
-        SELECT * FROM "Restaurante"
+        r = Restaurante()
+        sql_select = f"""
+        SELECT {",".join(r.columns())} 
+        FROM "Restaurante"
         WHERE "cnpjRestaurante" = %s
         """
         result = self.db.execute_query(sql_select, [cnpjRestaurante], fetch=True)
@@ -39,14 +41,9 @@ class DBRestaurante(DBOperation):
         return None
 
     def get_all(self):
+        r = Restaurante()
         sql_select = f"""
-        SELECT "endereco",
-                "razao",
-                "nome",
-                "telefone",
-                "cnpjMatriz",
-                "cpfGerente",
-                "cnpjRestaurante"
+        SELECT {",".join(r.columns())}
         FROM "Restaurante"
         """
         results = self.db.execute_query(sql_select, fetch=True)
