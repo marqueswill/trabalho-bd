@@ -34,8 +34,8 @@ CREATE TABLE "Categoria" (
 
 CREATE TABLE "Produto" (
   "codProduto" serial PRIMARY KEY,
-  "quantidade" real NOT NULL,
   "unidade" varchar NOT NULL,
+  "quantidade" real NOT NULL,
   "nome" varchar NOT NULL,
   "descricao" varchar,
   "codCategoria" integer NOT NULL

@@ -266,12 +266,12 @@ INSERT INTO "Entrada" ("descricao", "dataLancamento", "numLote", "cpfEstoquista"
 ('Entrada de ingredientes perecíveis', '2024-08-28', 5, '56789012345', '12345678901',1,false,true);
 
 -- Compra 
--- INSERT INTO "Compra" ("codOperacao", "cnpjFornecedor", "cnpjRestaurante", "notaFiscal", "data", "quantidade") VALUES
--- (1, '12345678000199', '98765432000199', decode('DEADBEEF', 'hex'), '2024-08-20', 100),
--- (2, '23456789000188', '98765432000199', decode('CAFEBABE', 'hex'), '2024-08-22', 200),
--- (3, '34567890000177', '98765432000199', decode('BEEFFACE', 'hex'), '2024-08-24', 150),
--- (4, '45678901000166', '98765432000199', decode('FEEDFACE', 'hex'), '2024-08-26', 300),
--- (5, '56789012000155', '98765432000199', decode('BADF00D', 'hex'), '2024-08-28', 250);
+INSERT INTO "Compra" ("codOperacao","numNF", "cnpjFornecedor", "cnpjRestaurante", "notaFiscal", "data") VALUES
+(1,101 ,'12345678000199', '98765432000199', '\x', '2024-08-20'),
+(2,102 ,'23456789000188', '98765432000199', '\x', '2024-08-22'),
+(3,103 ,'34567890000177', '98765432000199', '\x', '2024-08-24'),
+(4,104 ,'45678901000166', '98765432000199', '\x', '2024-08-26'),
+(5,105 ,'56789012000155', '98765432000199', '\x', '2024-08-28');
 
 
 -- Saida

@@ -109,7 +109,13 @@ def TelaCreate(entidade):
     valores = []
     for col in value_obj.columns():
         if col not in value_obj.auto_columns():
-            entrada = input(col.replace('"', "") + ": ")
+            if str(entidade) == "Compra" and col == '"notaFiscal"':
+                print("notaFiscal: ")
+                nome_arquivo = escolher_arquivo()
+                entrada = entidade.get_as_bytea(nome_arquivo)
+            else:
+                entrada = input(col.replace('"', "") + ": ")
+
             if entrada == "":
                 entrada = None
             valores.append(entrada)
@@ -117,7 +123,6 @@ def TelaCreate(entidade):
             valores.append(None)
     linha()
     try:
-        print(valores)
         obj = generate_object(entidade, valores)
         entidade.insert(obj)
 
@@ -139,41 +144,44 @@ def TelaRead(entidade):
     print(f"Lendo registros de {entidade}:")
     linha()
     registros = listar(entidade)
-    input()
+    # input("Aperte qualuqer tecla para voltar")
     linha()
-    return TelaCRUD(entidade)
+    # return TelaCRUD(entidade)
 
-    # opcoes = {
-    #     0: "Voltar",
-    #     1: "Detalhar",
-    # }
+    opcoes = {
+        0: "Voltar",
+        1: "Detalhar",
+    }
 
-    # for op in opcoes.items():
-    #     print(f"{op[0]} - {op[1]}")
-    # try:
-    #     escolha = int(input("Selecione uma opção: "))
-    # except ValueError:
-    #     return TelaRead(entidade)
+    for op in opcoes.items():
+        print(f"{op[0]} - {op[1]}")
+    try:
+        escolha = int(input("Selecione uma opção: "))
+    except ValueError:
+        return TelaRead(entidade)
 
-    # if escolha == 0:
-    #     return TelaCRUD(entidade)
-    # elif escolha == 1:
-    #     linha()
-    #     index = input("Escolha o registro que deseja detalhar: ")
-    #     registro = registros[int(index)]
-    #     keys = [c.replace('"', "") for c in objetos[str(entidade)].columns()]
-    #     values = registro.to_tuple()
-    #     for k, v in zip(keys, values):
-    #         print(f"{k} - {v}")
+    if escolha == 0:
+        return TelaCRUD(entidade)
+    elif escolha == 1:
+        linha()
+        index = input("Escolha o registro que deseja detalhar: ")
+        registro = registros[int(index)]
+        keys = [c.replace('"', "") for c in objetos[str(entidade)].columns()]
+        values = registro.to_tuple()
+        for k, v in zip(keys, values):
+            print(f"{k} - {v}")
 
-    #     input()
-    #     return TelaRead(entidade)
+        if str(entidade) == "Compra":
+            registro.export_pdf()
 
-    # else:
-    #     linha()
-    #     print("Opção inválida, tente novamente.")
-    #     input()
-    #     return TelaRead(entidade)
+        input()
+        return TelaRead(entidade)
+
+    else:
+        linha()
+        print("Opção inválida, tente novamente.")
+        input()
+        return TelaRead(entidade)
 
 
 def TelaUpdate(entidade):
@@ -188,7 +196,6 @@ def TelaUpdate(entidade):
         selecionado = selecionar(entidade, escolha)
 
         valores = list(selecionado.to_tuple())
-        print(valores)
 
         for i, c in enumerate(selecionado.columns()):
             if c not in selecionado.keys():

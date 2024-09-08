@@ -14,20 +14,20 @@ class TesteCompra(TesteBase):
 
             compras = [
                 Compra(
-                    numNF=101,
                     codOperacao=1,
                     cnpjFornecedor="12345678000199",
                     cnpjRestaurante="98765432000199",
                     notaFiscal=pdf_1,
                     data="2024-09-02",
+                    numNF=1001,
                 ),
                 Compra(
-                    numNF=102,
                     codOperacao=2,
                     cnpjFornecedor="23456789000188",
                     cnpjRestaurante="98765432000199",
                     notaFiscal=pdf_1,
                     data="2024-09-02",
+                    numNF=1002,
                 ),
             ]
 
@@ -39,7 +39,7 @@ class TesteCompra(TesteBase):
 
     def test_get_by_id(self):
         try:
-            compra = self.compra_db.get_by_id(101)
+            compra = self.compra_db.get_by_id(1001)
             if compra:
                 compra.export_pdf("./Output/")
                 return "Success"
@@ -57,7 +57,7 @@ class TesteCompra(TesteBase):
 
     def test_update(self):
         try:
-            compra = self.compra_db.get_by_id(102)
+            compra = self.compra_db.get_by_id(1002)
             compra.data = "2023-09-02"
             self.compra_db.update(compra)
             return "Success"
@@ -67,7 +67,7 @@ class TesteCompra(TesteBase):
 
     def test_delete(self):
         try:
-            c = self.compra_db.get_by_id(101)
+            c = self.compra_db.get_by_id(1001)
             self.compra_db.delete(c)
             return "Success"
         except Exception as e:

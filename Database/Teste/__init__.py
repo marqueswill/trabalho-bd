@@ -1,7 +1,7 @@
 from .TesteCategoria import TesteCategoria
 from .TesteFuncionario import TesteFuncionario
 from .TesteCategoria import TesteCategoria
-# from .TesteProduto import TesteProduto
+from .TesteProduto import TesteProduto
 from .TesteFornecedor import TesteFornecedor
 from .TesteRestaurante import TesteRestaurante
 from .TesteCotacao import TesteCotacao
