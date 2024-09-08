@@ -1,7 +1,12 @@
 class Fornecedor:
 
     def __init__(
-        self, cnpjFornecedor=None, endereco=None, razao=None, nome=None, telefone=None
+        self,
+        endereco=None,
+        razao=None,
+        nome=None,
+        telefone=None,
+        cnpjFornecedor=None,
     ):
         self.endereco = endereco
         self.razao = razao
@@ -27,5 +32,13 @@ class Fornecedor:
             '"razao"',
             '"nome"',
             '"telefone"',
+            '"cnpjFornecedor"',
+        ]
+
+    def auto_columns(self):
+        return []
+
+    def keys(self):
+        return [
             '"cnpjFornecedor"',
         ]

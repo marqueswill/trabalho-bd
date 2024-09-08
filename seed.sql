@@ -197,12 +197,12 @@ INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
 (9.00, 50, '01234567000100');
 
 -- Estoque
-INSERT INTO "Estoque" ("codEstoque","nome", "cnpjRestaurante") VALUES
-(1,'Estoque de Carnes', '98765432000199'),
-(2,'Estoque de Bebidas', '98765432000199'),
-(3,'Estoque de Laticínios Central', '98765432000199'),
-(4,'Estoque de Hortifrúti', '98765432000199'),
-(5,'Estoque de Enlatados', '98765432000199');
+INSERT INTO "Estoque" ("nome", "cnpjRestaurante") VALUES
+('Estoque de Carnes', '98765432000199'),
+('Estoque de Bebidas', '98765432000199'),
+('Estoque de Laticínios Central', '98765432000199'),
+('Estoque de Hortifrúti', '98765432000199'),
+('Estoque de Enlatados', '98765432000199');
 
 -- ProdutoEstoque
 INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoqueMin", "estoqueAtual", "estoqueDisp", "ultimoInv") VALUES

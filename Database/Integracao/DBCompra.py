@@ -6,14 +6,23 @@ class DBCompra(DBOperation):
     def __init__(self, teste=False):
         super().__init__(teste)
 
-    def insert(self, compra):
+    def get_as_bytea(self, pdf_path):
+        try:
+            with open(pdf_path, "rb") as file:
+                return file.read()
+        except Exception as e:
+            print(f"Erro ao ler o arquivo PDF: {e}")
+            return None
+
+    def insert(self, compra: Compra):
         sql_insert = """
-        INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante")
-        VALUES (%s, %s, %s, %s, %s)
+        INSERT INTO "Compra" ("data","notaFiscal","codOperacao", "cnpjFornecedor","cnpjRestaurante","numNF")
+        VALUES (%s, %s, %s, %s, %s, %s)
         """
+
         self.db.execute_query(sql_insert, compra.to_tuple())
 
-    def update(self, compra):
+    def update(self, compra: Compra):
         sql_update = """
         UPDATE "Compra" 
         SET "data" = %s, "notaFiscal" = %s
@@ -22,7 +31,7 @@ class DBCompra(DBOperation):
         params = [compra.data, compra.notaFiscal, compra.numNF]
         self.db.execute_query(sql_update, params)
 
-    def delete(self, compra):
+    def delete(self, compra: Compra):
         sql_delete = """
         DELETE FROM "Compra"
         WHERE "numNF" = %s
@@ -32,7 +41,7 @@ class DBCompra(DBOperation):
     def get_by_id(self, numNF):
         sql_select = """
         SELECT * FROM "Compra"
-        WHERE "codOperacao" = %s AND "cnpjFornecedor" = %s AND "cnpjRestaurante" = %s
+        WHERE "numNF" = %s
         """
         result = self.db.execute_query(sql_select, [numNF], fetch=True)
         if result:

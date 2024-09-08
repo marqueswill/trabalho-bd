@@ -22,30 +22,33 @@ class DBProdutoEstoque(DBOperation):
         """
         self.db.execute_query(sql_update, produtoEstoque.to_tuple())
 
-    def delete(self, codProduto, codEstoque):
+    def delete(self, produtoEstoque):
         sql_delete = """
         DELETE FROM "ProdutoEstoque"
         WHERE "codProduto" = %s AND "codEstoque" = %s
         """
-        self.db.execute_query(sql_delete, [codProduto,codEstoque])
+        self.db.execute_query(
+            sql_delete,
+            [
+                produtoEstoque.codProduto,
+                produtoEstoque.codEstoque,
+            ],
+        )
 
     def get_by_id(self, codProduto, codEstoque):
         sql_select = """
         SELECT * FROM "ProdutoEstoque"
         WHERE "codProduto" = %s AND "codEstoque" = %s
         """
-        result = self.db.execute_query(sql_select, [codProduto,codEstoque], fetch=True)
+        result = self.db.execute_query(sql_select, [codProduto, codEstoque], fetch=True)
         if result:
             return ProdutoEstoque(*result)
         return None
-    
+
     def get_all(self):
-        sql_select = """
-        SELECT * FROM "ProdutoEstoque"
+        pe = ProdutoEstoque()
+        sql_select = f"""
+        SELECT {",".join(pe.columns())} FROM "ProdutoEstoque"
         """
         results = self.db.execute_query(sql_select, fetch=True)
-        return [ProdutoEstoque(*row) for row in results] if results else[]
-
-
-
-
+        return [ProdutoEstoque(*row) for row in results] if results else []

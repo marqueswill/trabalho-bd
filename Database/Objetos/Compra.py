@@ -34,7 +34,7 @@ class Compra:
         )
 
     def export_pdf(self, destino, remove=False):
-        source = destino + self.numNF + "_" + self.data + ".pdf"
+        source = destino + str(self.numNF) + "_" + str(self.data) + ".pdf"
         c = canvas.Canvas(source)
         c.showPage()
         c.save()
@@ -51,5 +51,15 @@ class Compra:
             '"cnpjRestaurante"',
             '"notaFiscal"',
             '"data"',
+            '"numNF"',
+        ]
+
+    def auto_columns(self):
+        return [
+            '"codOperacao"',
+        ]
+
+    def keys(self):
+        return [
             '"numNF"',
         ]

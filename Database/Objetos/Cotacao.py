@@ -21,3 +21,12 @@ class Cotacao:
             '"codProduto"',
             '"cnpjFornecedor"',
         ]
+
+    def auto_columns(self):
+        return []
+
+    def keys(self):
+        return [
+            '"codProduto"',
+            '"cnpjFornecedor"',
+        ]

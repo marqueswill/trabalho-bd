@@ -40,8 +40,9 @@ class DBFuncionario(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT *
+        f = Funcionario()
+        sql_select = f"""
+        SELECT {",".join(f.columns())}
         FROM "Funcionario"
         """
         results = self.db.execute_query(sql_select, fetch=True)

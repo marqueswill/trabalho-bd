@@ -11,13 +11,13 @@ class TesteRestaurante(TesteBase):
         try:
             restaurantes = [
                 Restaurante(
-                    cnpjRestaurante="85920376000145",
                     endereco="Rua A, 123i",
                     razao="Restaurante Ain Ltda",
                     nome="Restaurante Ain",
                     telefone=11987654321,
                     cnpjMatriz=None,
                     cpfGerente="78901234568",
+                    cnpjRestaurante="85920376000145",
                 ),
                 Restaurante(
                     cnpjRestaurante="98765432000188",

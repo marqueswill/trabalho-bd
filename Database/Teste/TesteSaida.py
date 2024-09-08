@@ -14,13 +14,13 @@ from Database.Objetos.ProdutoLote import ProdutoLote
 class TesteSaida(TesteBase):
     def __init__(self):
         self.saida_db = DBSaida(teste=True)
-        self.lote_db = DBLote(teste=True)
-        self.produtolote_db = DBProdutoLote(teste=True)
+        # self.lote_db = DBLote(teste=True)
+        # self.produtolote_db = DBProdutoLote(teste=True)
 
     def test_insert(self):
         try:
-            self.lote_db.insert(Lote(tipo="saida"))
-            self.produtolote_db.insert(ProdutoLote(1, 1, 11, 10))
+            # self.lote_db.insert(Lote(tipo="saida"))
+            # self.produtolote_db.insert(ProdutoLote(1, 1, 11, 10))
 
             items = [
                 Saida(

@@ -16,10 +16,11 @@ testes = [
     # TesteEstoque(),
     TesteLote(),
     TesteProdutoLote(),
-    # TesteEntrada(),
-    # TesteSaida(),
-    # TesteCompra(),
-    TesteCotacao()
+    TesteEntrada(),
+    TesteSaida(),
+    TesteCompra(),
+    TesteCotacao(),
+    TesteProdutoEstoque(),
 ]
 
 for t in testes:
