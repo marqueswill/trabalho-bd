@@ -50,7 +50,8 @@ class TesteLote(TesteBase):
 
     def test_delete(self):
         try:
-            self.lote_db.delete(11)
+            l = self.lote_db.get_by_id(11)
+            self.lote_db.delete(l)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

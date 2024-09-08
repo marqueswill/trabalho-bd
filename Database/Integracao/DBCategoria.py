@@ -9,10 +9,10 @@ class DBCategoria(DBOperation):
 
     def insert(self, categoria: Categoria):
         sql_insert = """
-        INSERT INTO "Categoria" ("codCategoria", "nome")
-        VALUES (%s, %s)
+        INSERT INTO "Categoria" ("nome")
+        VALUES (%s)
         """
-        self.db.execute_query(sql_insert, categoria.to_tuple())
+        self.db.execute_query(sql_insert, [categoria.nome])
 
     def update(self, categoria: Categoria):
         sql_update = """

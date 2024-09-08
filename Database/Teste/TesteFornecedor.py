@@ -72,7 +72,8 @@ class TesteFornecedor(TesteBase):
 
     def test_delete(self):
         try:
-            self.fornecedor_db.delete("56789012000177")
+            f = self.fornecedor_db.get_by_id("56789012000177")
+            self.fornecedor_db.delete(f)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"
