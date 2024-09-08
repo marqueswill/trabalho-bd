@@ -109,13 +109,13 @@ import pandas as pd
 
 
 def listar(entidade):
-    linhas = entidade.get_all()
+    registros = entidade.get_all()
 
     headers = [c.replace('"', "") for c in objetos[str(entidade)].columns()]
     valores = {}
     for h in headers:
         valores[h] = []
-    for l in linhas:
+    for l in registros:
         col = l.to_tuple()
         for i in range(len(col)):
             valores[headers[i]].append(col[i])
@@ -126,15 +126,15 @@ def listar(entidade):
 
     print(tabulate(df, headers="keys", tablefmt="psql", showindex=True))
 
-    return
+    return registros
 
 
 def selecionar(entidade, escolha):
-    linhas = entidade.get_all()
+    registros = entidade.get_all()
 
     registros = {}
-    for i in range(len(linhas)):
-        registros[i] = linhas[i]
+    for i in range(len(registros)):
+        registros[i] = registros[i]
     return registros[int(escolha)]
 
 
@@ -177,7 +177,7 @@ def TelaCRUD(entidade):
         linha()
 
 
-def generate_object(entidade, valores, valores_antigos=None):
+def generate_object(entidade, valores):
     entidades = {
         "Categoria": Categoria,
         "Cotacao": Cotacao,
@@ -195,7 +195,6 @@ def generate_object(entidade, valores, valores_antigos=None):
     }
 
     cls = entidades.get(str(entidade))
-
 
     if cls:
         return cls(*valores)
@@ -236,14 +235,42 @@ def TelaRead(entidade):
     linha()
     print(f"Lendo registros de {entidade}:")
     linha()
-    listar(entidade)
+    registros = listar(entidade)
     linha()
 
+
+
+    opcoes = {
+        0: "Voltar",
+        1: "Detalhar",
+    }
+
+    for op in opcoes.items():
+        print(f"{op[0]} - {op[1]}")
     try:
-        escolha = int(input("Aperte qualquer tecla para voltar"))
-        return TelaCRUD(entidade)
+        escolha = int(input("Selecione uma opção: "))
     except ValueError:
+        return TelaRead(entidade)
+
+    if escolha == 0:
         return TelaCRUD(entidade)
+    elif escolha == 1:
+        linha()
+        index = input("Escolha o registro que deseja detalhar: ")
+        registro = registros[int(index)]
+        keys = [c.replace('"', "") for c in objetos[str(entidade)].columns()]
+        values = registro.to_tuple()
+        for k, v in zip(keys, values):
+            print(f'{k} - {v}')
+
+        input()
+        return TelaRead(entidade)
+
+    else:
+        linha()
+        print("Opção inválida, tente novamente.")
+        input()
+        return TelaRead(entidade)
 
 
 def TelaUpdate(entidade):
@@ -269,11 +296,11 @@ def TelaUpdate(entidade):
             else:
                 valores.append(valor_input)
 
-        print(valores_velhos,valores)
+        print(valores_velhos, valores)
         print(f"Atualizando registro de {entidade}")
         atualizado = generate_object(entidade, valores)
         entidade.update(atualizado)
-        
+
         return TelaCRUD(entidade)
     except Exception as e:
         print(f"Não foi possível atualizar o registro! Erro: {e}")

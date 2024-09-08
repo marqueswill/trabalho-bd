@@ -1,10 +1,12 @@
 from reportlab.pdfgen import canvas
 import os
 
+
 class Compra:
 
     def __init__(
         self,
+        numNF=None,
         codOperacao=None,
         cnpjFornecedor=None,
         cnpjRestaurante=None,
@@ -16,7 +18,7 @@ class Compra:
         self.cnpjRestaurante = cnpjRestaurante
         self.notaFiscal = notaFiscal
         self.data = data
-        #self.quantidade = quantidade
+        self.numNF = numNF
 
     def __str__(self):
         return "Compra"
@@ -28,16 +30,16 @@ class Compra:
             self.codOperacao,
             self.cnpjFornecedor,
             self.cnpjRestaurante,
-            #self.quantidade
+            self.numNF,
         )
-    
+
     def export_pdf(self, destino, remove=False):
         source = destino + self.numNF + "_" + self.data + ".pdf"
         c = canvas.Canvas(source)
         c.showPage()
         c.save()
 
-        with open(source, 'wb') as output_file:
+        with open(source, "wb") as output_file:
             output_file.write(self.notaFiscal)
             if remove:
                 os.remove(source)
@@ -49,4 +51,5 @@ class Compra:
             '"cnpjRestaurante"',
             '"notaFiscal"',
             '"data"',
+            '"numNF"',
         ]
