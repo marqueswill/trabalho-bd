@@ -1,5 +1,5 @@
 from Database.Integracao import *
-from Database.Teste.TesteInventario import TesteInventario
+from Database.Teste import *
 
 
 # dbEstoque = DBEstoque()
@@ -21,6 +21,7 @@ testes = [
     TesteCompra(),
     TesteProdutoEstoque(),
     TesteCotacao(),
+    TesteInventario(),
 ]
 
 for t in testes:

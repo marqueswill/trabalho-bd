@@ -283,7 +283,7 @@ INSERT INTO "Saida" ("descricao","dataLancamento",  "numLote", "cpfEstoquista", 
 ('Saída de ingredientes', '2024-08-29',  10, '12345678901', '56789012345',1,true,false);
 
 -- Inventario
-INSERT INTO "Inventario" ("codProduto", "codEstoque", "data", "contagem", "cpfOperador") VALUES
+INSERT INTO "Inventario" ("codProduto", "codEstoque", "data", "contagem", "cpfEstoquista") VALUES
 (1, 1, '2024-08-01', 45, '56789012345'),
 (2, 1, '2024-08-02', 115, '45678901234'),
 (3, 1, '2024-08-03', 240, '56789012345'),
