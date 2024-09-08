@@ -10,9 +10,9 @@ class Estoque:
 
     def to_tuple(self):
         return (
-            self.codEstoque,
             self.nome,
             self.cnpjRestaurante,
+            self.codEstoque,
         )
 
     def columns(self):

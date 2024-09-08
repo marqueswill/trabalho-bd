@@ -3,20 +3,9 @@ from Database.Integracao.DBOperation import DBOperation
 
 
 class DBProdutoEstoque(DBOperation):
-    def create_table(self):
-        sql_create = """
-        CREATE TABLE "ProdutoEstoque" (
-            "codProduto" integer,
-            "codEstoque" integer,
-            "estoqueMax" integer,
-            "estoqueMin" integer,
-            "estoqueAtual" integer,
-            "estoqueDisp" integer,
-            "ultimoInv" date,
-            PRIMARY KEY ("codProduto", "codEstoque")
-        );
-        """
-        self.db.execute_query(sql_create)
+
+    def __init__(self, teste=False):
+        super().__init__(teste)
 
     def insert(self, produtoEstoque):
         sql_insert = """
@@ -56,3 +45,7 @@ class DBProdutoEstoque(DBOperation):
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [ProdutoEstoque(*row) for row in results] if results else[]
+
+
+
+

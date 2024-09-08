@@ -197,12 +197,12 @@ INSERT INTO "Cotacao" ("valor", "codProduto", "cnpjFornecedor") VALUES
 (9.00, 50, '01234567000100');
 
 -- Estoque
-INSERT INTO "Estoque" ("nome", "cnpjRestaurante") VALUES
-('Estoque de Carnes', '98765432000199'),
-('Estoque de Bebidas', '98765432000199'),
-('Estoque de Laticínios Central', '98765432000199'),
-('Estoque de Hortifrúti', '98765432000199'),
-('Estoque de Enlatados', '98765432000199');
+INSERT INTO "Estoque" ("codEstoque","nome", "cnpjRestaurante") VALUES
+(1,'Estoque de Carnes', '98765432000199'),
+(2,'Estoque de Bebidas', '98765432000199'),
+(3,'Estoque de Laticínios Central', '98765432000199'),
+(4,'Estoque de Hortifrúti', '98765432000199'),
+(5,'Estoque de Enlatados', '98765432000199');
 
 -- ProdutoEstoque
 INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoqueMin", "estoqueAtual", "estoqueDisp", "ultimoInv") VALUES
@@ -210,7 +210,12 @@ INSERT INTO "ProdutoEstoque" ("codProduto", "codEstoque", "estoqueMax", "estoque
 (2, 1, 200, 50, 0, 0, '2024-09-01'),
 (3, 1, 300, 100, 0, 0, '2024-09-01'),
 (4, 1, 150, 30, 0, 0, '2024-09-01'),
-(5, 1, 400, 150, 0, 0, '2024-09-01');
+(5, 1, 400, 150, 0, 0, '2024-09-01'),
+(1, 2, 10, 20, 0, 0, '2024-09-01'),
+(2, 2, 20, 50, 0, 0, '2024-09-01'),
+(3, 2, 30, 100, 0, 0, '2024-09-01'),
+(4, 2, 15, 30, 0, 0, '2024-09-01'),
+(5, 2, 40, 150, 0, 0, '2024-09-01');
 
 -- Lote
 INSERT INTO "Lote" ("tipo") VALUES

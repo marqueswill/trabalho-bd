@@ -11,8 +11,8 @@ class TesteCategoria(TesteBase):
     def test_insert(self):
         try:
             categorias = [
-                Categoria(codCategoria=20, nome="sucos"),
-                Categoria(codCategoria=21, nome="carnes"),
+                Categoria(nome="sucos"),
+                Categoria(nome="carnes"),
             ]
             for c in categorias:
                 self.categoria_db.insert(c)
@@ -37,9 +37,20 @@ class TesteCategoria(TesteBase):
         except Exception as e:
             return f"Failed - {str(e)}"
 
+    def test_update(self):
+        try:
+            cat = self.categoria_db.get_by_id(11)
+            cat.nome = "Pratos e panelas"
+            self.categoria_db.update(cat)
+            return "Success"
+
+        except Exception as e:
+            return f"Failed - {str(e)}"
+
     def test_delete(self):
         try:
-            self.categoria_db.delete(1)
+            c = self.categoria_db.get_by_id(11)
+            self.categoria_db.delete(c)
             return "Success"
         except Exception as e:
             return f"Failed - {str(e)}"

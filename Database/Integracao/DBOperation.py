@@ -7,6 +7,9 @@ class DBOperation:
         if teste:
             self.setup()
 
+    def __str__(self):
+        return self.__class__.__name__[2:]
+
     def reset(self):
         with open("setup.sql", "r") as file:
             setup_query = file.read()
@@ -17,7 +20,6 @@ class DBOperation:
         with open("views.sql", "r") as file:
             views_query = file.read()
 
-        
         self.db.execute_query(
             setup_query + triggers_query + procedures_query + views_query
         )

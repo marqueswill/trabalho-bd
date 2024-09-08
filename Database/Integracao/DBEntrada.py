@@ -4,6 +4,9 @@ from Database.Integracao.DBOperation import DBOperation
 
 class DBEntrada(DBOperation):
 
+    def __init__(self, teste=False):
+        super().__init__(teste)
+
     def insert(self, entrada: Entrada):
         sql_insert = f"""
         INSERT INTO "Entrada" ({",".join(entrada.columns()[:-2])})
@@ -19,12 +22,12 @@ class DBEntrada(DBOperation):
         """
         self.db.execute_query(sql_update, entrada.to_tuple())
 
-    def delete(self, codOperacao):
+    def delete(self, entrada: Entrada):
         sql_delete = """
         DELETE FROM "Entrada"
         WHERE "codOperacao" = %s
         """
-        self.db.execute_query(sql_delete, [codOperacao])
+        self.db.execute_query(sql_delete, [entrada.codOperacao])
 
     def get_by_id(self, codOperacao):
         sql_select = """

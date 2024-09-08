@@ -1,11 +1,25 @@
 from Database.Integracao import *
 from Database.Teste import *
 
-dbcat = DBProdutoEstoque()
 
-for c in dbcat.get_all():
-    print(c.ultimoInv)
+# dbEstoque = DBEstoque()
+
+# for e in dbEstoque.get_all():
+#     print(e.nome)
 
 
-teste = TesteProdutoEstoque()
-teste.run()
+testes = [
+    TesteCategoria(),
+    TesteFuncionario(),
+    TesteFornecedor(),
+    TesteRestaurante(),
+    TesteEstoque(),
+    TesteLote(),
+    TesteProdutoLote(),
+    # TesteEntrada(),
+    # TesteSaida(),
+    # TesteCompra(),
+]
+
+for t in testes:
+    t.run()

@@ -1,0 +1,17 @@
+
+{
+  "dev": {
+    "database": "estoque",
+    "host": "localhost",
+    "user": "<SEU USER AQUI>",
+    "password": "<SUA SENHA AQUI>",
+    "port": "5432"
+  },
+  "test": {
+    "database": "teste",
+    "host": "localhost",
+    "user": "<SEU USER AQUI>",
+    "password": "<SUA SENHA AQUI>",
+    "port": "5432"
+  }
+}

@@ -21,12 +21,12 @@ class DBRestaurante(DBOperation):
         """
         self.db.execute_query(sql_update, restaurante.to_tuple())
 
-    def delete(self, cnpjRestaurante):
+    def delete(self, restaurante: Restaurante):
         sql_delete = """
         DELETE FROM "Restaurante"
         WHERE "cnpjRestaurante" = %s
         """
-        self.db.execute_query(sql_delete, [cnpjRestaurante])
+        self.db.execute_query(sql_delete, [restaurante.cnpjRestaurante])
 
     def get_by_id(self, cnpjRestaurante):
         sql_select = """
@@ -39,15 +39,14 @@ class DBRestaurante(DBOperation):
         return None
 
     def get_all(self):
-        sql_select = """
-        SELECT
-            "cnpjRestaurante",
-            "endereco",
-            "razao",
-            "nome",
-            "telefone",
-            "cnpjMatriz",
-            "cpfGerente"
+        sql_select = f"""
+        SELECT "endereco",
+                "razao",
+                "nome",
+                "telefone",
+                "cnpjMatriz",
+                "cpfGerente",
+                "cnpjRestaurante"
         FROM "Restaurante"
         """
         results = self.db.execute_query(sql_select, fetch=True)

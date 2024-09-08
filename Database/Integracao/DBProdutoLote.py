@@ -4,6 +4,9 @@ from Database.Integracao.DBOperation import DBOperation
 
 class DBProdutoLote(DBOperation):
 
+    def __init__(self, teste=False):
+        super().__init__(teste)
+
     def insert(self, produtolote: ProdutoLote):
         sql_insert = f"""
         INSERT INTO "ProdutoLote" ({",".join(produtolote.columns())})
@@ -20,12 +23,15 @@ class DBProdutoLote(DBOperation):
 
         self.db.execute_query(sql_update, produtolote.to_tuple())
 
-    def delete(self, codProduto, codEstoque, numLote):
+    def delete(self, produtolote):
         sql_delete = """
         DELETE FROM "ProdutoLote"
         WHERE "codProduto" = %s AND "codEstoque" = %s AND "numLote" = %s
         """
-        self.db.execute_query(sql_delete, [codProduto, codEstoque, numLote])
+        self.db.execute_query(
+            sql_delete,
+            [produtolote.codProduto, produtolote.codEstoque, produtolote.numLote],
+        )
 
     def get_by_id(self, codProduto, codEstoque, numLote):
         sql_select = """
