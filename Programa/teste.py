@@ -1,6 +1,7 @@
 from Database.Integracao import *
 from Database.Teste import *
 
+
 # dbEstoque = DBEstoque()
 
 # for e in dbEstoque.get_all():
