@@ -36,13 +36,13 @@ CREATE VIEW Operacoes_Estoque AS
         "codOperacao",
         "descricao",
         "dataLancamento",
-        "dataConfirmacao",
         "status",
-        "pendente",
-        "aprovado",
-        "numLote",
-        "cpfEstoquista",
-        "cpfOperador"
+        "dataConfirmacao"
+        -- "pendente",
+        -- "aprovado",
+        -- "numLote",
+        -- "cpfEstoquista",
+        -- "cpfOperador"
     FROM "Entrada"
 
     UNION ALL
@@ -52,13 +52,13 @@ CREATE VIEW Operacoes_Estoque AS
         "codOperacao",
         "descricao",
         "dataLancamento",
-        "dataConfirmacao",
         "status",
-        "pendente",
-        "aprovado",
-        "numLote",
-        "cpfEstoquista",
-        "cpfOperador"
+        "dataConfirmacao"
+        -- "pendente",
+        -- "aprovado",
+        -- "numLote",
+        -- "cpfEstoquista",
+        -- "cpfOperador"
     FROM "Saida"
     WHERE "codEstoque" = 1
-    ORDER BY "dataLancamento" DESC;
+    ORDER BY "status" DESC, "dataLancamento" ASC;

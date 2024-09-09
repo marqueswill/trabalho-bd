@@ -46,6 +46,7 @@ class DBFornecedor(DBOperation):
         sql_select = f"""
         SELECT {",".join(f.columns())}
         FROM "Fornecedor"
+        ORDER BY "nome"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Fornecedor(*row) for row in results] if results else []

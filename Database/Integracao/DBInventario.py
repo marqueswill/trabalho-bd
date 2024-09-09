@@ -49,6 +49,7 @@ class DBInventario(DBOperation):
         i = Inventario()
         sql_select_inventarios = f"""
         SELECT {",".join(i.columns())} FROM "Inventario"
+        ORDER BY "data"
         """
 
         cursor = self.db.execute_query(sql_select_inventarios, fetch=True)

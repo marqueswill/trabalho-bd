@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE Gerar_Historico_Operacoes_Estoque(p_codEstoque integer)
+CREATE OR REPLACE PROCEDURE Gerar_Historico(p_codEstoque integer)
 LANGUAGE plpgsql 
 AS $$
     BEGIN
@@ -35,22 +35,6 @@ AS $$
             e."cpfOperador"
         FROM "Entrada" e
         WHERE e."codEstoque" = p_codEstoque;
-
-        INSERT INTO "historico_operacoes"
-        SELECT 
-            'Requisicao' AS tipo_operacao,
-            r."codOperacao",
-            r."descricao",
-            r."dataLancamento",
-            r."dataConfirmacao",
-            r."status",
-            r."pendente",
-            r."aprovado",
-            r."numLote",
-            r."cpfEstoquista",
-            r."cpfOperador"
-        FROM "Requisicao" r
-        WHERE r."codEstoque" = p_codEstoque;
 
         INSERT INTO "historico_operacoes"
         SELECT 
@@ -138,16 +122,4 @@ BEGIN
     END LOOP;
 END;
 $$;
-
----- EXEMPLO:
--- CALL trocar_estoque(
---     1,
--- 	5,
---     ARRAY[
---         (1, 10)::produto_quantidade, 
---         (2, 10)::produto_quantidade   
---     ]
--- );
-
--- SELECT * FROM "ProdutoEstoque" ORDER BY "codEstoque", "codProduto";
 

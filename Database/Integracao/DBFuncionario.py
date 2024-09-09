@@ -47,6 +47,7 @@ class DBFuncionario(DBOperation):
         sql_select = f"""
         SELECT {",".join(f.columns())}
         FROM "Funcionario"
+        ORDER BY "nome"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Funcionario(*row) for row in results] if results else []

@@ -199,7 +199,12 @@ def TelaUpdate(entidade):
 
         for i, c in enumerate(selecionado.columns()):
             if c not in selecionado.keys():
-                valor_input = input(c.replace('"', "") + ": ")
+                if str(entidade) == "Compra" and c == '"notaFiscal"':
+                    print("notaFiscal: ")
+                    nome_arquivo = escolher_arquivo()
+                    valor_input = entidade.get_as_bytea(nome_arquivo)
+                else:
+                    valor_input = input(c.replace('"', "") + ": ")
                 if valor_input.strip() != "":
                     valores[i] = valor_input
         linha()

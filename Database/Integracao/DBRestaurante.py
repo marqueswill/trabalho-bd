@@ -45,6 +45,7 @@ class DBRestaurante(DBOperation):
         sql_select = f"""
         SELECT {",".join(r.columns())}
         FROM "Restaurante"
+        ORDER BY "nome"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Restaurante(*row) for row in results] if results else []
