@@ -8,7 +8,9 @@ O trabalho foi desenvolvido utilizando python
 ```
   pip install reportlab
 ```
-
+```
+pip install psycopg2
+```
 ## Setup
 1. Clone o repositório na sua máquina utilizando git:
 ```
