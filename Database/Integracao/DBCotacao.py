@@ -42,6 +42,7 @@ class DBCotacao(DBOperation):
     def get_all(self):
         sql_select = """
         SELECT * FROM "Cotacao"
+        ORDER BY "valor" ASC, "codProduto" ASC
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Cotacao(*row) for row in results] if results else []

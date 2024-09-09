@@ -43,6 +43,7 @@ class DBCategoria(DBOperation):
     def get_all(self):
         sql_select = """
         SELECT "codCategoria", "nome" FROM "Categoria"
+        ORDER BY "codCategoria" ASC
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Categoria(*row) for row in results] if results else []
