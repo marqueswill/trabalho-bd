@@ -9,6 +9,9 @@ O trabalho foi desenvolvido utilizando python
   pip install reportlab
 ```
 ```
+  pip install psycopg2
+```
+```
   pip install tabulate
 ```
 
