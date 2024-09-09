@@ -46,6 +46,7 @@ class DBLote(DBOperation):
         l = Lote()
         sql_select = f"""
         SELECT {",".join(l.columns())} FROM "Lote"
+        ORDER BY "numLote"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Lote(*row) for row in results] if results else []

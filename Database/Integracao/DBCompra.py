@@ -25,10 +25,17 @@ class DBCompra(DBOperation):
     def update(self, compra: Compra):
         sql_update = """
         UPDATE "Compra" 
-        SET "data" = %s, "notaFiscal" = %s
+        SET "data" = %s, "notaFiscal" = %s, "codOperacao" = %s, "cnpjFornecedor" = %s, "cnpjRestaurante" = %s
         WHERE "numNF" = %s
         """
-        params = [compra.data, compra.notaFiscal, compra.numNF]
+        params = [
+            compra.data,
+            compra.notaFiscal,
+            compra.codOperacao,
+            compra.cnpjFornecedor,
+            compra.cnpjRestaurante,
+            compra.numNF,
+        ]
         self.db.execute_query(sql_update, params)
 
     def delete(self, compra: Compra):
@@ -55,6 +62,7 @@ class DBCompra(DBOperation):
         sql_select = f"""
         SELECT {",".join(c.columns())} 
         FROM "Compra"
+        ORDER BY "codOperacao"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Compra(*row) for row in results] if results else []

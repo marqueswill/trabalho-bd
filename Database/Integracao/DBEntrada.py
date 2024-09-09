@@ -47,6 +47,7 @@ class DBEntrada(DBOperation):
         e = Entrada()
         sql_select = f"""
         SELECT {",".join(e.columns())} FROM "Entrada"
+        ORDER BY "dataLancamento" ASC, "status" DESC
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Entrada(*row) for row in results] if results else []

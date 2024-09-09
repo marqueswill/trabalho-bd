@@ -45,6 +45,7 @@ class DBEstoque(DBOperation):
         e = Estoque()
         sql_select = f"""
         SELECT {",".join(e.columns())} FROM "Estoque"
+        ORDER BY "codEstoque"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Estoque(*row) for row in results] if results else []

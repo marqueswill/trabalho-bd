@@ -44,6 +44,7 @@ class DBSaida(DBOperation):
         s = Saida()
         sql_select = f"""
         SELECT {",".join(s.columns())} FROM "Saida"
+        ORDER BY "dataLancamento" ASC, "status" DESC
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Saida(*row) for row in results] if results else []

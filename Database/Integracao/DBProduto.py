@@ -43,6 +43,7 @@ class DBProduto(DBOperation):
         p = Produto()
         sql_select = f"""
         SELECT {",".join(p.columns())} FROM "Produto"
+        ORDER BY "codProduto"
         """
         results = self.db.execute_query(sql_select, fetch=True)
         return [Produto(*row) for row in results] if results else []
