@@ -2,7 +2,7 @@ from Database.Objetos.Lote import Lote
 from Database.Integracao.DBOperation import DBOperation
 from typing import List
 
-
+ 
 class DBLote(DBOperation):
 
     def __init__(self, teste=False):
